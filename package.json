@@ -1,0 +1,21 @@
+{
+  "name": "mean",
+  "version": "1.0.0",
+  "description": "mean startup project",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server"
+  },
+  "keywords": [
+    "mean",
+    "chop"
+  ],
+  "author": "test",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.0.0-rc.2",
+    "cors": "^2.7.1",
+    "express": "^4.13.4",
+    "morgan": "^1.7.0"
+  }
+}
