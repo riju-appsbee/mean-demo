@@ -1,0 +1,132 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="ng/settings/global">Global Settings </a>
+        </li>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <h3 class="page-title"> Settings List </h3>
+        </div>
+        <div class="col-md-6">
+            <div class="btn-group pull-right page-title">
+                <a class="btn btn-sm green btn-outline filter-submit margin-bottom" data-toggle="modal" ng-click="openAddSettingFrm()"> <i class="fa fa-plus"></i> Add New </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN SAMPLE TABLE PORTLET-->
+        <div class="portlet box green">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-cogs"></i>All Global Settings are listed here </div>
+                <!-- <div class="tools">
+                    <a class="collapse" href="" data-original-title="" title=""> </a>
+                    <a class="config" data-toggle="modal" href="#portlet-config" data-original-title="" title=""> </a> <a class="reload" href="" data-original-title="" title=""> </a> 
+                    <a class="remove" href="" data-original-title="" title=""> </a>
+                </div>-->
+            </div>
+            <div class="portlet-body flip-scroll" style="display: block;">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="dataTables_filter pull-left">
+                            <form ng-submit="search()">
+                                <label>Search:
+                                    <input type="search" ng-model="searchText" class="form-control input-sm input-medium input-inline" placeholder="Type & hit enter">
+                                    <button class="btn green btn-sm" type="submit">
+                                        <span class="ladda-label">Search</span>
+                                    </button>
+                                </label>
+                            </form>
+                        </div>
+                    </div>                    
+                </div>
+                <span class="pull-right">Total : {{gSettings.length}}</span>
+                <table class="table table-bordered table-striped table-condensed flip-content">
+                    <thead class="flip-content">
+                        <tr>
+                            <!--                            <th> Sl No </th>-->
+                            <th> Settings Name </th>
+                            <th> Value </th>
+                            <th> Description </th>
+                            <th> &nbsp; </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="setting in gSettings">
+                            <!--                            <td>{{setting.id}}</td>-->
+                            <td>{{setting.name}}</td>
+                            <td class="numeric pop_sec">
+                                <div class=" item-wrapper">
+                                    <a href="#" editable-text="setting.value" onaftersave="update(setting.id, 'value', $data)">{{ setting.value || "empty" }}</a>
+                                </div>
+                            </td>
+                            <td class="numeric pop_sec">
+                                <div class=" item-wrapper">
+                                    <a href="#" editable-text="setting.description" onaftersave="update(setting.id, 'description', $data)">{{ setting.description || "empty" }}</a>
+                                </div>
+                            </td>
+                            <td class="numeric"><span ng-if="setting.value === 'true'" class="label label-success"> ON </span>
+                                <span ng-if="setting.value === 'false'" class="label label-danger"> OFF </span></td>
+                        </tr>
+                        <tr ng-show="!gSettings.length">
+                            <td colspan="5" style="text-align:center; color:red;">No record available.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-md-5 col-sm-5 text-left">
+                        <div class="dataTables_info">Current Page {{currentPage}} . Total records {{totalItems}}.</div>
+                    </div>
+                    <div class="col-md-7 col-sm-7 text-right">
+                        <uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" items-per-page="numPerPage" ng-change="pageChanged()"></uib-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END SAMPLE TABLE PORTLET-->
+    </div>
+</div>
+<!-- Modal For adding new settings -->
+<script type="text/ng-template" id="addSetting.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Add Setting</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" name="addSettingForm" method="post" novalidate>
+            <input type="hidden" name="settings_type" ng-model="params.settings_type" />
+            <div class="row">
+                <div class="col-md-12">
+                    <p>
+                        <h4>Settings Name <span class="required" aria-required="true">*</span></h4>
+                        <input type="text" name="name" ng-model="params.name" class="form-control" required>
+                        <div class="form-control-focus"> </div>
+                        <span ng-show="addSettingForm.name.$invalid && !addSettingForm.name.$pristine" class="help-block">Please enter setting name.</span>
+                    </p>
+                    <p>
+                        <h4>Value <span class="required" aria-required="true">*</span></h4>
+                        <input type="text" name="value" ng-model="params.value" class="form-control" required>
+                        <div class="form-control-focus"> </div>
+                        <span ng-show="addSettingForm.value.$invalid && !addSettingForm.value.$pristine" class="help-block">Please enter value.</span>
+                    </p>
+                    <p>
+                        <h4>Description <span class="required" aria-required="true">*</span></h4>
+                        <input type="text" name="description" ng-model="params.description" class="form-control" required>
+                        <div class="form-control-focus"> </div>
+                        <span ng-show="addSettingForm.description.$invalid && !addSettingForm.description.$pristine" class="help-block">Please enter description.</span>
+                    </p>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button ng-disabled="addSettingForm.$invalid" class="btn btn-primary" type="submit" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
+<!-- Modal End for adding new settings -->

@@ -1,0 +1,229 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="ng/menu/edit/{{menu_id}}">Item</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="">Add Item</a>
+        </li>
+    </ul>
+</div>
+<h3 class="page-title font-green"><i class=" fa fa-cutlery font-green"></i>  Add Item </h3>
+<!-- BEGIN FORM-->
+<form class="form-horizontal" name="itemForm" method="post" ng-submit="addItem(itemForm.$valid)" novalidate>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase">Basic Information </span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="form-body">
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : itemForm.name.$invalid && !itemForm.name.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">Name<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <input type="text" placeholder="Enter the name of the item" name="name" ng-model="params.name" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="itemForm.name.$invalid && !itemForm.name.$pristine" class="help-block">Please enter a title for the item.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            <label class="control-label col-md-4">Image</label>
+                            <div class="col-md-8">
+                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"> </div>
+                                    <div>
+                                        <span class="btn red btn-outline btn-file">
+                                        <span class="fileinput-new"> Select image </span>
+                                        <span class="fileinput-exists"> Change </span>
+                                        <input type="file" name="image" upload-able="params.image" />
+                                        </span>
+                                        <!-- <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> Remove </a> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="form-group form-md-line-input" ng-class="{ 'has-error' : itemForm.wholesale_price.$invalid && !itemForm.wholesale_price.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">Wholesale Price<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <input type="text" placeholder="Enter a valid price" name="wholesale_price" ng-model="params.wholesale_price" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="itemForm.wholesale_price.$error.required && itemForm.wholesale_price.$dirty" class="help-block">Please enter valid wholesale price.</span>
+                                <span ng-show="!itemForm.wholesale_price.$error.required && itemForm.wholesale_price.$error.pattern && itemForm.wholesale_price.$dirty" class="help-block">Must contain only number.</span>
+                            </div>
+                        </div> -->
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : itemForm.retail_price.$invalid && !itemForm.retail_price.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">Retail Price <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <input type="text" placeholder="Enter a valid price" name="retail_price" ng-model="params.retail_price" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="itemForm.retail_price.$error.required && itemForm.retail_price.$dirty" class="help-block">Please enter valid retail price.</span>
+                                <span ng-show="!itemForm.retail_price.$error.required && itemForm.retail_price.$error.pattern && itemForm.retail_price.$dirty" class="help-block">Must contain only number.</span>
+                            </div>
+                        </div>
+                        <!-- <div class="form-group form-md-line-input" ng-class="{ 'has-error' : itemForm.commission.$invalid && !itemForm.commission.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">Commission&nbsp;Percentage<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <input type="text" placeholder="Enter a commission" name="commission" ng-model="params.commission" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="itemForm.commission.$error.required && itemForm.commission.$dirty" class="help-block">Please enter valid commission.</span>
+                                <span ng-show="!itemForm.commission.$error.required && itemForm.commission.$error.pattern && itemForm.commission.$dirty" class="help-block">Must contain only number.</span>
+                            </div>
+                        </div> -->
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : itemForm.itm_prep_time.$invalid && !itemForm.itm_prep_time.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">Preparation Time</label>
+                            <div class="col-md-8">
+                                <input type="text" placeholder="Enter preparation time in minutes" name="itm_prep_time" ng-model="params.itm_prep_time" ng-pattern="/^[0-9]{1,7}$/" class="form-control">
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="itemForm.itm_prep_time.$error.pattern && itemForm.itm_prep_time.$dirty" class="help-block">Must contain only number.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            <label class="control-label col-md-5">Sold Out Expiry Date</label>
+                            <div class="col-md-7">
+                                <div class="input-group date date-picker" date-picker data-date-format="mm-dd-yyyy">
+                                    <input type="text" ng-model="params.soldout_exp_time_item" class="form-control" readonly name="soldout_exp_time_item">
+                                    <span class="input-group-btn">
+                                        <button class="btn default" type="button">
+                                            <i class="fa fa-calendar"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                                <span class="help-block">Please select a date.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            <label class="col-md-4 control-label" for="form_control_1">Meal Period</label>
+                            <div class="col-md-8">
+                                <tags-input ng-model="params.meal_period" spellcheck="false" placeholder="Add a meal-period and hit enter" min-length="1" add-from-autocomplete-only="true">
+                                    <auto-complete source="loadPeriodTags($query)" min-length="1"></auto-complete>
+                                </tags-input>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            <label class="col-md-4 control-label" for="form_control_1">Category</label>
+                            <div class="col-md-8">
+                                <tags-input ng-model="params.menu_category" spellcheck="false" placeholder="Add a category and hit enter" min-length="1" add-from-autocomplete-only="true">
+                                    <auto-complete source="loadCategoryTags($query)" min-length="1"></auto-complete>
+                                </tags-input>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            <label for="form_control_1" class="col-md-4 control-label">Description</label>
+                            <div class="col-md-8">
+                                <textarea class="form-control" name="description" ng-model="params.description" rows="3" placeholder="Enter some description here"></textarea>
+                                <div class="form-control-focus"> </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-radios">
+                            <label for="form_control_1" class="col-md-4 control-label">Active</label>
+                            <div class="col-md-8">
+                                <div class="md-radio-inline" ng-init="params.active=true">
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.active" id="active_yes" ng-value="true">
+                                        <label for="active_yes">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> Yes
+                                        </label>
+                                    </div>
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.active" id="active_no" ng-value="false">
+                                        <label for="active_no">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="portlet light portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase">Choice Section</span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <a class="btn btn-sm green btn-outline filter-submit margin-bottom" data-toggle="modal" href="#choiceModal">
+                        <i class="fa fa-plus"></i> Add New Choice
+                    </a>
+                    <span ng-repeat="choice in choices">
+                    <div class="clearfix">&nbsp;</div>
+
+
+                    <div class="portlet light bordered">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-cutlery font-green"></i><span class="caption-subject font-green-sharp sbold">{{choice.title}}</span> <span class="label label-info" ng-if="choice.required">Yes</span><span class="label label-primary" ng-if="!choice.required">No</span> <span class="label label-primary">{{choice.select}}</span></div>
+                <div class="actions">
+                    <a class="btn btn-circle btn-icon-only btn-default" ng-click="editChoice($index)" data-toggle="modal" href="#choiceModal"><i class="fa fa-edit"></i></a>
+                    <a href="" class="btn btn-circle btn-icon-only btn-default" ng-click="removeChoice($index)"><i class="fa fa-close"></i></a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="panel panel-default">
+                    <p>
+                        <a class="btn btn-sm green btn-outline filter-submit margin-bottom" data-toggle="modal" href="#optionModal" ng-click="updateChoiceIndex($index)">
+                            <i class="fa fa-plus"></i> Add New Option
+                        </a>
+                    </p>
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="option in choice.options">
+                            <div class="alert alert-info alert-dismissable alert-block">
+                                <div class="actions pull-right">
+                                    <a class="btn btn-circle btn-icon-only btn-default" ng-click="editOption($parent.$index,$index)" data-toggle="modal" href="#optionModal"><i class="fa fa-edit"></i></a>
+                                    <a href="" class="btn btn-circle btn-icon-only btn-default" data-dismiss="alert" ng-click="removeOption($parent.$index,$index)"><i class="fa fa-close"></i></a>
+                                    <!-- <button type="button" class="close" data-dismiss="alert" ng-click="removeOption($parent.$index,$index)"></button> -->
+                                </div>
+                                <h4 class="alert-heading">{{option.name}}</h4>
+                                <p>
+                                    <strong>Wholesale Price</strong> <span class="badge badge-success">{{option.wholesale_price}}</span>
+                                </p>
+                                <p>
+                                    <strong>Retail Price</strong> <span class="badge badge-success">{{option.retail_price}}</span>
+                                </p>
+                                <p ng-if="option.soldout_expiry">
+                                    <strong>Sold Out Expiry</strong>
+                                    <span class="label label-success">{{option.soldout_expiry|date:'MM-dd-yyyy'}}</span>
+                                </p>
+                                <p>
+                                    <strong>Active</strong>
+                                    <span class="label label-success" ng-if="option.active">Yes</span><span class="label label-success" ng-if="!option.active">No</span>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    </span>
+    </div>
+    </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-actions pull-right">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn green" ng-disabled="itemForm.$invalid">Submit</button>
+                        <button type="reset" class="btn default" ng-click="resetItemForm()">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<span ng-include="'app/item/modals.html'"></span>

@@ -1,0 +1,269 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="ng/alcohol-store/list">Alcohol Store</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="#">Add Alcohol Store</a>
+        </li>
+    </ul>
+</div>
+<h3 class="page-title font-green"><i class="fa fa-glass" aria-hidden="true"></i>  Add Alcohol Store </h3>
+<div class="m-heading-1 border-green m-bordered">
+    <p>Provide store details.</p>
+</div>
+<!-- BEGIN FORM-->
+<form class="form-horizontal" name="alcoholStoreForm" method="post" ng-submit="addAlcoholStore(params)">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase">General Information </span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="form-body">
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : alcoholStoreForm.name.$invalid   && !alcoholStoreForm.name.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Name <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="name" ng-model="params.name" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="alcoholStoreForm.name.$invalid && !alcoholStoreForm.name.$pristine" class="help-block">
+                                    Alcohol store name is required
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : alcoholStoreForm.email.$invalid && !alcoholStoreForm.email.$pristine }">
+                                    <label for="form_control_1" class="col-md-3 control-label">Email<span class="required" aria-required="true">*</span></label>
+                                    <div class="col-md-9">
+                                        <input type="email" name="email" ng-model="params.email" class="form-control" required>
+                                        <div class="form-control-focus"> </div>
+                                        <span ng-show="alcoholStoreForm.email.$invalid && !alcoholStoreForm.email.$pristine" class="help-block">Please enter email address.</span>
+                                    </div>
+                                </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : alcoholStoreForm.contact_no.$invalid && !alcoholStoreForm.contact_no.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Contact No. <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" input-mask name="contact_no" ng-model="params.contact_no" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="alcoholStoreForm.contact_no.$invalid && !alcoholStoreForm.contact_no.$pristine" class="help-block">
+                                   Contact number is required
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : alcoholStoreForm.address.$invalid   && !alcoholStoreForm.address.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Location <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" places-auto-complete component-restrictions="{country:'us'}" on-place-changed="placeChanged()" name="address" ng-model="params.address" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="alcoholStoreForm.address.$invalid && !alcoholStoreForm.address.$pristine" class="help-block">
+                                   Location is required
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : alcoholStoreForm.zipcode.$invalid   && !alcoholStoreForm.zipcode.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Zipcode <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" mask-number name="zipcode" ng-model="params.zipcode" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="alcoholStoreForm.zipcode.$invalid && !alcoholStoreForm.zipcode.$pristine" class="help-block">
+                                   Zipcode is required
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : alcoholStoreForm.fax_no.$invalid   && !alcoholStoreForm.fax_no.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Fax No. <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" mask-number name="fax_no" ng-model="params.fax_no" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="alcoholStoreForm.fax_no.$invalid && !alcoholStoreForm.fax_no.$pristine" class="help-block">
+                                   Fax number is required
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            <label for="form_control_1" class="col-md-3 control-label">Comment </label>
+                            <div class="col-md-9">
+                                <textarea name="comment" ng-model="params.comment" class="form-control"></textarea>
+                                <div class="form-control-focus"> </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : alcoholStoreForm.percentage.$invalid   && !alcoholStoreForm.percentage.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Percentage <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="percentage" ng-model="params.percentage" class="form-control" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="alcoholStoreForm.percentage.$error.required && alcoholStoreForm.percentage.$dirty" class="help-block">
+                                   Percentage is required
+                                </span>
+                                <span ng-show="!alcoholStoreForm.percentage.$error.required && alcoholStoreForm.percentage.$error.pattern && alcoholStoreForm.percentage.$dirty" class="help-block">Must contain only number.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            <label for="form_control_1" class="col-md-3 control-label">Logo </label>
+                            <div class="col-md-9">
+                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 115px; height: 60px;"> </div>
+                                    <div>
+                                        <span class="btn red btn-outline btn-file">
+                                            <span class="fileinput-new"> Select image </span>
+                                        <span class="fileinput-exists"> Change </span>
+                                        <input type="file" name="logo" upload-able="params.logo" />
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-radios">
+                            <label for="form_control_1" class="col-md-3 control-label">Active</label>
+                            <div class="col-md-9">
+                                <div class="md-radio-inline" ng-init="params.active='true'">
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.active" id="active_yes" ng-value="'true'">
+                                        <label for="active_yes">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> Yes
+                                        </label>
+                                    </div>
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.active" id="active_no" ng-value="'false'">
+                                        <label for="active_no">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase">Zone Information </span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="form-body">
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : alcoholStoreForm.state_code.$invalid && !alcoholStoreForm.state_code.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">State <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <select class="form-control" name="state_code" ng-model="params.state_code" ng-options="state.value for state in states track by state.id" ng-change="changedValue(params.state_code.id)" required>
+                                    <option value="">Select state</option>
+                                </select>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="alcoholStoreForm.state_code.$invalid && !alcoholStoreForm.state_code.$pristine" class="help-block">Please select state.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : alcoholStoreForm.market_office.$invalid && !alcoholStoreForm.market_office.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">Market office <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <select class="form-control" name="market_office" ng-model="params.market_office" ng-options="row.id as row.office_name for row in listOfMarketOffice" ng-change="changedMktofficeValue(params.state_code.id,params.market_office)" required>
+                                    <option value="">Select market office</option>
+                                </select>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="alcoholStoreForm.market_office.$invalid && !alcoholStoreForm.market_office.$pristine" class="help-block">Please select market office.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : alcoholStoreForm.market_office_city_id.$invalid && !alcoholStoreForm.market_office_city_id.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">Market office city<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <select class="form-control" name="market_office_city" ng-model="params.market_office_city" ng-options="row.id as row.city_name for row in listOfMarketOfficeCity" ng-change="changedMktofficeCityValue(params.state_code.id,params.market_office)" required>
+                                    <option value="">Select market office city</option>
+                                </select>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="alcoholStoreForm.market_office_city.$invalid && !alcoholStoreForm.market_office_city.$pristine" class="help-block">Please select market office city.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : alcoholStoreForm.zone_hash.$invalid && !alcoholStoreForm.zone_hash.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">Zone<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <select multiple="" name="zone_hash" ng-model="params.zone_hash" ng-options="row.shortid as row.delivery_zone_name for row in listOfZone" class="form-control" required>
+                                    <option value="">Select zone</option>
+                                </select>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="alcoholStoreForm.zone_hash.$invalid && !alcoholStoreForm.zone_hash.$pristine" class="help-block">Please select at least one zone.</span>
+                                <span ng-show="alcoholStoreForm.zone_hash.$valid" class="help-block">Press Ctrl to select more than one zone.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase">Alcohol Store Category </span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="form-body">
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : alcoholStoreForm.sub_category.$invalid && !alcoholStoreForm.sub_category.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">Category </label>
+                            <div class="col-md-8">
+                                <tags-input name="sub_category" ng-model="params.sub_category" add-on-paste="true" spellcheck="true" placeholder="Type and hit enter" min-length="1" required></tags-input>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="alcoholStoreForm.sub_category.$invalid && !alcoholStoreForm.sub_category.$pristine" class="help-block">Add category tags.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase">Opening Hours </span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="form-body">
+                        <div class="clearfix">
+                            <div class="panel panel-default" ng-repeat="(k, v) in opening_hours">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">{{days[k]}}</h3>
+                                </div>
+                                <table class="table table-bordered table-striped">
+                                    <tbody>
+                                        <tr>
+                                            <td width="50%">
+                                                <label>Start Time</label>
+                                                <uib-timepicker ng-model="v.start_time" ng-change="changed_start_time(k,v.start_time)" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
+                                            </td>
+                                            <td width="50%">
+                                                <label>End Time</label>
+                                                <uib-timepicker ng-model="v.end_time" ng-change="changed_end_time(k,v.end_time)" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-actions pull-right">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn green" ng-disabled="alcoholStoreForm.$invalid">Submit</button>
+                        <button type="button" class="btn default" ng-click="reset()">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

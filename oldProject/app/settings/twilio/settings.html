@@ -1,0 +1,475 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+     <ul class="page-breadcrumb">
+        <li>
+            
+        </li>
+        
+        <li>
+            
+            
+        </li>
+    </ul>
+    
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <h3 class="page-title"> Twilio Settings </h3> </div>
+        <div class="col-md-6">
+            
+        </div>
+    </div>
+</div>
+<!-- BEGIN FORM-->
+<form class="form-horizontal" name="twilioSettingsForm" method="post" ng-submit="saveTwilioSettings(params)">
+    <div class="row">    
+        
+        <div class="col-md-6">
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet box green" style="margin-bottom: 0px;">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-list"></i>Twilio Environment Change </div>
+                        <div class="tools">
+                            <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
+                            <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title=""> </a>
+                            <a href="javascript:;" class="reload" data-original-title="" title=""> </a>
+                            <a href="javascript:;" class="remove" data-original-title="" title=""> </a>
+                        </div>
+                    </div>
+
+                    <div class="portlet-body">
+                        <div class="form-body">
+                            <!--<h3 class="form-section">General Information</h3>-->
+                            <div class="form-group form-md-radios">
+                                <label for="form_control_1" class="col-md-3 control-label">Environment</label>
+                                <div class="col-md-9">
+                                    <div class="md-radio-inline" ng-init="params.env='DEVELOPMENT'">
+                                        <div class="md-radio">
+                                            <input type="radio" class="md-radiobtn" ng-model="params.env" id="env_yes" ng-value="'PRODUCTION'">
+                                            <label for="env_yes">
+                                                <span></span>
+                                                <span class="check"></span>
+                                                <span class="box"></span> Production
+                                            </label>
+                                        </div>
+                                        <div class="md-radio">
+                                            <input type="radio" class="md-radiobtn" ng-model="params.env" id="env_no" ng-value="'DEVELOPMENT'">
+                                            <label for="env_no">
+                                                <span></span>
+                                                <span class="check"></span>
+                                                <span class="box"></span> Development
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet box green" style="margin-bottom: 0px;">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-list"></i>Twilio Message/Call Settings Turn On/Off </div>
+                        <div class="tools">
+                            <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
+                            <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title=""> </a>
+                            <a href="javascript:;" class="reload" data-original-title="" title=""> </a>
+                            <a href="javascript:;" class="remove" data-original-title="" title=""> </a>
+                        </div>
+                    </div>
+
+                    <div class="portlet-body">
+                        <div class="form-body">
+                            
+                            <div class="form-group form-md-radios">
+                                <label for="form_control_1" class="col-md-3 control-label">Call</label>
+                                <div class="col-md-9">
+                                    <div class="md-radio-inline" ng-init="params.call='false'">
+                                        <div class="md-radio">
+                                            <input type="radio" class="md-radiobtn" ng-model="params.call" id="call_yes" ng-value="'true'">
+                                            <label for="call_yes">
+                                                <span></span>
+                                                <span class="check"></span>
+                                                <span class="box"></span> Yes
+                                            </label>
+                                        </div>
+                                        <div class="md-radio">
+                                            <input type="radio" class="md-radiobtn" ng-model="params.call" id="call_no" ng-value="'false'">
+                                            <label for="call_no">
+                                                <span></span>
+                                                <span class="check"></span>
+                                                <span class="box"></span> No
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-md-radios">
+                                <label for="form_control_1" class="col-md-3 control-label">Message</label>
+                                <div class="col-md-9">
+                                    <div class="md-radio-inline" ng-init="params.message='false'">
+                                        <div class="md-radio">
+                                            <input type="radio" class="md-radiobtn" ng-model="params.message" id="message_yes" ng-value="'true'">
+                                            <label for="message_yes">
+                                                <span></span>
+                                                <span class="check"></span>
+                                                <span class="box"></span> Yes
+                                            </label>
+                                        </div>
+                                        <div class="md-radio">
+                                            <input type="radio" class="md-radiobtn" ng-model="params.message" id="message_no" ng-value="'false'">
+                                            <label for="message_no">
+                                                <span></span>
+                                                <span class="check"></span>
+                                                <span class="box"></span> No
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet box green" style="margin-bottom: 0px;">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-list"></i>Twilio Development Settings </div>
+                        <div class="tools">
+                            <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
+                            <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title=""> </a>
+                            <a href="javascript:;" class="reload" data-original-title="" title=""> </a>
+                            <a href="javascript:;" class="remove" data-original-title="" title=""> </a>
+                        </div>
+                    </div>
+
+                    <div class="portlet-body">
+                        <div class="form-body">
+                            <!--<h3 class="form-section">General Information</h3>-->
+                            <div class="form-group form-md-line-input" ng-class="{ 'has-error' : twilioSettingsForm.ACCOUNT_SID_DEVELOPMENT.$invalid   && !twilioSettingsForm.ACCOUNT_SID_DEVELOPMENT.$dirty }">
+                                <label for="form_control_1" class="col-md-3 control-label">Account SID <span class="required" aria-required="true">*</span></label>
+                                <div class="col-md-9">
+                                    <input type="text" name="ACCOUNT_SID_DEVELOPMENT"  ng-model="params.ACCOUNT_SID_DEVELOPMENT" class="form-control" required>
+                                    <div class="form-control-focus"> </div>
+                                    <span ng-show="twilioSettingsForm.ACCOUNT_SID_DEVELOPMENT.$error.required && !twilioSettingsForm.ACCOUNT_SID_DEVELOPMENT.$dirty.required" class="help-block">
+                                        Account SID is required
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-md-line-input" ng-class="{ 'has-error' : twilioSettingsForm.ACCESS_TOKEN_DEVELOPMENT.$invalid   && !twilioSettingsForm.ACCESS_TOKEN_DEVELOPMENT.$dirty }">
+                                <label for="form_control_1" class="col-md-3 control-label">Access Token <span class="required" aria-required="true">*</span></label>
+                                <div class="col-md-9">
+                                    <input type="text" name="ACCESS_TOKEN_DEVELOPMENT"  ng-model="params.ACCESS_TOKEN_DEVELOPMENT" class="form-control" required>
+                                    <div class="form-control-focus"> </div>
+                                    <span ng-show="twilioSettingsForm.ACCESS_TOKEN_DEVELOPMENT.$error.required && !twilioSettingsForm.ACCESS_TOKEN_DEVELOPMENT.$dirty.required" class="help-block">
+                                        Access token is required
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-md-line-input" ng-class="{ 'has-error' : twilioSettingsForm.FROM_NUMBER_DEVELOPMENT.$invalid   && !twilioSettingsForm.FROM_NUMBER_DEVELOPMENT.$dirty }">
+                                <label for="form_control_1" class="col-md-3 control-label">From Number <span class="required" aria-required="true">*</span></label>
+                                <div class="col-md-9">
+                                    <input type="text" name="FROM_NUMBER_DEVELOPMENT"  ng-model="params.FROM_NUMBER_DEVELOPMENT" class="form-control" required>
+                                    <div class="form-control-focus"> </div>
+                                    <span ng-show="twilioSettingsForm.FROM_NUMBER_DEVELOPMENT.$error.required && !twilioSettingsForm.FROM_NUMBER_DEVELOPMENT.$dirty.required" class="help-block">
+                                        From number is required
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-md-line-input" ng-class="{ 'has-error' : twilioSettingsForm.TWILIO_URL_DEVELOPMENT.$invalid   && !twilioSettingsForm.TWILIO_URL_DEVELOPMENT.$dirty }">
+                                <label for="form_control_1" class="col-md-3 control-label">Twilio Url <span class="required" aria-required="true">*</span></label>
+                                <div class="col-md-9">
+                                    <input type="text" name="TWILIO_URL_DEVELOPMENT"  ng-model="params.TWILIO_URL_DEVELOPMENT" class="form-control" required>
+                                    <div class="form-control-focus"> </div>
+                                    <span ng-show="twilioSettingsForm.TWILIO_URL_DEVELOPMENT.$error.required && !twilioSettingsForm.TWILIO_URL_DEVELOPMENT.$dirty.required" class="help-block">
+                                        Twilio url is required
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet box green" style="margin-bottom: 0px;">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-list"></i>Twilio Production Settings </div>
+                        <div class="tools">
+                            <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
+                            <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title=""> </a>
+                            <a href="javascript:;" class="reload" data-original-title="" title=""> </a>
+                            <a href="javascript:;" class="remove" data-original-title="" title=""> </a>
+                        </div>
+                    </div>
+
+                    <div class="portlet-body">
+                        <div class="form-body">
+                            <!--<h3 class="form-section">General Information</h3>-->
+                            <div class="form-group form-md-line-input" ng-class="{ 'has-error' : twilioSettingsForm.ACCOUNT_SID_PRODUCTION.$invalid   && !twilioSettingsForm.ACCOUNT_SID_PRODUCTION.$dirty }">
+                                <label for="form_control_1" class="col-md-3 control-label">Account SID <span class="required" aria-required="true">*</span></label>
+                                <div class="col-md-9">
+                                    <input type="text" name="ACCOUNT_SID_PRODUCTION"  ng-model="params.ACCOUNT_SID_PRODUCTION" class="form-control" required>
+                                    <div class="form-control-focus"> </div>
+                                    <span ng-show="twilioSettingsForm.ACCOUNT_SID_PRODUCTION.$error.required && !twilioSettingsForm.ACCOUNT_SID_PRODUCTION.$dirty.required" class="help-block">
+                                        Account SID is required
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-md-line-input" ng-class="{ 'has-error' : twilioSettingsForm.ACCESS_TOKEN_PRODUCTION.$invalid   && !twilioSettingsForm.ACCESS_TOKEN_PRODUCTION.$dirty }">
+                                <label for="form_control_1" class="col-md-3 control-label">Access Token <span class="required" aria-required="true">*</span></label>
+                                <div class="col-md-9">
+                                    <input type="text" name="ACCESS_TOKEN_PRODUCTION"  ng-model="params.ACCESS_TOKEN_PRODUCTION" class="form-control" required>
+                                    <div class="form-control-focus"> </div>
+                                    <span ng-show="twilioSettingsForm.ACCESS_TOKEN_PRODUCTION.$error.required && !twilioSettingsForm.ACCESS_TOKEN_PRODUCTION.$dirty.required" class="help-block">
+                                        Access token is required
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-md-line-input" ng-class="{ 'has-error' : twilioSettingsForm.FROM_NUMBER_PRODUCTION.$invalid   && !twilioSettingsForm.FROM_NUMBER_PRODUCTION.$dirty }">
+                                <label for="form_control_1" class="col-md-3 control-label">From Number <span class="required" aria-required="true">*</span></label>
+                                <div class="col-md-9">
+                                    <input type="text" name="FROM_NUMBER_PRODUCTION"  ng-model="params.FROM_NUMBER_PRODUCTION" class="form-control" required>
+                                    <div class="form-control-focus"> </div>
+                                    <span ng-show="twilioSettingsForm.FROM_NUMBER_PRODUCTION.$error.required && !twilioSettingsForm.FROM_NUMBER_PRODUCTION.$dirty.required" class="help-block">
+                                        From number is required
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-md-line-input" ng-class="{ 'has-error' : twilioSettingsForm.TWILIO_URL_PRODUCTION.$invalid   && !twilioSettingsForm.TWILIO_URL_PRODUCTION.$dirty }">
+                                <label for="form_control_1" class="col-md-3 control-label">Twilio Url <span class="required" aria-required="true">*</span></label>
+                                <div class="col-md-9">
+                                    <input type="text" name="TWILIO_URL_PRODUCTION"  ng-model="params.TWILIO_URL_PRODUCTION" class="form-control" required>
+                                    <div class="form-control-focus"> </div>
+                                    <span ng-show="twilioSettingsForm.TWILIO_URL_PRODUCTION.$error.required && !twilioSettingsForm.TWILIO_URL_PRODUCTION.$dirty.required" class="help-block">
+                                        Twilio url is required
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet box green" style="margin-bottom: 0px;">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-list"></i>Twilio Message After Heading To You </div>
+                        <div class="tools">
+                            <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
+                            <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title=""> </a>
+                            <a href="javascript:;" class="reload" data-original-title="" title=""> </a>
+                            <a href="javascript:;" class="remove" data-original-title="" title=""> </a>
+                        </div>
+                    </div>
+
+                    <div class="portlet-body">
+                        <div class="form-body">
+                            <!--<h3 class="form-section">General Information</h3>-->
+                            <div class="form-group form-md-line-input" ng-class="{ 'has-error' : twilioSettingsForm.TWILIO_MESSAGE_AFTER_ORDER.$invalid   && !twilioSettingsForm.TWILIO_MESSAGE_AFTER_ORDER.$dirty }">
+                                
+                                <div class="col-md-12">
+                                    
+                                    <textarea  name="TWILIO_MESSAGE_AFTER_ORDER"  ng-model="params.TWILIO_MESSAGE_AFTER_ORDER" class="form-control" maxlength="160" ng-trim="false" required></textarea>
+                                    <div class="form-control-focus"> </div>
+                                    <span ng-show="twilioSettingsForm.TWILIO_MESSAGE_AFTER_ORDER.$error.required && !twilioSettingsForm.TWILIO_MESSAGE_AFTER_ORDER.$dirty.required" class="help-block">
+                                        Twilio After Order Message is required
+                                    </span>
+
+
+                                </div>
+                                <span>Characters Left: {{160-params.TWILIO_MESSAGE_AFTER_ORDER.length}}</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet box green" style="margin-bottom: 0px;">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-list"></i>Twilio Message After Driver Has Arrived </div>
+                        <div class="tools">
+                            <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
+                            <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title=""> </a>
+                            <a href="javascript:;" class="reload" data-original-title="" title=""> </a>
+                            <a href="javascript:;" class="remove" data-original-title="" title=""> </a>
+                        </div>
+                    </div>
+
+                    <div class="portlet-body">
+                        <div class="form-body">
+                            <!--<h3 class="form-section">General Information</h3>-->
+                            <div class="form-group form-md-line-input" ng-class="{ 'has-error' : twilioSettingsForm.TWILIO_MESSAGE.$invalid   && !twilioSettingsForm.TWILIO_MESSAGE.$dirty }">
+                                
+                                <div class="col-md-12">
+                                    
+                                    <textarea  name="TWILIO_MESSAGE"  ng-model="params.TWILIO_MESSAGE" class="form-control" maxlength="160" ng-trim="false" required></textarea>
+                                    <div class="form-control-focus"> </div>
+                                    <span ng-show="twilioSettingsForm.TWILIO_MESSAGE.$error.required && !twilioSettingsForm.TWILIO_MESSAGE.$dirty.required" class="help-block">
+                                        Twilio Driver Arrived Message is required
+                                    </span>
+                                </div>
+                                <span>Characters Left: {{160-params.TWILIO_MESSAGE.length}}</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet box green" style="margin-bottom: 0px;">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-list"></i>Twilio Verification Message </div>
+                        <div class="tools">
+                            <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
+                            <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title=""> </a>
+                            <a href="javascript:;" class="reload" data-original-title="" title=""> </a>
+                            <a href="javascript:;" class="remove" data-original-title="" title=""> </a>
+                        </div>
+                    </div>
+
+                    <div class="portlet-body">
+                        <div class="form-body">
+                            <!--<h3 class="form-section">General Information</h3>-->
+                            <div class="form-group form-md-line-input" ng-class="{ 'has-error' : twilioSettingsForm.TWILIO_VERIFICATION_MESSAGE.$invalid   && !twilioSettingsForm.TWILIO_VERIFICATION_MESSAGE.$dirty }">
+                                
+                                <div class="col-md-12">
+                                    
+                                    <textarea name="TWILIO_VERIFICATION_MESSAGE"  ng-model="params.TWILIO_VERIFICATION_MESSAGE" class="form-control" maxlength="180" ng-trim="false" required></textarea>
+                                    <div class="form-control-focus"> </div>
+                                    <span ng-show="twilioSettingsForm.TWILIO_VERIFICATION_MESSAGE.$error.required && !twilioSettingsForm.TWILIO_VERIFICATION_MESSAGE.$dirty.required" class="help-block">
+                                        Twilio Verification Message is required
+                                    </span>
+                                </div>
+                                <span>Characters Left: {{180-params.TWILIO_VERIFICATION_MESSAGE.length}}</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet box green" style="margin-bottom: 0px;">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-list"></i>Twilio Verification Download Link </div>
+                        <div class="tools">
+                            <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
+                            <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title=""> </a>
+                            <a href="javascript:;" class="reload" data-original-title="" title=""> </a>
+                            <a href="javascript:;" class="remove" data-original-title="" title=""> </a>
+                        </div>
+                    </div>
+
+                    <div class="portlet-body">
+                        <div class="form-body">
+                            <!--<h3 class="form-section">General Information</h3>-->
+                            <div class="form-group form-md-line-input" ng-class="{ 'has-error' : twilioSettingsForm.TWILIO_DOWNLOAD_LINK.$invalid   && !twilioSettingsForm.TWILIO_DOWNLOAD_LINK.$dirty }">
+                                
+                                <div class="col-md-12">
+                                    
+                                    <textarea  name="TWILIO_DOWNLOAD_LINK"  ng-model="params.TWILIO_DOWNLOAD_LINK" class="form-control" required></textarea>
+                                    <div class="form-control-focus"> </div>
+                                    <span ng-show="twilioSettingsForm.TWILIO_DOWNLOAD_LINK.$error.required && !twilioSettingsForm.TWILIO_DOWNLOAD_LINK.$dirty.required" class="help-block">
+                                        Twilio Verification Download Link is required
+                                    </span>
+                                </div>
+                                
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet box green" style="margin-bottom: 0px;">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-list"></i>Twilio Late Message </div>
+                        <div class="tools">
+                            <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
+                            <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title=""> </a>
+                            <a href="javascript:;" class="reload" data-original-title="" title=""> </a>
+                            <a href="javascript:;" class="remove" data-original-title="" title=""> </a>
+                        </div>
+                    </div>
+
+                    <div class="portlet-body">
+                        <div class="form-body">
+                            <!--<h3 class="form-section">General Information</h3>-->
+                            <div class="form-group form-md-line-input" ng-class="{ 'has-error' : twilioSettingsForm.TWILIO_LATE_MESSAGE.$invalid   && !twilioSettingsForm.TWILIO_LATE_MESSAGE.$dirty }">
+                                
+                                <div class="col-md-12">
+                                    
+                                    <textarea  name="TWILIO_LATE_MESSAGE"  ng-model="params.TWILIO_LATE_MESSAGE" class="form-control" maxlength="160" ng-trim="false" required></textarea>
+                                    <div class="form-control-focus"> </div>
+                                    <span ng-show="twilioSettingsForm.TWILIO_LATE_MESSAGE.$error.required && !twilioSettingsForm.TWILIO_LATE_MESSAGE.$dirty.required" class="help-block">
+                                        Twilio Late Message is required
+                                    </span>
+                                </div>
+                                <span>Characters Left: {{160-params.TWILIO_LATE_MESSAGE.length}}</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="row">
+       <div class="col-md-12">
+            <div class="form-actions" style="float:right">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn green" ng-disabled="twilioSettingsForm.$invalid">Submit</button>
+                        <button type="reset" class="btn default">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>    

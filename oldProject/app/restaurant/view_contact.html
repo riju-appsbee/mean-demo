@@ -1,0 +1,201 @@
+BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="ng/restaurant/list">Restaurant</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="ng/restaurant/edit/{{params.id}}">Edit Restaurant</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="#">Restaurant Contact List</a>
+        </li>
+    </ul>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <h3 class="page-title"> Restaurant Name : {{params.name}} </h3>
+        </div>
+        <div class="col-md-6">
+            <div class="page-title pull-right">
+            <a class="btn btn-sm green btn-outline filter-submit margin-bottom" ng-click="addNewContactPopup()">
+                <i class="fa fa-plus"></i> Add New Contact</a>
+            </div>
+       </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN SAMPLE TABLE PORTLET-->
+        <div class="portlet box green">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-cogs"></i>Contact List</div>
+                <div class="tools">
+                    <a class="collapse" href="javascript:;" data-original-title="" title=""> </a>
+                    <!-- <a class="config" data-toggle="modal" href="#portlet-config" data-original-title="" title=""> </a>
+                    <a class="reload" href="javascript:;" data-original-title="" title=""> </a> -->
+                    <a class="remove" href="javascript:;" data-original-title="" title=""> </a>
+                </div>
+            </div>
+            <div class="portlet-body flip-scroll">
+            <span class="pull-right">Total : {{totalRestaurantContact}}</span>
+                <table class="table table-bordered table-striped table-condensed flip-content">
+                    <thead class="flip-content">
+                        <tr>
+                            <!-- <th> Sno. </th> -->
+                            <th> Title </th>
+                            <th> Name </th>
+                            <th> Cell No </th>
+                            <th> Email </th>
+                            <th width="20%"> Action </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="(key, val) in listOfRestaurantContact">
+                            <!-- <td> {{$index + 1}}. </td> -->
+                            <td>{{ val.title }}</td>
+                            <td>{{ val.name }}</td>
+                            <td>{{ val.cellphone_no }}</td>
+                            <td>{{ val.email }}</td>
+                            <td>
+                                <a class="btn btn-outline btn-circle btn-sm purple" ng-click="updateContactPopup(key,'')"><i class="fa fa-edit"></i> View </a>
+
+                                <a class="btn btn-outline btn-circle dark btn-sm red" data-ng-click="deleteResContact(params.id,key)" href="javascript:;"><i class="fa fa-trash-o"></i> Delete </a>
+                            </td>
+                        </tr>
+                        <tr ng-show="!totalRestaurantContact">
+                            <td colspan="7" class="text-center font-red font-lg">No record available.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- END SAMPLE TABLE PORTLET-->
+    </div>
+</div>
+
+<!-- ADD POPUP FORM BEGIN -->
+<script type="text/ng-template" id="add_new_contact">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Fill Contact Details</h4>
+            </div>
+            <form class="form-horizontal" name="restaurantContactForm" method="post" ng-submit="addRestaurantContact(restaurantContactForm.$valid)" novalidate>
+                <div class="modal-body"> 
+                    <div class="form-body">
+                        <div class="form-group form-md-line-input"  ng-class="{ 'has-error' : restaurantContactForm.title.$invalid && !restaurantContactForm.title.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Title <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="title"  ng-model="contact_info.title" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="restaurantContactForm.title.$invalid && !restaurantContactForm.title.$pristine" class="help-block">Please enter restaurant name.</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-md-line-input"  ng-class="{ 'has-error' : restaurantContactForm.name.$invalid && !restaurantContactForm.name.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Name <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="name"  ng-model="contact_info.name" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="restaurantContactForm.name.$invalid && !restaurantContactForm.name.$pristine" class="help-block">Please enter restaurant name.</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : restaurantContactForm.email.$invalid && !restaurantContactForm.email.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Email <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="email" name="email" ng-model="contact_info.email" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="restaurantContactForm.email.$invalid && !restaurantContactForm.email.$pristine" class="help-block">Please enter restaurant email address.</span>
+                            </div>
+                        </div> 
+
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : restaurantContactForm.cellphone_no.$invalid && !restaurantContactForm.cellphone_no.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Phone <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" input-mask name ="cellphone_no" ng-model="contact_info.cellphone_no" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span class="help-block" ng-show="restaurantContactForm.cellphone_no.$error.required && restaurantContactForm.cellphone_no.$dirty" class="help-block">Please enter valid phone number.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn green" ng-disabled="restaurantContactForm.$invalid">Add</button>
+                    <button type="button" class="btn dark btn-outline" ng-click="cancel()">Close</button>
+                </div>
+            </form> 
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <toastr></toartr>
+</script>
+<!-- ADD POPUP FORM END -->
+
+<!-- EDIT POPUP FORM START -->
+<script type="text/ng-template" id="update_contact">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit Contact Details</h4>
+            </div>
+            <form class="form-horizontal" name="restaurantEditContactForm" method="post" ng-submit="editRestaurantContact(restaurantEditContactForm.$valid)" novalidate>
+                <div class="modal-body"> 
+                    <div class="form-body">                       
+                        <div class="form-group form-md-line-input"  ng-class="{ 'has-error' : restaurantEditContactForm.title.$invalid && !restaurantEditContactForm.title.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Title <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="title"  ng-model="contact_edit_info.title" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="restaurantEditContactForm.title.$invalid && !restaurantEditContactForm.title.$pristine" class="help-block">Please enter restaurant name.</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-md-line-input"  ng-class="{ 'has-error' : restaurantEditContactForm.name.$invalid && !restaurantEditContactForm.name.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Name <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="name"  ng-model="contact_edit_info.name" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="restaurantEditContactForm.name.$invalid && !restaurantEditContactForm.name.$pristine" class="help-block">Please enter restaurant name.</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : restaurantEditContactForm.email.$invalid && !restaurantEditContactForm.email.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Email <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="email" name="email" ng-model="contact_edit_info.email" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="restaurantEditContactForm.email.$invalid && !restaurantEditContactForm.email.$pristine" class="help-block">Please enter restaurant email address.</span>
+                            </div>
+                        </div> 
+
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : restaurantEditContactForm.cellphone_no.$invalid && !restaurantEditContactForm.cellphone_no.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Phone <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" input-mask name ="cellphone_no" ng-model="contact_edit_info.cellphone_no" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="restaurantEditContactForm.cellphone_no.$error.required && restaurantEditContactForm.cellphone_no.$dirty" class="help-block">Please enter valid phone number.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn green" ng-disabled="restaurantEditContactForm.$invalid">Update</button>
+                    <button type="button" class="btn dark btn-outline" ng-click="cancel()">Close</button>
+                </div>
+            </form> 
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <toastr></toartr>
+</script>
+<!-- EDIT POPUP FORM END

@@ -1,0 +1,246 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="ng/promo/list">Promo</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="">Add Promo</a>
+        </li>
+    </ul>
+</div>
+<h3 class="page-title font-green"><i class=" icon-user font-green"></i>  Add Promo </h3>
+<!-- BEGIN FORM-->
+<form class="form-horizontal" name="promoForm" method="post" ng-submit="addPromo(promoForm.$valid)" novalidate>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase">Basic Information </span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="form-body">
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : promoForm.code.$invalid && !promoForm.code.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Code <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="code" ng-model="params.code" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="promoForm.code.$invalid && !promoForm.code.$pristine" class="help-block">Please enter code.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : promoForm.title.$invalid && !promoForm.title.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Title <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="title" ng-model="params.title" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="promoForm.title.$invalid && !promoForm.title.$pristine" class="help-block">Please enter title.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : promoForm.amount.$invalid && !promoForm.amount.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Amount <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="amount" ng-model="params.amount" class="form-control" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="promoForm.amount.$invalid && !promoForm.amount.$pristine" class="help-block">Please provide amount upto 2 decimal places.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{'has-error' : promoForm.type.$invalid && !promoForm.type.$pristine }">
+                            <label class="col-md-3 control-label" for="form_control_1">Type<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <select class="form-control" name="type" ng-model="params.type">
+                                    <option value="">Select Type</option>
+                                    <option value="percentage">Percentage</option>
+                                    <option value="flat">Flat</option>
+                                </select>
+                                <div class="form-control-focus"></div>
+                                <span ng-show="promoForm.type.$invalid && !promoForm.type.$pristine" class="help-block">Please select a type.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{'has-error' : promoForm.start_date.$invalid && !promoForm.start_date.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Start Date<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-4">
+                                <div class="input-group date date-picker" date-picker data-date-format="yyyy-mm-dd">
+                                    <input type="text" ng-model="params.start_date" class="form-control" readonly name="start_date" required>
+                                    <span class="input-group-btn">
+                                        <button class="btn default" type="button">
+                                            <i class="fa fa-calendar"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                                <span ng-show="promoForm.start_date.$invalid && !promoForm.start_date.$pristine" class="help-block"> select a start date </span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{'has-error' : promoForm.end_date.$invalid && !promoForm.end_date.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">End Date<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-4">
+                                <div class="input-group date date-picker" date-picker data-date-format="yyyy-mm-dd">
+                                    <input type="text" ng-model="params.end_date" class="form-control" readonly name="end_date" compare-date="params.start_date">
+                                    <span class="input-group-btn">
+                                        <button class="btn default" type="button">
+                                            <i class="fa fa-calendar"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                                <span ng-show="promoForm.end_date.$invalid && !promoForm.end_date.$pristine" class="help-block"> select a end date </span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-radios">
+                            <label for="form_control_1" class="col-md-3 control-label">Active</label>
+                            <div class="col-md-9">
+                                <div class="md-radio-inline" ng-init="params.active=false">
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.active" id="active_yes" ng-value="true">
+                                        <label for="active_yes">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> Yes
+                                        </label>
+                                    </div>
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.active" id="active_no" ng-value="false">
+                                        <label for="active_no">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <!-- BEGIN VALIDATION STATES-->
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase">Promo Market Place Information</span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="form-body">
+                        <div class="form-group form-md-line-input" ng-class="{'has-error' : promoForm.state_code.$invalid && !promoForm.state_code.$pristine }">
+                            <label class="col-md-4 control-label" for="form_control_1">State<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <select class="form-control" name="state_code" ng-model="params.state_code" ng-options="row.id as row.value for row in states" ng-change="getMarketOffice(params.state_code)" required>
+                                </select>
+                                <div class="form-control-focus"></div>
+                                <span ng-show="promoForm.state_code.$invalid && !promoForm.state_code.$pristine" class="help-block">Please select a state.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{'has-error' : promoForm.market_office_id.$invalid && !promoForm.market_office_id.$pristine }">
+                            <label class="col-md-4 control-label" for="form_control_1">Market Office<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <select class="form-control" name="market_office_id" ng-model="params.market_office_id" ng-options="row.id as row.office_name for row in marketOffice" ng-change="getDeliveryZone(params.state_code,params.market_office_id)" required>
+                                </select>
+                                <div class="form-control-focus"></div>
+                                <span ng-show="promoForm.market_office_id.$invalid && !promoForm.market_office_id.$pristine" class="help-block">Please select a market office.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{'has-error' : promoForm.market_office_city_delivery_zone_id.$invalid && !promoForm.market_office_id.$pristine }">
+                            <label class="col-md-4 control-label" for="form_control_1">Delivery Zone<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <select class="form-control" name="market_office_id" ng-model="params.market_office_city_delivery_zone_id" ng-options="row.id as row.delivery_zone_name for row in deliveryZone" required>
+                                </select>
+                                <div class="form-control-focus"></div>
+                                <span ng-show="promoForm.market_office_city_delivery_zone_id.$invalid && !promoForm.market_office_city_delivery_zone_id.$pristine" class="help-block">Please select a delivery zone.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <!-- BEGIN VALIDATION STATES-->
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase">Other Information</span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="form-body">
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : promoForm.max_uses.$invalid && !promoForm.max_uses.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">Max Uses <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <input type="text" name="max_uses" ng-model="params.max_uses" class="form-control" ng-pattern="/^[0-9]+$/" step="0.01" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="promoForm.max_uses.$invalid && !promoForm.max_uses.$pristine" class="help-block">Please enter max uses.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : promoForm.min_order_amount.$invalid && !promoForm.min_order_amount.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">Min Order Amount <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <input type="text" name="min_order_amount" ng-model="params.min_order_amount" class="form-control" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="promoForm.min_order_amount.$invalid && !promoForm.min_order_amount.$pristine" class="help-block">Please enter min order amount upto 2 decimal places.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-radios">
+                            <label for="form_control_1" class="col-md-4 control-label">Once Per Customer</label>
+                            <div class="col-md-8">
+                                <div class="md-radio-inline" ng-init="params.use_once_per_customer=false">
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.use_once_per_customer" id="use_once_per_customer_yes" ng-value="true">
+                                        <label for="use_once_per_customer_yes">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> Yes
+                                        </label>
+                                    </div>
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.use_once_per_customer" id="use_once_per_customer_no" ng-value="false">
+                                        <label for="use_once_per_customer_no">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-radios">
+                            <label for="form_control_1" class="col-md-4 control-label">New Customer Only</label>
+                            <div class="col-md-8">
+                                <div class="md-radio-inline" ng-init="params.new_customer_only=false">
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.new_customer_only" id="new_customer_only_yes" ng-value="true">
+                                        <label for="new_customer_only_yes">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> Yes
+                                        </label>
+                                    </div>
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.new_customer_only" id="new_customer_only_no" ng-value="false">
+                                        <label for="new_customer_only_no">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-actions pull-right">
+                <button type="submit" class="btn green" ng-disabled="promoForm.$invalid">Submit</button>
+                <button type="button" class="btn default" ng-click="reset()">Reset</button>
+            </div>
+        </div>
+    </div>
+</form>

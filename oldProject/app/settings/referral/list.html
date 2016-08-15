@@ -1,0 +1,299 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="#">Referral Setting</a>
+            <i class="fa fa-circle"></i>
+        </li>
+    </ul>
+    
+</div>
+<h3 class="page-title font-green"><i class=" icon-user font-green"></i>  Edit Referral Setting </h3>
+
+<!-- BEGIN FORM-->
+<form class="form-horizontal" name="referralForm" method="post" ng-submit="update(referralForm.$valid)" novalidate>
+    <div class="row">    
+    	<div class="col-md-6">
+           <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase">Invite Friend Settings </span>
+                    </div>
+                </div>
+
+                <div class="portlet-body">
+                    <div class="form-body">
+                        <div class="form-group form-md-line-input"  ng-class="{ 'has-error' : referralForm.invite_friend_wording.$invalid && !referralForm.invite_friend_wording.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Invite Friend Wording <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="invite_friend_wording"  ng-model="params.invite_friend_wording" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="referralForm.invite_friend_wording.$invalid && !referralForm.invite_friend_wording.$pristine" class="help-block">Please provide invite friend wording.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group form-md-line-input"  ng-class="{ 'has-error' : referralForm.invite_friend_subject.$invalid && !referralForm.invite_friend_subject.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Invite Friend Subject <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="invite_friend_subject"  ng-model="params.invite_friend_subject" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="referralForm.invite_friend_subject.$invalid && !referralForm.invite_friend_subject.$pristine" class="help-block">Please provide invite friend subject.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : referralForm.invite_friend_message.$invalid && !referralForm.invite_friend_message.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Invite Friend Message <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="invite_friend_message" ng-model="params.invite_friend_message" class="form-control"  required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="referralForm.invite_friend_message.$invalid && !referralForm.invite_friend_message.$pristine" class="help-block">Please provide invite friend message.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : referralForm.invite_friend_sms_message.$invalid && !referralForm.invite_friend_sms_message.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Invite Friend SMS Message <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="invite_friend_sms_message" ng-model="params.invite_friend_sms_message" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="referralForm.invite_friend_sms_message.$invalid && !referralForm.invite_friend_sms_message.$pristine" class="help-block">Please provide invite friend SMS message.</span>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : referralForm.invite_friend_reminder_subject.$invalid && !referralForm.invite_friend_reminder_subject.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Invite Friend Reminder Subject <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="invite_friend_reminder_subject" ng-model="params.invite_friend_reminder_subject" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="referralForm.invite_friend_reminder_subject.$invalid && !referralForm.invite_friend_reminder_subject.$pristine" class="help-block">Please provide invite friend reminder subject.</span>
+                            </div>
+                        </div>
+                       
+                        
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : referralForm.invite_friend_reminder_message.$invalid && !referralForm.invite_friend_reminder_message.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Invite Friend Reminder Message <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="invite_friend_reminder_message" ng-model="params.invite_friend_reminder_message" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="referralForm.invite_friend_reminder_message.$invalid && !referralForm.invite_friend_reminder_message.$pristine" class="help-block">Please provide invite friend reminder message.</span>
+                            </div>
+                        </div>
+                        
+                        
+                         <div class="form-group form-md-line-input" ng-class="{ 'has-error' : referralForm.landing_url.$invalid && !referralForm.landing_url.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Landing Url <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="landing_url" ng-model="params.landing_url" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="referralForm.landing_url.$invalid && !referralForm.landing_url.$pristine" class="help-block">Please provide landing url.</span>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>    
+                </div>
+            </div>
+        </div>
+    
+    
+        <div class="col-md-6">
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase">Facebook Settings </span>
+                    </div>
+                </div>
+
+                <div class="portlet-body">
+                    <div class="form-body">
+                        <div class="form-group form-md-line-input"  ng-class="{ 'has-error' : referralForm.facebook_content_title.$invalid && !referralForm.facebook_content_title.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Facebook Content Title <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="facebook_content_title"  ng-model="params.facebook_content_title" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="referralForm.facebook_content_title.$invalid && !referralForm.facebook_content_title.$pristine" class="help-block">Please provide facebook content title.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group form-md-line-input"  ng-class="{ 'has-error' : referralForm.facebook_content_description.$invalid && !referralForm.facebook_content_description.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Facebook Content Description <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="facebook_content_description"  ng-model="params.facebook_content_description" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="referralForm.facebook_content_description.$invalid && !referralForm.facebook_content_description.$pristine" class="help-block">Please provide facebook content description.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : referralForm.facebook_content_url.$invalid && !referralForm.facebook_content_url.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Facebook Content Url <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="facebook_content_url" ng-model="params.facebook_content_url" class="form-control"  required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="referralForm.facebook_content_url.$invalid && !referralForm.facebook_content_url.$pristine" class="help-block">Please provide facebook content url.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : referralForm.facebook_image_url.$invalid && !referralForm.facebook_image_url.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Facebook Image Url <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="facebook_image_url" ng-model="params.facebook_image_url" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="referralForm.facebook_image_url.$invalid && !referralForm.facebook_image_url.$pristine" class="help-block">Please provide facebook image url.</span>
+                            </div>
+                        </div>
+                        
+                    </div>    
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="col-md-6">
+           <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase">Campaign Settings </span>
+                    </div>
+                </div>
+
+                <div class="portlet-body">
+                    <div class="form-body">
+                        <div class="form-group form-md-line-input"  ng-class="{ 'has-error' : referralForm.campaign_name.$invalid && !referralForm.campaign_name.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Campaign Name <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="campaign_name"  ng-model="params.campaign_name" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="referralForm.campaign_name.$invalid && !referralForm.campaign_name.$pristine" class="help-block">Please provide campaign name.</span>
+                            </div>
+                        </div>
+                        
+                        
+                       <div class="form-group form-md-line-input"  ng-class="{ 'has-error' : referralForm.campaign_description.$invalid && !referralForm.campaign_description.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Campaign Description <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="campaign_description"  ng-model="params.campaign_description" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="referralForm.campaign_description.$invalid && !referralForm.campaign_description.$pristine" class="help-block">Please provide campaign description.</span>
+                            </div>
+                        </div>
+                        
+                    </div>    
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="col-md-6">
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase">Twitter Settings </span>
+                    </div>
+                </div>
+
+                <div class="portlet-body">
+                    <div class="form-body">
+                        
+                        <div class="form-group form-md-line-input"  ng-class="{ 'has-error' : referralForm.twitter_content_description.$invalid && !referralForm.twitter_content_description.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Twitter Content Description <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="twitter_content_description"  ng-model="params.twitter_content_description" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="referralForm.twitter_content_description.$invalid && !referralForm.twitter_content_description.$pristine" class="help-block">Please provide twitter content description.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : referralForm.twitter_content_url.$invalid && !referralForm.twitter_content_url.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Twitter Content Url <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="twitter_content_url" ng-model="params.twitter_content_url" class="form-control"  required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="referralForm.twitter_content_url.$invalid && !referralForm.twitter_content_url.$pristine" class="help-block">Please provide twitter content url.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : referralForm.twitter_image_url.$invalid && !referralForm.twitter_image_url.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Twitter Image Url <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="twitter_image_url" ng-model="params.twitter_image_url" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="referralForm.twitter_image_url.$invalid && !referralForm.twitter_image_url.$pristine" class="help-block">Please provide twitter image url.</span>
+                            </div>
+                        </div>
+                        
+                    </div>    
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        
+        
+        
+        
+        <div class="col-md-6">
+           <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase">Others Settings </span>
+                    </div>
+                </div>
+
+                <div class="portlet-body">
+                    <div class="form-body">
+                        <div class="form-group form-md-line-input"  ng-class="{ 'has-error' : referralForm.share_image_url.$invalid && !referralForm.share_image_url.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Share Image Url <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="share_image_url"  ng-model="params.share_image_url" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="referralForm.share_image_url.$invalid && !referralForm.share_image_url.$pristine" class="help-block">Please provide share image url.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group form-md-line-input"  ng-class="{ 'has-error' : referralForm.share_content_url.$invalid && !referralForm.share_content_url.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Share Content Url <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="share_content_url"  ng-model="params.share_content_url" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="referralForm.share_content_url.$invalid && !referralForm.share_content_url.$pristine" class="help-block">Please provide share content url.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group form-md-line-input"  ng-class="{ 'has-error' : referralForm.commission_amount.$invalid && !referralForm.commission_amount.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Commission Amount <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="commission_amount"  ng-model="params.commission_amount" class="form-control" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="referralForm.commission_amount.$invalid && !referralForm.commission_amount.$pristine" class="help-block">Please provide commission amount.</span>
+                            </div>
+                        </div>
+                        
+                    </div>    
+                </div>
+            </div>
+        </div>
+        
+        
+        
+
+
+        
+    </div>
+
+    <div class="row">
+       <div class="col-md-12">
+            <div class="form-actions" style="float:right">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn green" ng-disabled="referralForm.$invalid">Submit</button>
+                        <button type="button" class="btn default" ng-click="reset()">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>    

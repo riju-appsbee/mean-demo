@@ -1,0 +1,68 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="#">DYNAMO TABLE LIST</a>
+        </li>
+    </ul>    
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <h3 class="page-title"> Dynamo Table List </h3>
+        </div>
+        <div class="col-md-6">
+            <div class="col-md-12">
+        <div class="col-md-8">
+            <select name="selectedTable" class="form-control dropdown-toggle" style="margin-top: 24px;" required
+                    ng-model="selectedTable" 
+                    ng-options="row.tblName as row.aliasName for row in tablesNames"> 
+                <option value="">Select Table</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <div class="btn-group pull-right page-title">
+                <a class="btn btn-sm green btn-outline filter-submit margin-bottom" ng-click="createTable(selectedTable)">
+                    <i class="fa fa-plus"></i> Add Table</a>
+            </div>
+        </div>
+            </div>            
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN SAMPLE TABLE PORTLET-->
+        <div class="portlet box green">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-cogs"></i>All dynamo tables are listed here </div>                
+            </div>
+            <div class="portlet-body flip-scroll" style="display: block;">
+            <span class="pull-right">Total : {{dynamoTables.length}}</span>                
+                <table class="table table-bordered table-striped table-condensed flip-content">
+                    <thead class="flip-content">
+                        <tr>
+                            <th> Table Name </th>                            
+                            <th class="numeric"> Action </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="tbls in dynamoTables">                            
+                            <td class="numeric">{{tbls}}</td>                            
+                            <td class="numeric"> 
+                                <a ng-click="importData(tbls)" class="btn btn-outline btn-circle dark btn-sm black" href=""><i class="fa fa-trash-o"></i> Import Data </a>
+                                <a ng-click="showData(tbls)" class="btn btn-outline btn-circle dark btn-sm black" href=""><i class="fa fa-trash-o"></i> Show Data </a>
+                                <a ng-click="deleteData(tbls)" class="btn btn-outline btn-circle dark btn-sm black" href=""><i class="fa fa-trash-o"></i> Delete Table Data </a>
+                                <a ng-click="deleteTable(tbls)" class="btn btn-outline btn-circle dark btn-sm black" href=""><i class="fa fa-trash-o"></i> Delete Table </a>
+                            </td>
+                        </tr>
+                        <tr ng-show="!dynamoTables.length"><td colspan="6" style="text-align:center; color:red;">No record available.</td></tr>                  
+                    </tbody>
+                </table>                
+                
+            </div>
+        </div>
+        <!-- END SAMPLE TABLE PORTLET-->
+    </div>
+</div>

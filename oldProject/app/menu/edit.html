@@ -1,0 +1,159 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="ng/menu/list">Menu</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="">Edit Menu</a>
+        </li>
+    </ul>
+</div>
+<h3 class="page-title font-green"><i class=" fa fa-cutlery font-green"></i>  Edit Menu </h3>
+<!-- BEGIN FORM-->
+<form class="form-horizontal" name="menuForm" method="post" ng-submit="updateMenu(menuForm.$valid)" novalidate>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase">Basic Information </span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="form-body">
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : menuForm.menu_name.$invalid && !menuForm.menu_name.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Menu Name <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="menu_name" ng-model="params.title" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="menuForm.menu_name.$invalid && !menuForm.menu_name.$pristine" class="help-block">Please enter a title for the menu.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            <label class="col-md-3 control-label" for="form_control_1">Meal&nbsp;Period</label>
+                            <div class="col-md-9">
+                                <tags-input ng-model="params.meal_period" add-on-paste="true" spellcheck="false" placeholder="Add a meal-period and hit enter" min-length="1">
+                                </tags-input>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            <label class="col-md-3 control-label" for="form_control_1">Menu&nbsp;Category</label>
+                            <div class="col-md-9">
+                                <tags-input ng-model="params.menu_category" add-on-paste="true" spellcheck="false" placeholder="Add a category and hit enter" min-length="1">
+                                </tags-input>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-radios">
+                            <label for="form_control_1" class="col-md-3 control-label">Active</label>
+                            <div class="col-md-9">
+                                <div class="md-radio-inline" ng-init="params.menu_active=true">
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.menu_active" id="menu_active_yes" ng-value="true">
+                                        <label for="menu_active_yes">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> Yes
+                                        </label>
+                                    </div>
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.menu_active" id="menu_active_no" ng-value="false">
+                                        <label for="menu_active_no">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="col-md-6">
+            <div class="portlet light portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase">Item Section</span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <a class="btn btn-sm green btn-outline filter-submit margin-bottom" href="ng/item/list/{{params.id}}">
+                        <i class="fa fa-plus"></i> Add Item
+                    </a>
+                </div>
+            </div>
+        </div> -->
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-actions pull-right">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn green" ng-disabled="menuForm.$invalid">Submit</button>
+                        <button type="reset" class="btn default" ng-click="resetMenuForm()">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="row">
+    <div class="col-md-12">
+        <div class="btn-group pull-right page-title">
+            <a class="btn btn-sm green btn-outline filter-submit margin-bottom" href="ng/item/add/{{menu_id}}">
+                <i class="fa fa-plus"></i> Add New Item</a>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN SAMPLE TABLE PORTLET-->
+        <div class="portlet box green">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-cogs"></i>LIST OF ITEMS</div>
+                <div class="tools">
+                    <a class="collapse" href="" data-original-title="" title=""> </a>
+                    <a class="remove" href="" data-original-title="" title=""> </a>
+                </div>
+            </div>
+            <div class="portlet-body flip-scroll">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="col-md-8 col-sm-8">
+                            <span class="label label-success pull-left" ng-show="loaderValue"> Loading data... </span>
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <span class="pull-right" ng-show="!loaderValue"> Total : {{totalItems}} </span>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-bordered table-striped table-condensed flip-content">
+                    <thead class="flip-content">
+                        <tr>
+                            <th> Item Name </th>
+                            <th> Created On </th>
+                            <th class="numeric"> Action </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in items track by $index">
+                            <td class="numeric">{{item.name}}</td>
+                            <td class="numeric">{{item.created_date*1000 | date:'MM-dd-yyyy'}}</td>
+                            <td class="numeric">
+                                <a class="btn btn-outline btn-circle btn-sm purple" href="ng/item/edit/{{item.id}}/{{menu_id}}"><i class="fa fa-edit"></i> View </a>
+                                <a ng-click="deleteItem(item.id)" class="btn btn-outline btn-circle dark btn-sm black" href=""><i class="fa fa-trash-o"></i> Delete </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- END SAMPLE TABLE PORTLET-->
+    </div>
+</div>

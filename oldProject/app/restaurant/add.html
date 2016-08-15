@@ -1,0 +1,375 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="ng/restaurant/list">Restaurant</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="#">Add Restaurant</a>
+        </li>
+    </ul>
+    <div class="page-toolbar">
+        <div class="btn-group pull-right">
+            <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" dropdown-menu-hover data-delay="1000" data-close-others="true"> Actions
+                <i class="fa fa-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu pull-right" role="menu">
+                <li>
+                    <a href="ng/restaurant/add">
+                        <i class="fa fa-cutlery" aria-hidden="true"></i> Add New Restaurant </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<h3 class="page-title font-green"><i class="fa fa-cutlery" aria-hidden="true"></i> Add Restaurant </h3>
+<div class="m-heading-1 border-green m-bordered">
+    <p>Provide restaurant details.</p>
+</div>
+<!-- BEGIN FORM-->
+<form class="form-horizontal" id="restaurantForm" name="restaurantForm" method="post" ng-submit="addRestaurant(restaurantForm.$valid)" novalidate>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase">Restaurant Information </span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="form-body">
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : restaurantForm.business_user_id.$invalid && !restaurantForm.business_user_id.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Business&nbsp;User<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="business_user_id" ng-model="params.business_user_id" class="form-control" uib-typeahead="row.id as row.name for row in listOfRestaurantUser | filter:{name:$viewValue}" typeahead-editable="false" typeahead-input-formatter="formatLabel($model)" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="restaurantForm.business_user_id.$invalid && !restaurantForm.business_user_id.$pristine" class="help-block">Please select businness user.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : restaurantForm.name.$invalid && !restaurantForm.name.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Name <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="name" ng-model="params.name" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="restaurantForm.name.$invalid && !restaurantForm.name.$pristine" class="help-block">Please enter restaurant name.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : restaurantForm.email.$invalid && !restaurantForm.email.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Email <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="email" name="email" ng-model="params.email" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="restaurantForm.email.$invalid && !restaurantForm.email.$pristine" class="help-block">Please enter restaurant email address.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : restaurantForm.contact_no.$invalid && !restaurantForm.contact_no.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Phone <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" input-mask name="contact_no" ng-model="params.contact_no" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="restaurantForm.contact_no.$error.required && restaurantForm.contact_no.$dirty" class="help-block">Please enter valid contact number.</span>
+                            </div>
+                        </div>
+                        <!--mask-number -->
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : restaurantForm.zip.$invalid && !restaurantForm.zip.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Zip <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="zip" ng-pattern="/^[0-9]{1,7}$/" ng-model="params.zip" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="restaurantForm.zip.$error.required && restaurantForm.zip.$dirty" class="help-block">Please enter valid zip number.</span>
+                                <span ng-show="!restaurantForm.zip.$error.required && restaurantForm.zip.$error.pattern && restaurantForm.zip.$dirty" class="help-block">Must contain only numbers upto 9999999</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : restaurantForm.address.$invalid && !restaurantForm.address.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Address <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" places-auto-complete component-restrictions="{country:'us'}" on-place-changed="placeChanged()" name="address" ng-model="params.address" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="restaurantForm.address.$invalid && !restaurantForm.address.$pristine" class="help-block">Please enter restaurant address.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : restaurantForm.rest_avg_prep_time.$invalid && !restaurantForm.rest_avg_prep_time.$pristine }">
+                            <label for="form_control_1" class="col-md-5 control-label">Average Preparation Time<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-7">
+                                <input type="text" name="rest_avg_prep_time" ng-model="params.rest_avg_prep_time" ng-pattern="/^[0-9]{1,7}$/" class="form-control" placeholder="Please enter minutes" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="restaurantForm.rest_avg_prep_time.$error.required && restaurantForm.rest_avg_prep_time.$dirty" class="help-block">Please enter minutes.</span>
+                                <span ng-show="!restaurantForm.rest_avg_prep_time.$error.required && restaurantForm.rest_avg_prep_time.$error.pattern && restaurantForm.rest_avg_prep_time.$dirty" class="help-block">Must contain only numbers</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : restaurantForm.snd_drvr_erly_mins.$invalid && !restaurantForm.snd_drvr_erly_mins.$pristine }">
+                            <label for="form_control_1" class="col-md-5 control-label">Send Driver Time<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-7">
+                                <input type="text" name="snd_drvr_erly_mins" ng-model="params.snd_drvr_erly_mins" ng-pattern="/^[0-9]{1,7}$/" class="form-control" placeholder="Please enter minutes" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="restaurantForm.snd_drvr_erly_mins.$error.required && restaurantForm.snd_drvr_erly_mins.$dirty" class="help-block">Please enter minutes.</span>
+                                <span ng-show="!restaurantForm.snd_drvr_erly_mins.$error.required && restaurantForm.snd_drvr_erly_mins.$error.pattern && restaurantForm.snd_drvr_erly_mins.$dirty" class="help-block">Must contain only numbers</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : restaurantForm.rstrnt_stmnt_fee.$invalid && !restaurantForm.rstrnt_stmnt_fee.$pristine }">
+                            <label for="form_control_1" class="col-md-5 control-label">Statement Fee<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-7">
+                                <input type="text" name="rstrnt_stmnt_fee" ng-model="params.rstrnt_stmnt_fee" ng-pattern="/^[0-9]{1,7}$/" class="form-control" placeholder="Enter statement fee in digits" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="restaurantForm.rstrnt_stmnt_fee.$error.required && restaurantForm.rstrnt_stmnt_fee.$dirty" class="help-block">Please enter statement fee.</span>
+                                <span ng-show="!restaurantForm.rstrnt_stmnt_fee.$error.required && restaurantForm.rstrnt_stmnt_fee.$error.pattern && restaurantForm.rstrnt_stmnt_fee.$dirty" class="help-block">Must contain only numbers</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-radios">
+                            <label for="form_control_1" class="col-md-5 control-label">Restaurant Pay Tax</label>
+                            <div class="col-md-7">
+                                <div class="md-radio-inline" ng-init="params.rstrnt_pay_tax=true">
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.rstrnt_pay_tax" id="rstrnt_pay_tax_yes" ng-value="true">
+                                        <label for="rstrnt_pay_tax_yes">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> Yes
+                                        </label>
+                                    </div>
+                                    <div class="md-radio">
+                                        <input type="radio" checked="" class="md-radiobtn" ng-model="params.rstrnt_pay_tax" id="rstrnt_pay_tax_no" ng-value="false">
+                                        <label for="rstrnt_pay_tax_no">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="form-group form-md-radios">
+                            <label for="form_control_1" class="col-md-3 control-label">Restaurant Featured</label>
+                            <div class="col-md-9">
+                                <div class="md-radio-inline" ng-init="params.feat_rstrnt=true">
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.feat_rstrnt" id="feat_rstrnt_yes" ng-value="true">
+                                        <label for="feat_rstrnt_yes">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> Yes
+                                        </label>
+                                    </div>
+                                    <div class="md-radio">
+                                        <input type="radio" checked="" class="md-radiobtn" ng-model="params.feat_rstrnt" id="feat_rstrnt_no" ng-value="false">
+                                        <label for="feat_rstrnt_no">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : restaurantForm.fdjts_trgt_pct.$invalid && !restaurantForm.fdjts_trgt_pct.$pristine }">
+                            <label for="form_control_1" class="col-md-5 control-label">FoodJets Target Percentage</label>
+                            <div class="col-md-7">
+                                <input type="text" name="fdjts_trgt_pct" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" placeholder="Enter an amount" ng-model="params.fdjts_trgt_pct" class="form-control" ng-blur="calculateServiceFee()">
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="restaurantForm.fdjts_trgt_pct.$error.pattern && restaurantForm.fdjts_trgt_pct.$dirty" class="help-block">Must contain only number.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : restaurantForm.fdjts_disc_pct.$invalid && !restaurantForm.fdjts_disc_pct.$pristine }">
+                            <label for="form_control_1" class="col-md-5 control-label">FoodJets&nbsp;Discount&nbsp;Percentage</label>
+                            <div class="col-md-7">
+                                <input type="text" name="fdjts_disc_pct" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" placeholder="Enter an amount" ng-model="params.fdjts_disc_pct" class="form-control" ng-blur="calculateServiceFee()">
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="restaurantForm.fdjts_disc_pct.$error.pattern && restaurantForm.fdjts_disc_pct.$dirty" class="help-block">Must contain only number.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            <label for="form_control_1" class="col-md-5 control-label">Resturant Service Fee</label>
+                            <div class="col-md-7">
+                                <input type="text" readonly name="rstrn_srv_fee_pct" ng-model="params.rstrn_srv_fee_pct" class="form-control">
+                                <div class="form-control-focus"> </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            <label for="form_control_1" class="col-md-3 control-label">Fax Number </label>
+                            <div class="col-md-9">
+                                <input type="text" name="fax" ng-model="params.fax" mask-number class="form-control">
+                                <div class="form-control-focus"> </div>
+                                <span class="help-block">Please enter fax number.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            <label for="form_control_1" class="col-md-3 control-label">Image (1040X486)</label>
+                            <div class="col-md-9">
+                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px;height:150px;"> </div>
+                                    <div>
+                                        <span class="btn red btn-outline btn-file">
+                                            <span class="fileinput-new"> Select image </span>
+                                        <span class="fileinput-exists"> Change </span>
+                                        <input type="file" name="image" upload-able="params.image" />
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            <label for="form_control_1" class="col-md-3 control-label">Banner (751X149)</label>
+                            <div class="col-md-9">
+                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px;height:75px;"> </div>
+                                    <div>
+                                        <span class="btn red btn-outline btn-file">
+                                            <span class="fileinput-new"> Select image </span>
+                                        <span class="fileinput-exists"> Change </span>
+                                        <input type="file" name="banner" upload-able="params.banner" />
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-radios">
+                            <label for="form_control_1" class="col-md-3 control-label">Active</label>
+                            <div class="col-md-9">
+                                <div class="md-radio-inline" ng-init="params.active=true">
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.active" id="active_yes" ng-value="true">
+                                        <label for="active_yes">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> Yes
+                                        </label>
+                                    </div>
+                                    <div class="md-radio">
+                                        <input type="radio" checked="" class="md-radiobtn" ng-model="params.active" id="active_no" ng-value="false">
+                                        <label for="active_no">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <!-- BEGIN VALIDATION STATES-->
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase">Location Information</span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="form-body">
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : restaurantForm.state_code.$invalid && !restaurantForm.state_code.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">State <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <select name="state_code" ng-model="params.state_code" ng-options="row.id as row.value for row in states" ng-change="changedValue(params.state_code)" class="form-control" required>
+                                    <option value="">Select state</option>
+                                </select>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="restaurantForm.state_code.$invalid && !restaurantForm.state_code.$pristine" class="help-block">Please select state.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : restaurantForm.market_office_id.$invalid && !restaurantForm.market_office_id.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">Market office <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <select name="market_office_id" ng-model="params.market_office_id" ng-options="row.id as row.office_name for row in listOfMarketOffice" ng-change="changedMktofficeValue(params.state_code,params.market_office_id)" class="form-control" required>
+                                    <option value="">Select market office</option>
+                                </select>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="restaurantForm.market_office_id.$invalid && !restaurantForm.market_office_id.$pristine" class="help-block">Please select market office.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : restaurantForm.market_office_city_id.$invalid && !restaurantForm.market_office_city_id.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">Market office city<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <select name="market_office_city_id" ng-model="params.market_office_city_id" ng-options="row.id as row.city_name for row in listOfMarketOfficeCity" ng-change="changedMktofficeCityValue(params.state_code,params.market_office_city_id)" class="form-control" required>
+                                    <option value="">Select market office city</option>
+                                </select>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="restaurantForm.market_office_city_id.$invalid && !restaurantForm.market_office_city_id.$pristine" class="help-block">Please select market office city.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : restaurantForm.zone.$invalid && !restaurantForm.zone.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">Zone<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <select multiple="" name="zone" ng-model="params.zone" ng-options="row.shortid as row.delivery_zone_name for row in listOfZone" class="form-control" required>
+                                    <option value="">Select zone</option>
+                                </select>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="restaurantForm.zone.$invalid && !restaurantForm.zone.$pristine" class="help-block">Please select zone.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <!-- BEGIN VALIDATION STATES-->
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase">Other Information</span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="form-body">
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : restaurantForm.cuisine_tag.$invalid && !restaurantForm.cuisine_tag.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">Cuisine tags <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <tags-input name="cuisine_tag" ng-model="params.cuisine_tag" add-on-paste="true" spellcheck="true" placeholder="Add cuisine tags" min-length="1"></tags-input>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="restaurantForm.cuisine_tag.$invalid && !restaurantForm.cuisine_tag.$pristine" class="help-block">Add cuisine tags.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : (restaurantForm.order_amount_min.$invalid && !restaurantForm.order_amount_min.$pristine) || (restaurantForm.order_amount_max.$invalid && !restaurantForm.order_amount_max.$pristine) }">
+                            <label for="form_control_1" class="col-md-3 control-label">Order&nbsp;Amount<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-4">
+                                <input type="text" name="order_amount_min" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" placeholder="Min Amount : 0.00" ng-model="params.order_amount.min" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="restaurantForm.order_amount_min.required && restaurantForm.order_amount_min.$dirty" class="help-block">Please enter minimum order amount.</span>
+                                <span ng-show="!restaurantForm.order_amount_min.required && restaurantForm.order_amount_min.$error.pattern && restaurantForm.order_amount_min.$dirty" class="help-block">Must contain only number.</span>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" name="order_amount_max" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" placeholder="Max Amount : 0.00" ng-model="params.order_amount.max" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="restaurantForm.order_amount_max.$error.pattern && restaurantForm.order_amount_max.$dirty" class="help-block">Must contain only number.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            <label for="form_control_1" class="col-md-4 control-label">Featured Note</label>
+                            <div class="col-md-8">
+                                <input type="text" name="featured_note" ng-model="params.featured_note" class="form-control">
+                                <div class="form-control-focus"> </div>
+                                <span class="help-block">Please enter featured note.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            <label for="form_control_1" class="col-md-4 control-label">Comment</label>
+                            <div class="col-md-8">
+                                <textarea rows="3" name="comment" ng-model="params.comment" class="form-control"></textarea>
+                                <div class="form-control-focus"> </div>
+                                <span class="help-block">Please enter restaurant comment.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-actions pull-right">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" spinner-button class="btn green mt-ladda-btn ladda-button" data-style="expand-left" data-spinner-color="#333" ng-disabled="restaurantForm.$invalid"><span class="ladda-label">SUBMIT</span></button>
+                        <button type="reset" class="btn default">RESET</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

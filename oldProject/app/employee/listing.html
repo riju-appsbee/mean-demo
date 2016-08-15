@@ -1,0 +1,109 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="ng/employee/list">Employee</a>
+        </li>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <h3 class="page-title"> Employee List </h3>
+        </div>
+        <div class="col-md-6">
+            <div class="btn-group pull-right page-title">
+                <a class="btn btn-sm green btn-outline filter-submit margin-bottom" href="ng/employee/add">
+                    <i class="icon-user"></i> Add New Employee </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="row">
+    <div class="col-md-2">
+        <select class="form-control" name="market_office_state_code" ng-model="params.market_office_state_code" ng-options="row.id as row.value for row in states" ng-change="getMarketOffices(params.market_office_state_code)" required>
+        </select>
+    </div>
+    <div class="col-md-2">
+        <select class="form-control" name="market_office_id" ng-model="params.market_office_id" ng-options="row.id as row.office_name for row in marketOffice" required>
+        </select>
+    </div>
+    <div class="col-md-8">&nbsp;</div>
+</div>
+<br> -->
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN SAMPLE TABLE PORTLET-->
+        <div class="portlet box">
+            <div class="portlet-body flip-scroll">
+                <div class="row">
+                    <div class="col-md-6">
+                        <!-- <div class="dataTables_filter pull-left">
+                            <form ng-submit="searchEmployee()">
+                                <label>
+                                    Search:
+                                    <input type="search" ng-model="searchText" class="form-control input-sm input-medium input-inline" placeholder="Type and hit enter.">
+                                </label>
+                            </form>
+                        </div> -->
+                        <div class="dataTables_filter pull-left">
+                            <form ng-submit="searchEmployee()">
+                                <label>Search:
+                                    <input type="search" ng-model="searchText" class="form-control input-sm input-medium input-inline" placeholder="Type and hit enter.">
+                                </label>
+                                <button class="btn green btn-sm" type="submit">
+                                    <span class="ladda-label">Search</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <span class="label label-success pull-right" ng-show="loaderValue"> Loading data... </span>
+                    </div>
+                </div>
+                <span class="pull-right" ng-show="!loaderValue">Total : {{info.length}}</span>
+                <table class="table table-bordered table-striped table-condensed flip-content">
+                    <thead class="flip-content">
+                        <tr>
+                            <th> id </th>
+                            <th> Name </th>
+                            <th> Email </th>
+                            <th> Phone </th>
+                            <th> Employee Role </th>
+                            <th> State Code </th>
+                            <th> City Name </th>
+                            <th class="numeric"> Action </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="value in info">
+                            <td> {{value.id}} </td>
+                            <td> {{value.name}} </td>
+                            <td class="numeric"> {{value.email}} </td>
+                            <td class="numeric"> {{value.phone}} </td>
+                            <td class="numeric"> {{value.employee_role_id}} </td>
+                            <td> {{value.state_code}} </td>
+                            <td> {{value.city_name}} </td>
+                            <td class="numeric">
+                                <a href="ng/employee/edit/{{value.id}}" class="btn btn-outline btn-circle btn-sm purple" href="javascript:;"><i class="fa fa-edit"></i> View </a>
+                                <a class="btn btn-outline btn-circle dark btn-sm black" ng-click="deleteEmployee(value.id)" href=""><i class="fa fa-trash-o"></i> Delete </a>
+                            </td>
+                        </tr>
+                        <tr ng-show="!info.length">
+                            <td colspan="8" class="text-center font-red font-lg">No record available.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-md-5 col-sm-5 text-left">
+                        <div class="dataTables_info">Current Page {{currentPage}} . Total records {{totalItems}}.</div>
+                    </div>
+                    <div class="col-md-7 col-sm-7 text-right">
+                        <uib-pagination total-items="totalItems" ng-model="currentPage" items-per-page="numPerPage" ng-change="pageChanged()"></uib-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END SAMPLE TABLE PORTLET-->
+    </div>
+</div>

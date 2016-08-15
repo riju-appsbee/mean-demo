@@ -1,0 +1,106 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="#">Driver</a>
+        </li>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <h3 class="page-title"> Driver List </h3>
+        </div>
+        <div class="col-md-6">
+            <div class="btn-group pull-right page-title">
+                <a class="btn btn-sm green btn-outline filter-submit margin-bottom" href="ng/driver/add">
+                    <i class="fa fa-plus"></i> Add New Driver</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-2">
+        <select class="form-control" name="market_office_state_code" ng-model="params.market_office_state_code" ng-options="row.id as row.value for row in states" ng-change="getMarketOffice(params.market_office_state_code)" required>
+        <option value="" selected="selected">--Select A State--</option>
+        </select>
+    </div>
+    <div class="col-md-2">
+        <select class="form-control" name="market_office_id" ng-model="params.market_office_id" ng-options="row.id as row.office_name for row in marketOffice" required>
+        </select>
+    </div>
+    <div class="col-md-8">&nbsp;</div>
+</div>
+<br>
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN SAMPLE TABLE PORTLET-->
+        <div class="portlet box top5">
+
+            <div class="portlet-body flip-scroll">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="dataTables_filter pull-left">
+                            <form class="form" ng-submit="searchDriver()">
+                            <label>Search:
+                                <input type="search" ng-model="searchText" class="form-control input-sm input-medium input-inline" placeholder="Type and hit enter.">
+                            </label>
+                            <button class="btn green btn-sm" type="submit">
+                                <span class="ladda-label">Search</span>
+                            </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <span class="label label-success pull-right" ng-show="loaderValue"> Loading data... </span>
+                    </div>
+                </div>
+                <span class="pull-right" ng-show="!loaderValue">Total : {{drivers.length}}</span>
+                <table class="table table-bordered table-striped table-condensed flip-content">
+                    <thead class="flip-content">
+                        <tr>
+                            <th> ID </th>
+                            <th> Name </th>
+                            <th> Email </th>
+                            <th> Phone </th>
+                            <th> Address </th>
+                            <!-- <th> OnFleet ID </th> -->
+                            <th class="numeric"> Action </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="driver in drivers track by $index">
+                            <td class="numeric">{{driver.id}}</td>
+                            <td>{{driver.first_name}}&nbsp;{{driver.last_name}}</td>
+                            <td class="numeric">{{driver.email}}</td>
+                            <td class="numeric">{{driver.phone}}</td>
+                            <td class="numeric">{{driver.address}}</td>
+                            <!-- <td class="numeric">{{driver.onfleet_id}}</td> -->
+                            <td class="numeric">
+                                <a class="btn btn-outline btn-circle btn-sm purple" href="ng/driver/edit/{{driver.id}}"><i class="fa fa-edit"></i> View </a>
+                                <a ng-click="deleteDriver(driver.id)" class="btn btn-outline btn-circle dark btn-sm black" href=""><i class="fa fa-trash-o"></i> Delete </a>
+                                <a class="btn btn-outline btn-circle red btn-sm blue" data-toggle="modal" href="#messageModal" ng-click="updateDriverIndex(driver.id)"><i class="fa fa-envelope-o"></i> Send Message </a>
+                            </td>
+                        </tr>
+                        <tr ng-show="!drivers.length">
+                            <td colspan="6" class="text-center font-red font-lg">No record available.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-md-5 col-sm-5 text-left">
+                        <div class="dataTables_info">Showing {{currentPage}} to {{numPerPage}} of {{totalItems}} records</div>
+                    </div>
+                    <div class="col-md-7 col-sm-7 text-right">
+                        <uib-pagination total-items="totalItems" ng-model="currentPage" items-per-page="numPerPage" ng-change="pageChanged()"></uib-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END SAMPLE TABLE PORTLET-->
+    </div>
+</div>
+<ng-include src="'app/driver/modals.html'"></ng-include>

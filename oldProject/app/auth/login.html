@@ -1,0 +1,69 @@
+<!-- BEGIN : LOGIN PAGE 5-2 -->
+<div class="remove-bg-color user-login-5">
+    <div class="row bs-reset">
+        <div class="col-md-6 login-container bs-reset">
+            <img class="login-logo login-6" src="assets/pages/img/login/login-invert.png" />
+            <div class="login-content">
+                <h1>Foodjets Admin Login</h1>
+                <p> Lorem ipsum dolor sit amet, coectetuer adipiscing elit sed diam nonummy et nibh euismod aliquam erat volutpat. Lorem ipsum dolor sit amet, coectetuer adipiscing. </p>
+                <form name="login" ng-submit="submitLogin(login.$valid)" class="login-form" method="post"  novalidate>
+                   
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <input class="form-control form-control-solid placeholder-no-fix form-group" type="email" autocomplete="off" placeholder="Email Address" name="email" ng-model="user.email" required/> 
+                            	<div class="login-error" ng-show="login.email.$dirty && login.email.$invalid && login.email.$error.required">
+				 Email address is required
+				</div>
+				<div class="login-error" ng-show="login.email.$dirty && login.email.$invalid && login.email.$error.email">
+				  Please provide a valid email
+				</div>
+                        </div>
+                        <div class="col-xs-6">
+                            <input class="form-control form-control-solid placeholder-no-fix form-group" type="password" autocomplete="off" placeholder="Password" name="password" ng-model="user.password" required /> 
+                                <div class="login-error" ng-show="login.password.$dirty && login.password.$invalid && login.password.$error.required">
+					Password is required
+				</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        
+                        <div class="col-sm-8 text-right">
+                            <div class="forgot-password">
+                                <a href="javascript:;" id="forget-password" class="forget-password">Forgot Password?</a>
+                            </div>
+                            <button class="btn blue" type="submit">Sign In</button>
+                        </div>
+                    </div>
+                </form>
+                <!-- BEGIN FORGOT PASSWORD FORM -->
+                <form class="forget-form" action="javascript:;" method="post">
+                    <h3>Forgot Password ?</h3>
+                    <p> Enter your e-mail address below to reset your password. </p>
+                    <div class="form-group">
+                        <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email" name="email" /> </div>
+                    <div class="form-actions">
+                        <button type="button" id="back-btn" class="back-btn btn blue btn-outline">Back</button>
+                        <button type="submit" class="btn blue uppercase pull-right">Submit</button>
+                    </div>
+                </form>
+                <!-- END FORGOT PASSWORD FORM -->
+            </div>
+            <div class="login-footer">
+                <div class="row bs-reset">
+                    <div class="col-xs-5 bs-reset">
+                       
+                    </div>
+                    <div class="col-xs-7 bs-reset">
+                        <div class="login-copyright text-right">
+                            <p>Copyright &copy; Foodjets 2016</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 bs-reset">
+            <div class="login-bg"> </div>
+        </div>
+    </div>
+</div>
+<!-- END : LOGIN PAGE 5-2 -->

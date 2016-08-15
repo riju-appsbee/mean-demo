@@ -1,0 +1,238 @@
+<div class="page-sidebar navbar-collapse collapse">
+    <!-- BEGIN SIDEBAR MENU -->
+    <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
+    <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
+    <!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
+    <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+    <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
+    <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+    <ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" ng-class="{'page-sidebar-menu-closed': settings.layout.pageSidebarClosed}">
+        <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
+        <li class="sidebar-search-wrapper">
+            <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+            <!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box -->
+            <!-- DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box -->
+            <form class="sidebar-search sidebar-search-bordered" action="javascript:void(0);" method="POST">
+                <a href="javascript:;" class="remove">
+                    <i class="icon-close"></i>
+                </a>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search...">
+                    <span class="input-group-btn">
+                        <a href="javascript:;" class="btn submit">
+                            <i class="icon-magnifier"></i>
+                        </a>
+                    </span>
+                </div>
+            </form>
+            <!-- END RESPONSIVE QUICK SEARCH FORM -->
+        </li>
+        <li class="start nav-item">
+            <a href="ng/dashboard">
+                <i class="icon-home"></i>
+                <span class="title">Dashboard</span>
+            </a>
+        </li>
+        <li class="start nav-item">
+            <a href="ng/order/list">
+                <i class="icon-home"></i>
+                <span class="title">Order</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="ng/customer/list">
+                <i class="icon-user"></i>
+                <span class="title">Customer</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="ng/employee/list">
+                <i class="fa fa-user-plus"></i>
+                <span class="title">Employee</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="ng/driver/list">
+                <i class="fa fa-truck"></i>
+                <span class="title">Driver</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="ng/business-user/list">
+                <i class="fa fa-user-md"></i>
+                <span class="title">Business User</span>
+            </a>
+        </li>
+        <!--<li class="nav-item">
+            <a href="ng/market-office/list/" class="nav-link nav-toggle">
+                <i class="fa fa-map-marker"></i>
+                <span class="title">Market Office</span>
+            </a>
+        </li>-->
+        <li class="nav-item">
+            <a href="ng/today-drivers/list/" class="nav-link nav-toggle">
+                <i class="icon-user"></i>
+                <span class="title">Todays Drivers</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="fa fa-cutlery" aria-hidden="true"></i>
+                <span class="title">FoodJets Restaurants</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li>
+                    <a href="ng/restaurant/list">
+                        <span> Restaurants </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="ng/restaurant/global-search">
+                        <span> Global Restaurants Search </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="ng/menu/list">
+                        <span> Restaurants Menu </span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a href="" class="nav-link nav-toggle">
+                <i class="fa fa-shopping-cart"></i>
+                <span class="title">FoodJets Marketplace</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li>
+                    <a href="ng/market-store/list">
+                        <span> Market Store</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="ng/market-store/global-search">
+                        <span> Global Market Store Search</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="ng/market-store/add">
+                        <span> Add Market Store</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a href="" class="nav-link nav-toggle">
+                <i class="fa fa-glass"></i>
+                <span class="title">FoodJets Alcohol</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li>
+                    <a href="ng/alcohol-store/list">
+                        <span> Alcohol Store</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="ng/alcohol-store/global-search">
+                        <span> Global Market Store Search</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="ng/alcohol-store/add">
+                        <span> Add Alcohol Store</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a href="" class="nav-link nav-toggle">
+                <i class="fa fa-gift"></i>
+                <span class="title">Promos & Gifts</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li>
+                    <a href="ng/promo/list">
+                        <span> Promo Code </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="ng/gift/list">
+                        <span>Gift Code</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a href="" class="nav-link nav-toggle">
+                <i class="fa fa-wrench"></i>
+                <span class="title">Configurations</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu">
+                <li>
+                    <a href="ng/market-office/list/">
+                        <span class="title"> Market Office</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="ng/settings/global">
+                        <span> Global Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="ng/settings/twilio">
+                        <span>Twilio Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="ng/settings/office-setup">
+                        <span> Office Setup</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="ng/settings/referral">
+                        <span> Referral Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="ng/settings/reward-point">
+                        <span> Reward Points</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="ng/tax/list/">
+                        <span>Tax Table</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="ng/dynamo/list">
+                        <span>Dynamo Table List</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link nav-toggle">
+                        <span class="title">Push Notification</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="ng/settings/global-push-notification">
+                                <span> Global Push Notification </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="ng/settings/push-notification-setting">
+                                <span> Push Notification Setting </span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <!-- END SIDEBAR MENU -->
+</div>

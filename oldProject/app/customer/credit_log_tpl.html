@@ -1,0 +1,36 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-social-dribbble font-blue"></i>
+            <span class="caption-subject font-blue bold uppercase">Customer {{tabResult.tabName}} List : Total ( {{tabResult.length}} )</span>
+        </div>        
+    </div>
+    <div class="portlet-body">
+        <div class="table-scrollable">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th> # </th>
+                        <th> Address </th>
+                        <th> Delivery zone name </th>
+                        <th> latitude </th>
+                        <th> longitude </th>
+                        <th> Action </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="val in tabResult">
+                        <td> {{ val.id }}. </td>
+                        <td> {{ val.address }} </td>
+                        <td> {{ val.market_office_city_delivery_zone_id }} </td>
+                        <td> {{ val.latitude }} </td>
+                        <td> {{ val.longitude }} </td>
+                        <td>
+                            <span class="label label-sm label-success"> Delete </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

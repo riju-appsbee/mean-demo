@@ -1,0 +1,95 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="">Promo Code</a>
+        </li>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <h3 class="page-title"> Promo List </h3>
+        </div>
+        <div class="col-md-6">
+            <div class="page-title pull-right">
+                <a class="btn btn-sm green btn-outline filter-submit margin-bottom" href="ng/promo/add">
+                    <i class="fa fa-plus"></i> Add New Promo</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN SAMPLE TABLE PORTLET-->
+        <div class="portlet box green">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-cogs"></i>All Promos listed here </div>
+                <div class="tools">
+                    <a class="collapse" href="javascript:;" data-original-title="" title=""> </a>
+                    <!-- <a class="config" data-toggle="modal" href="#portlet-config" data-original-title="" title=""> </a>
+                    <a class="reload" href="javascript:;" data-original-title="" title="" ng-click="promoList()"> </a> -->
+                    <a class="remove" href="javascript:;" data-original-title="" title=""> </a>
+                </div>
+            </div>
+            <div class="portlet-body flip-scroll">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="dataTables_filter pull-left">
+                                <form ng-submit="search()">
+                                    <label>Search:
+                                        <input type="search" ng-model="searchText" class="form-control input-sm input-medium input-inline" placeholder="Type and hit enter.">
+                                        <button class="btn green btn-sm" type="submit">
+                                            <span class="ladda-label">Search</span>
+                                        </button>
+                                    </label>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <span class="label label-success pull-right" ng-show="loaderValue"> Loading data... </span>
+                        </div>
+                    </div>
+                </div>
+                <span class="pull-right" ng-show="!loaderValue"> Total : {{totalItems || 0}} </span>
+                <table class="table table-bordered table-striped table-condensed flip-content">
+                    <thead class="flip-content">
+                        <tr>
+                            <!-- <th width="10%"> id </th> -->
+                            <th> Code </th>
+                            <th> Amount </th>
+                            <th> Active </th>
+                            <th class="numeric"> Action </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="val in listOfPromos">
+                            <!-- <td> {{ val.id }} </td> -->
+                            <td> {{ val.code }} </td>
+                            <td class="numeric"> {{ val.amount.toFixed(2) }} </td>
+                            <td> {{ val.active }} </td>
+                            <td class="numeric">
+                                <a class="btn btn-outline btn-circle btn-sm purple" href="ng/promo/edit/{{val.id}}"><i class="fa fa-edit"></i> View </a>
+                                <a class="btn btn-outline btn-circle dark btn-sm black" ng-click="deletePromo(val.id)" href="javascript:;"><i class="fa fa-trash-o"></i> Delete </a>
+                            </td>
+                        </tr>
+                        <tr ng-show="errors.status">
+                            <td colspan="7" class="text-center font-red font-lg">{{errors.msg}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-md-5 col-sm-5 text-left">
+                        <div class="dataTables_info">Current Page {{currentPage}}. Total Records {{totalItems}}.</div>
+                    </div>
+                    <div class="col-md-7 col-sm-7 text-right">
+                        <uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" items-per-page="numPerPage" ng-change="pageChanged()"></uib-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END SAMPLE TABLE PORTLET-->
+    </div>
+</div>

@@ -1,0 +1,189 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a ng-click="$state.go('ng.customer.order.add', {
+                customerId: customerInfo.id
+            })">Order List</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="#">Add New Order</a>
+        </li>
+    </ul>
+</div>
+<div class="row">
+    
+    <div class="col-md-12 checkout_section">
+        <div class="col-md-8">
+            <h3 class="page-title"><strong>{{restaurantInfo.name}}</strong> <span ng-if="restaurantInfo.is_closed === true" class="label label-danger"> CLOSED </span> </h3>
+            <div class="col-md-12 pad_n">
+                <div class="col-md-9 pad_n">
+                    <h5>{{restaurantInfo.cuisine}}<br /><span>Delivery Hours: {{restaurant_deliver_hours}}</span></h5></div>
+                <div class="col-md-3 pad_n">
+                    <h5 class="align-right"><strong>Date:</strong> {{market_office_current_date}}<br><strong>Time:</strong> {{market_office_current_time}}</h5></div>
+            </div>
+            <h4>Current Flight Time: {{restaurantInfo.order_time-10}}-{{restaurantInfo.order_time+5}} mins - <i class="fa fa-info-circle" aria-hidden="true"></i></h4>
+            <uib-tabset active="activeTab">
+                <uib-tab index="$index" ng-repeat="(periodKey, periodVal) in nestedMenuItems" select="mealPeriodSelect(periodKey)" ng-if="okeys(nestedMenuItems) > 0">
+                    <uib-tab-heading><span class="text-uppercase">{{periodKey | nodash}}</span></uib-tab-heading>
+                    <div class="col-md-12 main_list_view" ng-repeat="(catKey, catVal) in periodVal">
+                        <h2 class="heading_dor">{{catKey}}</h2>
+                        <div class="col-md-4 ellipsis" ng-repeat="(itemKey, itemVal) in catVal" ng-click="open(itemKey, itemVal, periodKey)">
+                            <a><strong>{{itemVal.name}} - ${{itemVal.retail_price | number:2}}</strong><br>
+{{itemVal.description}}</a>
+                        </div>
+                    </div>
+                </uib-tab>
+            </uib-tabset>
+
+        </div>
+
+        <div class="col-md-4 bor_no">
+
+<div class="col-md-12">
+        <div class="portlet box cust_info">
+            
+            <div class="portlet-body left_ali">
+                <div class="row static-info">
+                    <div class="col-md-3 name"> Name: </div>
+                    <div class="col-md-9 value"> {{customerInfo.name ? customerInfo.name : ''}} </div>
+                </div>
+                <div class="row static-info">
+                    <div class="col-md-3 name"> Email: </div>
+                    <div class="col-md-9 value"> {{customerInfo.email ? customerInfo.email : ''}} </div>
+                </div>
+                <div class="row static-info">
+                    <div class="col-md-3 name"> Phone: </div>
+                    <div class="col-md-9 value"> {{customerInfo.phone ? customerInfo.phone : ''}} </div>
+                </div>
+                <div class="row static-info">
+                    <div class="col-md-3 name"> Address: </div>
+                    <div class="col-md-9 value"> {{customerInfo.tmp_delivery_address.address ? customerInfo.tmp_delivery_address.address : customerInfo.address}} </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="col-md-12 border_all">
+<div class="mar_t30 order_sec">
+            <h2><strong>Your Order</strong></h2>
+            <button type="submit" class="btn green btn-block" ng-disabled="!cartData.food.length" ng-click="createNewOrder()">Checkout</button>
+
+            <div class="col-md-12 order_box" ng-show="cartData.food.length">
+
+                <div class="col-md-12 mar_bot_5 pad_n" ng-repeat="items in cartData.food">
+                    <div class="col-md-1"><strong> {{items.qty}}</strong></div>
+                    <div class="col-md-7"><strong>{{items.name}}</strong></div>
+                    <div class="col-md-3 ali_r"><strong>x ${{items.retail_price | number:2}}</strong></div>
+                    <div class="col-md-1 ali_r"><a ng-click='removeCartItem($index)'><i class="fa fa-trash-o" aria-hidden="true"></i></a></div>
+
+                    <div class="col-md-12 mar_bot_5 pad_n" ng-repeat="(choiceKey,choiceRow) in items.choices">
+                        <div class="col-md-1">&nbsp;</div>
+                        <div class="col-md-7 choice_font_weight">{{choiceRow.title}}</div>
+                        <div class="col-md-3">&nbsp;</div>
+                        <div class="col-md-1">&nbsp;</div>
+                        <div class="col-md-12 pad_n" ng-repeat="(optionKey, optionValue) in choiceRow.options">
+                            <div class="col-md-1">&nbsp;</div>
+                            <div class="col-md-7 pad_l_15">- {{optionValue.name}}</div>
+                            <div class="col-md-3 ali_r">${{optionValue.retail_price | number:2}}</div>
+                            <div class="col-md-1">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 pad_n" ng-show="cartData.food.length">
+                    <div class="col-md-1"><strong>Total</strong></div>
+                    <div class="col-md-7"></div>
+                    <div class="col-md-3 ali_r"><strong>$ {{cartData.amount.food_amount | number:2}}</strong></div>
+                    <div class="col-md-1">&nbsp;</div>
+                </div>
+
+
+            </div>
+
+            <div class="col-md-12" ng-show="!cartData.food.length">&nbsp;</div>
+            <div class="clearfix"></div>
+            <button type="submit" class="btn green btn-block" ng-disabled="!cartData.food.length" ng-click="createNewOrder()">Checkout</button>
+        </div>
+</div>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/ng-template" id="optionChoicesPopup.html">
+
+    <div class="modal_n">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" ng-click="cancel()">×</button>
+                    <h4 class="modal-title"><strong>{{item.details.name}}</strong>
+                  <br />{{item.details.description}}</h4>
+                </div>
+                <div class="modal-body">
+                    <span ng-repeat="(ckey, choice) in item.details.choices" ng-if="choice.active === true">
+                            <div class="col-md-12 pop_section">
+                                <div class="col-md-9">
+                                    <h4 class="modal-title"><strong>{{choice.title}}</strong> <button type="button" class="btn green" ng-show="choice.required">Required</button></h4>
+                                </div>
+                                <div class="col-md-3">
+                                    Select {{choice.select}}
+                                </div>
+                            </div>
+                            <div class="col-md-12 row_section" ng-repeat="(okey, option) in choice.options" ng-if="option.active === true">
+                                <div class="col-md-8">
+                                    <label class="mt-radio mt-radio-outline" ng-class="{ 'mt-radio-disabled' : option.soldout_expiry >= now }" ng-if="choice.select == '1'"> {{option.name}}
+                                        <input id="{{okey}}" name="{{ckey}}" ng-model="modalItem[ckey]" type="radio" value="{{okey}}" ng-disabled="option.soldout_expiry >= now" ng-click="itemOn()" />
+                                        <span></span>
+                    </label>
+                    <label class="mt-checkbox mt-checkbox-outline" ng-class="{ 'mt-checkbox-disabled' : option.soldout_expiry >= now }" ng-if="choice.select > 1"> {{option.name}}
+                        <input id="{{okey}}" type="checkbox" ng-model="modalItem[ckey][okey]" value="{{okey}}" ng-disabled="option.soldout_expiry >= now" ng-click="itemOn()" />
+                        <span></span>
+                    </label>
+                </div>
+                <div class="col-md-4">
+                    <span class="pull-left">${{option.retail_price}}</span>
+                    <a class="btn red btn-outline sbold btn-sm pull-right" ng-if="option.soldout_expiry >= now">Sold Out</a>
+                </div>
+            </div>
+            </span>
+            <div class="clearfix"></div>
+        </div>
+        <div class="modal-footer">
+            <div class="col-md-12 input_sec">
+                <div class="col-md-6">
+                    <div class="center">
+                        <div class="input-group plus_min_sec">
+                            <span class="input-group-btn">
+              <button type="button" ng-click="decItemQuantity()" class="btn btn-danger btn-number" data-type="minus" >
+                <span class="glyphicon glyphicon-minus"></span>
+                            </button>
+                            </span>
+                            <input type="text" name="quantity" class="form-control input-number input-sm text-center" value="{{itemcart.qty}}" ng-model="itemcart.qty" min="1" max="100" readonly>
+                            <span class="input-group-btn">
+              <button type="button" ng-click="incItemQuantity()" class="btn btn-success btn-number" data-type="plus" >
+                  <span class="glyphicon glyphicon-plus"></span>
+                            </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 amount_t">
+                    ${{itemcart.total_price}}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="center_section">
+                <button type="button" class="btn red" ng-click="addToCart()" ng-disabled="!isValid" ng-hide="!item.canCheckout">Add to Cart</button>
+                <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+            </div>
+
+        </div>
+
+    </div>
+    </div>
+    </div>
+</script>

@@ -1,0 +1,171 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+    	<li>
+            <a href="ng/market-store/list">Market Store</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="ng/market-store-catalog/list/{{storeid}}">Market Store Catalog</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="ng/market-items/list/{{storeid}}/{{catid}}">Market Items</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="#">Add Market Items</a>
+        </li>
+    </ul>
+    
+</div>
+<h3 class="page-title font-green"><i class=" icon-user font-green"></i>  Add Market Items </h3>
+
+
+    <div class="row">    
+    	<form class="form-horizontal" name="itemsForm" method="post" ng-submit="add(itemsForm.$valid)" novalidate>
+        <div class="col-md-6">
+            <!-- BEGIN FORM-->
+            
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase">Basic Information </span>
+                    </div>
+                </div>
+
+                <div class="portlet-body">
+                    <div class="form-body">
+                       
+                        
+                        <div class="form-group form-md-line-input"  ng-class="{ 'has-error' : itemsForm.name.$invalid && !itemsForm.name.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Name <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="name"  ng-model="params.name" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="itemsForm.name.$invalid && !itemsForm.name.$pristine" class="help-block">Please enter item name.</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-md-line-input"  ng-class="{ 'has-error' : itemsForm.unit_price.$invalid && !itemsForm.unit_price.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Unit Price <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="unit_price"  ng-model="params.unit_price" class="form-control" ng-pattern="/^\d+(\.[0-9]{1,2})*\s?$/" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="itemsForm.unit_price.$invalid && !itemsForm.unit_price.$pristine" class="help-block">Please provide unit price upto 2 decimal places.</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-md-line-input"  ng-class="{ 'has-error' : itemsForm.selling_price.$invalid && !itemsForm.selling_price.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Selling Price<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="selling_price"  ng-model="params.selling_price" ng-pattern="/^\d+(\.[0-9]{1,2})*\s?$/" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="itemsForm.selling_price.$invalid && !itemsForm.selling_price.$pristine" class="help-block">Please provide selling price upto 2 decimal places.</span>
+                            </div>
+                        </div>                        
+
+
+                        <div class="form-group form-md-line-input" >
+                            <label for="form_control_1" class="col-md-3 control-label">Description </label>
+                            <div class="col-md-9">
+                                <textarea name="description"  ng-model="params.description" class="form-control"></textarea>
+                                <div class="form-control-focus"> </div>
+                               
+                            </div>
+                        </div>
+
+                    </div>    
+                </div>
+            </div>
+            
+        </div>
+               
+        <div class="col-md-6">
+            <!-- BEGIN FORM-->
+           
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase">Other Information </span>
+                    </div>
+                </div>
+
+                <div class="portlet-body">
+                    <div class="form-body">
+                    
+                    	<div class="form-group form-md-line-input"  ng-class="{ 'has-error' : itemsForm.commission.$invalid && !itemsForm.commission.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Commission<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="commission"  ng-model="params.commission" ng-pattern="/^\d+(\.[0-9]{1,2})*\s?$/" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="itemsForm.commission.$invalid && !itemsForm.commission.$pristine" class="help-block">Please provide commission upto 2 decimal places.</span>
+                            </div>
+                        </div>                        
+
+                    
+                        <div class="form-group form-md-radios">
+                            <label for="form_control_1" class="col-md-3 control-label">Active</label>
+                            <div class="col-md-9">
+                                <div class="md-radio-inline" ng-init="params.active=true">
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.active" id="active_yes" ng-value="true">
+                                        <label for="active_yes">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> Yes 
+                                        </label>
+                                    </div>
+
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.active" id="active_no" ng-value="false">
+                                        <label for="active_no">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> No 
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                       <div class="form-group form-md-line-input">
+                            <label for="form_control_1" class="col-md-3 control-label">Image</label>
+                            <div class="col-md-9">
+                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"> 
+                                    	
+                                    </div>
+                                    <div>
+                                        <span class="btn red btn-outline btn-file">
+                                            <span class="fileinput-new"> Select image </span>
+                                            <span class="fileinput-exists"> Change </span>
+                                            <input type="file" name="image" upload-able="params.image" />
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>    
+                </div>
+            </div>
+            <div class="form-actions pull-right">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn green" ng-disabled="itemsForm.$invalid">Submit</button>
+                        <button type="button" class="btn default" ng-click="reset()">Reset</button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        </form> 
+
+    </div>
+
+    
+   

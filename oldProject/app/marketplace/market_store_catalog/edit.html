@@ -1,0 +1,100 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="ng/market-store/list">Market Store</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="ng/market-store-catalog/list/{{storeid}}">Market Store Catalog</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="">Edit Market Store Catalog</a>
+        </li>
+    </ul>
+</div>
+<h3 class="page-title font-green"><i class=" fa fa-shopping-cart font-green"></i>  Edit {{storeInfo.name}}  Catalog</h3>
+<!-- BEGIN FORM-->
+<form class="form-horizontal" name="mrktCatForm" method="post" ng-submit="updateMrktCat(mrktCatForm.$valid)" novalidate>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase">basic Information </span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="form-body">
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : mrktCatForm.catalog_name.$invalid && !mrktCatForm.catalog_name.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">Catalog Name <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <input type="text" name="catalog_name" ng-model="params.catalog_name" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="mrktCatForm.catalog_name.$invalid && !mrktCatForm.catalog_name.$pristine" class="help-block">Please enter a catalog name.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            <label class="col-md-4 control-label" for="form_control_1">Store Categories</label>
+                            <div class="col-md-8">
+                                <tags-input ng-model="params.store_categories" add-on-paste="true" spellcheck="false" placeholder="Add a store category and hit enter" min-length="1">
+                                </tags-input>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-radios">
+                            <label for="form_control_1" class="col-md-4 control-label">Active</label>
+                            <div class="col-md-8">
+                                <div class="md-radio-inline" ng-init="params.active = true">
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.active" id="active_yes" ng-value="true">
+                                        <label for="active_yes">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> Yes
+                                        </label>
+                                    </div>
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.active" id="active_no" ng-value="false">
+                                        <label for="active_no">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="portlet light portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase">Item Section</span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <a class="btn btn-sm green btn-outline filter-submit margin-bottom" href="ng/market-items/list/{{storeid}}/{{params.id}}">
+                        <i class="fa fa-plus"></i> Add Item
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-actions pull-right">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn green" ng-disabled="mrktCatForm.$invalid">Submit</button>
+                            <button type="reset" class="btn default">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</form>

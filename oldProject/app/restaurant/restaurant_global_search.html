@@ -1,0 +1,87 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="#">Restaurant</a>
+        </li>
+    </ul>
+</div>
+<h3 class="page-title"> Restaurant Global Search </h3>
+<div class="row">
+    <div class="col-md-12">
+        <div class="btn-group pull-left">
+            &nbsp;
+        </div>
+        <div class="btn-group pull-right">
+            <a class="btn btn-sm green btn-outline filter-submit margin-bottom" href="ng/restaurant/add"><i class="fa fa-plus"></i> Add New Restaurant</a>
+        </div>
+    </div>
+</div>
+<div class="row">&nbsp;</div>
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN SAMPLE TABLE PORTLET-->
+        <div class="portlet box">
+            <div class="portlet-body flip-scroll">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="pull-left">
+                            <form ng-submit=searchGlobalRestaurant()>
+                                <label>
+                                    Search:
+                                    <input type="search" ng-model="searchText" class="form-control input-sm input-medium input-inline" placeholder="Type and hit enter.">
+                                </label>
+                            </form>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+                        <span class="label label-success pull-right" ng-show="loaderValue"> Loading data... </span>
+                        <span class="pull-right" ng-show="!loaderValue">Total : {{totalRestaurant}}</span>
+                    </div>
+                </div>
+                <table class="table table-bordered table-striped table-condensed flip-content">
+                    <thead class="flip-content">
+                        <tr>
+                            <th> Name </th>
+                            <th> Email </th>
+                            <th> Phone </th>
+                            <th> Address </th>
+                            <th> Cusine Tag </th>
+                            <th width="20%"> Action </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="(key, val) in listOfRestaurant">
+                            <td> {{ val.name }} </td>
+                            <td class="numeric"> {{ val.email }} </td>
+                            <td class="numeric"> {{ val.contact_no }} </td>
+                            <td class="numeric"> {{ val.address }} </td>
+                            <td class="numeric">
+                                <label ng-repeat="ctag in val.cuisine_tag">{{ctag}}{{$last ? '' : ', '}}</label>
+                            </td>
+                            <td class="numeric">
+                                <a class="btn btn-outline btn-circle btn-sm purple" href="ng/restaurant/edit/{{key}}"><i class="fa fa-edit"></i> View </a>
+                                <a class="btn btn-outline btn-circle dark btn-sm red" ng-click="deleteRestaurant(key,val.business_user_id)" href="javascript:;"><i class="fa fa-trash-o"></i> Delete </a>
+                            </td>
+                        </tr>
+                        <!-- <tr ng-show="!totalRestaurant">
+                            <td colspan="7" style="text-align:center; color:red;"> {{ 'No record available.' }}</td>
+                        </tr> -->
+                    </tbody>
+                </table>
+                <!--
+                <div class="row">
+                    <div class="col-md-5 col-sm-5 text-left">
+                        <div class="dataTables_info">Showing {{currentPage}} to {{numPerPage}} of {{totalItems}} records</div>
+                    </div>
+                    <div class="col-md-7 col-sm-7 text-right">
+                        <uib-pagination total-items="totalItems" ng-model="currentPage" items-per-page="numPerPage" ng-change="pageChanged()"></uib-pagination>
+                    </div>
+                </div>
+                -->
+            </div>
+        </div>
+        <!-- END SAMPLE TABLE PORTLET-->
+    </div>
+</div>

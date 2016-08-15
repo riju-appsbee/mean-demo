@@ -1,0 +1,361 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+     <ul class="page-breadcrumb">
+        <li>
+            <a href="ng/market-store/list">Market Store</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        
+        <li>
+            <a href="#">Edit Market Store</a>
+            
+        </li>
+    </ul>
+    
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <h3 class="page-title"> Edit Market Store </h3> </div>
+        <div class="col-md-6">
+            <div class="btn-group pull-right page-title">
+                <a class="btn btn-sm green btn-outline filter-submit margin-bottom" style="margin-left: 8px;" href="ng/market-store-catalog/list/{{storeId}}">
+                    <i class="icon-user"></i> View Market Catalog </a>
+            </div>
+
+            <div class="btn-group pull-right page-title">
+                <a class="btn btn-sm green btn-outline filter-submit margin-bottom" href="ng/market-store/view-contact-info/{{storeId}}">
+                    <i class="icon-user"></i> View Contact Info </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- BEGIN FORM-->
+<div>
+    <form class="form-horizontal" name="marketStoreForm" method="post" ng-submit="saveMarketStore(params)">
+        <div class="row">    
+            <div class="col-md-6">
+                <div class="portlet light portlet-fit portlet-form bordered">
+                    <div class="portlet box green" style="margin-bottom: 0px;">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-list"></i>General Information </div>
+                            <div class="tools">
+                                <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
+                                <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title=""> </a>
+                                <a href="javascript:;" class="reload" data-original-title="" title=""> </a>
+                                <a href="javascript:;" class="remove" data-original-title="" title=""> </a>
+                            </div>
+                        </div>
+
+                        <div class="portlet-body">
+                            <div class="form-body">
+                                <!--<h3 class="form-section">General Information</h3>-->
+                                <div class="form-group form-md-line-input" ng-class="{ 'has-error' : marketStoreForm.name.$invalid   && !marketStoreForm.name.$pristine }">
+                                    <label for="form_control_1" class="col-md-3 control-label">Name <span class="required" aria-required="true">*</span></label>
+                                    <div class="col-md-9">
+                                        <input type="text" name="name"  ng-model="params.name" class="form-control" required>
+                                        <div class="form-control-focus"> </div>
+                                        <span ng-show="marketStoreForm.name.$error.required && !marketStoreForm.name.$pristine" class="help-block">
+                                            Market store name is required
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group form-md-line-input" ng-class="{ 'has-error' : marketStoreForm.address.$invalid   && !marketStoreForm.address.$pristine }">
+                                    <label for="form_control_1" class="col-md-3 control-label" style="padding-left:5px;">Address <span class="required" aria-required="true">*</span></label>
+                                    <div class="col-md-9">
+                                        <input type="text" places-auto-complete  component-restrictions="{country:'us'}" on-place-changed="placeChanged()" name="addresslocation" ng-model="params.address" class="form-control" required>
+                                        <div class="form-control-focus"> </div>
+                                        <span ng-show="marketStoreForm.address.$error.required && !marketStoreForm.address.$pristine" class="help-block">
+                                           Address is required
+                                        </span>
+                                    </div>
+                                </div>
+                                
+
+                                <div class="form-group form-md-line-input" ng-class="{ 'has-error' : marketStoreForm.zipcode.$invalid   && !marketStoreForm.zipcode.$pristine }">
+                                    <label for="form_control_1" class="col-md-3 control-label">Zipcode <span class="required" aria-required="true">*</span></label>
+                                    <div class="col-md-9">
+                                        <input type="text" name="zipcode"  ng-model="params.zipcode" class="form-control" required>
+                                        <div class="form-control-focus"> </div>
+                                        <span ng-show="marketStoreForm.zipcode.$error.required && !marketStoreForm.zipcode.$pristine" class="help-block">
+                                           Zipcode is required
+                                        </span>
+                                    </div>
+                                </div>
+
+                               <div class="form-group form-md-line-input" ng-class="{ 'has-error' : marketStoreForm.contact_no.$invalid   && !marketStoreForm.contact_no.$pristine }">
+                                    <label for="form_control_1" class="col-md-3 control-label" style="padding-left:2px;">Contact No. <span class="required" aria-required="true">*</span></label>
+                                    <div class="col-md-9">
+                                        <input type="text" input-mask name="contact_no"  ng-model="params.contact_no" class="form-control" required>
+                                        <div class="form-control-focus"> </div>
+                                        <span ng-show="marketStoreForm.contact_no.$error.required && !marketStoreForm.contact_no.$pristine" class="help-block">
+                                           Contact number is required
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group form-md-line-input" ng-class="{ 'has-error' : marketStoreForm.email.$invalid   && !marketStoreForm.email.$pristine }">
+                                    <label for="form_control_1" class="col-md-3 control-label">Email <span class="required" aria-required="true">*</span></label>
+                                    <div class="col-md-9">
+                                        <input type="text" name="email"  ng-model="params.email" class="form-control" required>
+                                        <div class="form-control-focus"> </div>
+                                        <span ng-show="marketStoreForm.email.$error.required && !marketStoreForm.email.$pristine" class="help-block">
+                                           Email is required
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group form-md-line-input" ng-class="{ 'has-error' : marketStoreForm.fax_no.$invalid   && !marketStoreForm.fax_no.$pristine }">
+                                    <label for="form_control_1" class="col-md-3 control-label">Fax No. <span class="required" aria-required="true">*</span></label>
+                                    <div class="col-md-9">
+                                        <input type="text" name="fax_no"  ng-model="params.fax_no" class="form-control" required>
+                                        <div class="form-control-focus"> </div>
+                                        <span ng-show="marketStoreForm.fax_no.$error.required && !marketStoreForm.fax_no.$pristine" class="help-block">
+                                           Fax number is required
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group form-md-line-input" ng-class="{ 'has-error' : marketStoreForm.comment.$invalid   && !marketStoreForm.comment.$pristine }">
+                                    <label for="form_control_1" class="col-md-3 control-label">Comment <span class="required" aria-required="true">*</span></label>
+                                    <div class="col-md-9">
+                                        <textarea name="comment" ng-model="params.comment" class="form-control" required></textarea>
+                                        <div class="form-control-focus"> </div>
+                                        <span ng-show="marketStoreForm.comment.$error.required && !marketStoreForm.comment.$pristine" class="help-block">
+                                           Comment is required
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group form-md-line-input" ng-class="{ 'has-error' : marketStoreForm.percentage.$invalid   && !marketStoreForm.percentage.$pristine }">
+                                    <label for="form_control_1" class="col-md-3 control-label" style="padding-left:5px;">Percentage <span class="required" aria-required="true">*</span></label>
+                                    <div class="col-md-9">
+                                        <input type="text" name="percentage"  ng-model="params.percentage" class="form-control" required>
+                                        <div class="form-control-focus"> </div>
+                                        <span ng-show="marketStoreForm.percentage.$error.required && !marketStoreForm.percentage.$pristine" class="help-block">
+                                           Percentage is required
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group form-md-line-input">
+                                    <label for="form_control_1" class="col-md-3 control-label" style="padding-left:5px;">Logo </label>
+                                    <div class="col-md-9">
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 115px; height: 60px;"> </div>
+                                            <div>
+                                                <span class="btn red btn-outline btn-file">
+                                                    <span class="fileinput-new"> Select image </span>
+                                                    <span class="fileinput-exists"> Change </span>
+                                                    <input type="file" name="logo" upload-able="params.logo" />
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-userpic" style="float: right;width: 50%;"><img ng-src="{{params.imagePath}}" class="img-responsive" alt=""></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group form-md-radios">
+                                <label for="form_control_1" class="col-md-3 control-label">Active</label>
+                                <div class="col-md-9">
+                                    <div class="md-radio-inline" ng-init="params.active='false'">
+                                        <div class="md-radio">
+                                            <input type="radio" class="md-radiobtn" ng-model="params.active" id="active_yes" ng-value="'true'">
+                                            <label for="active_yes">
+                                                <span></span>
+                                                <span class="check"></span>
+                                                <span class="box"></span> Yes
+                                            </label>
+                                        </div>
+                                        <div class="md-radio">
+                                            <input type="radio" class="md-radiobtn" ng-model="params.active" id="active_no" ng-value="'false'">
+                                            <label for="active_no">
+                                                <span></span>
+                                                <span class="check"></span>
+                                                <span class="box"></span> No
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portlet light portlet-fit portlet-form bordered">
+                    <div class="portlet box green" style="margin-bottom: 0px;">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-list"></i>Zone Information </div>
+                            <div class="tools">
+                                <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
+                                <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title=""> </a>
+                                <a href="javascript:;" class="reload" data-original-title="" title=""> </a>
+                                <a href="javascript:;" class="remove" data-original-title="" title=""> </a>
+                            </div>
+                        </div>
+
+                        <div class="portlet-body">
+                            <div class="form-body">
+                                <!--<h3 class="form-section">General Information</h3>-->
+                                <div class="form-group form-md-line-input" ng-class="{ 'has-error' : marketStoreForm.state_code.$invalid   && !marketStoreForm.state_code.$pristine }">
+                                    <label for="form_control_1" class="col-md-3 control-label" style="padding-left:5px;">State Code <span class="required" aria-required="true">*</span></label>
+                                    <div class="col-md-9">
+                                        <select class="form-control" name="state_code" ng-model="params.state_code" ng-options="state.id as state.value for state in states" ng-change="getMarketOffice(params.state_code.id)" required>
+                                            <option value="">----Select State----</option>
+                                        </select>
+                                        <div class="form-control-focus"> </div>
+                                        <span ng-show="marketStoreForm.state_code.$error.required && !marketStoreForm.state_code.$pristine" class="help-block">
+                                           State Code is required
+                                        </span>
+                                        
+                                    </div>
+                                </div>
+
+                                <div class="form-group form-md-line-input" ng-class="{ 'has-error' : marketStoreForm.market_office.$invalid   && !marketStoreForm.market_office.$pristine }">
+                                    <label for="form_control_1" class="col-md-3 control-label" style="padding-left:5px;">Market Office <span class="required" aria-required="true">*</span></label>
+                                    <div class="col-md-9">
+                                        <select class="form-control" name="market_office" ng-model="params.market_office" ng-options="marketOffice.id as marketOffice.office_name for marketOffice in marketOffices" ng-change="getMarketOfficeCity(params.market_office.id)" required>
+                                            <option value="">----Market Office----</option>
+                                        </select>
+                                        <div class="form-control-focus"> </div>
+                                        <span ng-show="marketStoreForm.market_office.$error.required && !marketStoreForm.market_office.$pristine" class="help-block">
+                                           State Code is required
+                                        </span>
+                                    </div>
+                                </div>
+
+                                 <div class="form-group form-md-line-input" ng-class="{ 'has-error' : marketStoreForm.market_office_city.$invalid   && !marketStoreForm.market_office_city.$pristine }">
+                                    <label for="form_control_1" class="col-md-3 control-label" style="padding-left:5px;">Market Office City <span class="required" aria-required="true">*</span></label>
+                                    <div class="col-md-9">
+                                        <select class="form-control" name="market_office_city" ng-model="params.market_office_city" ng-options="marketOfficeCity.id as marketOfficeCity.city_name for marketOfficeCity in marketOfficeCities" ng-change="getDeliveryZones()" required>
+                                            <option value="">--Market Office City--</option>
+                                        </select>
+                                        <div class="form-control-focus"> </div>
+                                        <span ng-show="marketStoreForm.market_office_city.$error.required && !marketStoreForm.market_office_city.$pristine" class="help-block">
+                                           State Code is required
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group form-md-line-input" ng-class="{ 'has-error' : marketStoreForm.zone_hash.$invalid   && !marketStoreForm.zone_hash.$pristine }">
+                                    <label for="form_control_1" class="col-md-4 control-label">Select Zones <span class="required" aria-required="true">*</span> <span> [select min 1 option. Press Ctrl to select more than one ]</span></label>
+                                    <div class="col-md-8">
+                                        <select class="form-control" multiple="" aria-required="true" aria-invalid="false" aria-describedby="select_multi-error" name="zone_hash" ng-model="params.zone_hash" ng-options="zone.shortid as zone.delivery_zone_name for zone in deliveryZones">
+                                            <option value="">--Delivery Zones--</option>
+                                        </select>
+                                        <div class="form-control-focus"> </div>
+                                        <span ng-show="marketStoreForm.zone_hash.$error.required && !marketStoreForm.zone_hash.$pristine" class="help-block">
+                                            Zone is required
+                                        </span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>                   
+                </div>
+
+                <div class="portlet light portlet-fit portlet-form bordered">
+                    <div class="portlet box green" style="margin-bottom: 0px;">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-list"></i>Market Store Category </div>
+                            <div class="tools">
+                                <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
+                                <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title=""> </a>
+                                <a href="javascript:;" class="reload" data-original-title="" title=""> </a>
+                                <a href="javascript:;" class="remove" data-original-title="" title=""> </a>
+                            </div>
+                        </div>
+
+                        <div class="portlet-body">
+                            <div class="form-body">
+                                <!--<h3 class="form-section">General Information</h3>-->
+                                <div class="form-group form-md-line-input" ng-class="{ 'has-error' : marketStoreForm.title.$invalid   && !marketStoreForm.title.$pristine }">
+                                    <label for="form_control_1" class="col-md-4 control-label">Category <span class="required" aria-required="true">*</span> </label>
+                                    <div class="col-md-8">
+                                        <tags-input ng-model="params.sub_category" add-on-paste="true" spellcheck="false" placeholder="Add a category and hit enter" min-length="1">
+                                        </tags-input>
+                                        <div class="form-control-focus"> </div>
+                                        <span ng-show="marketStoreForm.title.$error.required && !marketStoreForm.title.$pristine" class="help-block">
+                                            Zone is required
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                   
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+                <div class="portlet light portlet-fit portlet-form bordered">
+                    <div class="portlet box green" style="margin-bottom: 0px;">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-list"></i>Opening Hours </div>
+                            <div class="tools">
+                                <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
+                                <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title=""> </a>
+                                <a href="javascript:;" class="reload" data-original-title="" title=""> </a>
+                                <a href="javascript:;" class="remove" data-original-title="" title=""> </a>
+                            </div>
+                        </div>
+
+                        <div class="portlet-body">
+                            <div class="form-body">
+                                
+
+                                <div class="clearfix" >
+                                    <div class="panel panel-default" ng-repeat="(k, v) in opening_hours">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title">{{days[k]}}</h3>
+                                        </div>
+                                        <table class="table table-bordered table-striped">
+                                            <tbody>
+                                                <tr>
+                                                    <td width="50%">
+                                                        <label>Start Time</label>
+                                                        <uib-timepicker ng-model="v.start_time" ng-change="changed_start_time(k,v.start_time)" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
+                                                    </td>
+                                                    <td width="50%">
+                                                        <label>End Time</label>
+                                                        <uib-timepicker ng-model="v.end_time" ng-change="changed_end_time(k,v.end_time)" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                
+
+                            </div>
+                        </div>
+                    </div>                   
+                </div>
+            </div>
+            
+
+            
+        </div>
+
+        <div class="row">
+           <div class="col-md-12">
+                <div class="form-actions" style="float:right">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn green" ng-disabled="marketStoreForm.$invalid">Submit</button>
+                            <button type="reset" class="btn default">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>    

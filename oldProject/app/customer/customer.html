@@ -1,0 +1,89 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="#">Customer</a>
+        </li>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <h3 class="page-title"> Customer List </h3>
+        </div>
+        <div class="col-md-6">
+            <div class="page-title pull-right">
+                <a class="btn btn-sm green btn-outline filter-submit margin-bottom" href="ng/customer/add">
+                    <i class="fa fa-plus"></i> Add New Customer</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN SAMPLE TABLE PORTLET-->
+        <div class="portlet box">
+            <div class="portlet-body flip-scroll">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="dataTables_filter pull-left">
+                            <form ng-submit="searchCustomer()">
+                                <label>Search:
+                                    <input type="search" ng-model="searchText" class="form-control input-sm input-medium input-inline" placeholder="Type and hit enter.">
+                                </label>
+                                <button class="btn green btn-sm" type="submit">
+                                    <span class="ladda-label">Search</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <span class="label label-success pull-right" ng-show="loaderValue"> Loading data... </span>
+                    </div>
+                </div>
+                <span class="pull-right" ng-show="!loaderValue">Total : {{listOfCustomers.length}}</span>
+                <table class="table table-bordered table-striped table-condensed flip-content">
+                    <thead class="flip-content">
+                        <tr>
+                            <!-- <th> id </th> -->
+                            <th> First Name </th>
+                            <th> Last Name </th>
+                            <th> Email </th>
+                            <th> Phone </th>
+                            <th class="numeric"> Source </th>
+                            <th class="numeric"> Date </th>
+                            <th class="numeric"> Action </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="val in listOfCustomers">
+                            <!-- <td> {{ val.id }} </td> -->
+                            <td> {{ val.first_name }} </td>
+                            <td> {{ val.last_name }} </td>
+                            <td class="numeric"> {{ val.email }} </td>
+                            <td class="numeric"> {{ val.phone }} </td>
+                            <td class="numeric"> {{ val.signup_source }} </td>
+                            <td class="numeric"> {{ val.created_at | date:'medium' }} </td>
+                            <td class="numeric">
+                                <a class="btn btn-outline btn-circle btn-sm purple" href="ng/customer/edit/{{val.id}}"><i class="fa fa-edit"></i> View </a>
+                                <a class="btn btn-outline btn-circle dark btn-sm black" ng-click="deleteCustomer(val.id)" href="javascript:;"><i class="fa fa-trash-o"></i> Delete </a>
+                            </td>
+                        </tr>
+                        <tr ng-show="!listOfCustomers.length">
+                            <td colspan="7" class="text-center font-red font-lg">No record available.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-md-5 col-sm-5 text-left">
+                        <div class="dataTables_info">Showing {{currentPage}} to {{numPerPage}} of {{totalItems}} records</div>
+                    </div>
+                    <div class="col-md-7 col-sm-7 text-right">
+                        <uib-pagination total-items="totalItems" ng-model="currentPage" items-per-page="numPerPage" ng-change="pageChanged()"></uib-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END SAMPLE TABLE PORTLET-->
+    </div>
+</div>

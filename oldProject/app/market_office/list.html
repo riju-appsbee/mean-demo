@@ -1,0 +1,60 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="ng/market-office/list/{{selectedState}}">Market Office</a>
+        </li>
+    </ul>
+</div>
+<h3 class="page-title"> Market Office List </h3>
+<div class="row">
+    <div class="col-md-12">
+        <div class="btn-group pull-left">
+            <select class="form-control" name="market_office_state_code" ng-model="params.market_office_state_code" ng-options="row.id as row.value for row in states" ng-change="changeState(params.market_office_state_code)">
+                <option value="" selected="selected">--Select A State--</option>
+            </select>
+        </div>
+        <div class="btn-group pull-right">
+            <a class="btn btn-sm green btn-outline filter-submit margin-bottom" href="ng/market-office/add">
+                <i class="fa fa-plus"></i> Add Market Office</a>
+        </div>
+    </div>
+</div>
+<div class="row">&nbsp;</div>
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN SAMPLE TABLE PORTLET-->
+        <div class="portlet box">
+            <div class="portlet-body flip-scroll">
+                <span class="pull-right">Total : {{marketOffice.length || 0}}</span>
+                <table class="table table-bordered table-striped table-condensed flip-content">
+                    <thead class="flip-content">
+                        <tr>
+                            <th> Name </th>
+                            <th> Location </th>
+                            <th> Tax Percentage </th>
+                            <th> Mail Sent </th>
+                            <th class="numeric"> Action </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="value in marketOffice">
+                            <td> {{value.office_name}} </td>
+                            <td class="numeric"> {{value.location}} </td>
+                            <td class="numeric"> {{value.tax_percentage.toFixed(2)}} </td>
+                            <td class="numeric"> {{value.mail_sent}} </td>
+                            <td class="numeric">
+                                <a href="ng/market-office/edit/{{selectedState}}/{{value.id}}" class="btn btn-outline btn-circle btn-sm purple" href="javascript:;"><i class="fa fa-edit"></i> View </a>
+                                <a class="btn btn-outline btn-circle dark btn-sm black" href="javascript:;" ng-click="deleteMarketOffice(value.id)"><i class="fa fa-trash-o"></i> Delete </a>
+                            </td>
+                        </tr>
+                        <tr ng-show="errors.status">
+                            <td colspan="7" class="text-center font-red font-lg">{{errors.msg}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- END SAMPLE TABLE PORTLET-->
+    </div>
+</div>

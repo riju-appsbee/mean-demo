@@ -1,0 +1,87 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="ng/market-office/list/{{state}}">Market Office</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="ng/market-office/edit/{{state}}/{{mofid}}">Edit Market Office</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="#">Add Market Office City</a>
+        </li>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <h3 class="page-title"> Add Market Office City </h3> </div>
+    </div>
+</div>
+
+<!-- BEGIN FORM-->
+<div ng-controller="MarketOfficeCityController as mktOfcCityctrl">
+    <form class="form-horizontal" id="mktOfcCityForm" name="mktOfcCityForm" method="post" ng-submit="addMktOfcCity(cityinfo)">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="portlet light portlet-fit portlet-form bordered">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class=" icon-layers font-green"></i>
+                            <span class="caption-subject font-green sbold uppercase">City Information </span>
+                        </div>
+                    </div>
+
+                    <div class="portlet-body">
+                        <div class="form-body">
+                            <div class="form-group form-md-line-input" ng-class="{ 'has-error' : mktOfcCityForm.city_name.$invalid  && mktOfcCityForm.city_name.$dirty }">
+                                <label for="form_control_1" class="col-md-3 control-label">City&nbsp;Name<span class="required" aria-required="true">*</span></label>
+                                <div class="col-md-9">
+                                    <input type="text" name="city_name" ng-model="cityinfo.city_name" class="form-control" uib-typeahead="cityDetails.City for cityDetails in allCities | filter:$viewValue | limitTo:10" typeahead-editable="false" required>
+                                    <div class="form-control-focus"> </div>
+                                    <span ng-show="mktOfcCityForm.city_name.$error.required && mktOfcCityForm.city_name.$dirty" class="help-block">
+                                        City name is required
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="portlet-body">
+                        <div class="form-body">
+                            <div class="form-group" ng-class="{ 'has-error' : mktOfcCityForm.skyline_img.$invalid  && mktOfcCityForm.skyline_img.$dirty }">
+                                <label for="form_control_1" class="col-md-3 control-label">Skyline Image (1100X185) <span class="required" aria-required="true">*</span></label>
+                                <div class="col-md-9">
+                                    <input type="file" name="skyline_img" upload-able="cityinfo.skyline_img" ng-model="cityinfo.skyline_img" class="form-control" style="height:auto;" required>
+                                    <div class="form-control-focus"> </div>
+                                    <span ng-show="mktOfcCityForm.skyline_img.$error.required && mktOfcCityForm.skyline_img.$dirty" class="help-block">
+                                        Skyline image is required
+                                    </span>
+                                    <br>
+                                    <img src="{{cityinfo.skyline_img}}" ng-if="!!cityinfo.skyline_img" class="img-responsive" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-actions pull-right">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn green" ng-disabled="mktOfcCityForm.$invalid">Submit</button>
+                            <button type="reset" class="btn default">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

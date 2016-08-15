@@ -1,0 +1,127 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="ng/market-office/list/{{state}}">Market Office</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="ng/market-office/edit/{{state}}/{{mofid}}">Edit Market Office</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="#">Edit Market Office City</a>
+        </li>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <h3 class="page-title"> Edit Market Office City </h3> </div>
+    </div>
+</div>
+<!-- BEGIN FORM-->
+<div ng-controller="MarketOfficeCityController as mktOfcCityctrl">
+    <form class="form-horizontal" id="mktOfcCityForm" name="mktOfcCityForm" method="post" ng-submit="editMktOfcCity(cityinfo)">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="portlet light portlet-fit portlet-form bordered">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class=" icon-layers font-green"></i>
+                            <span class="caption-subject font-green sbold uppercase">City Information </span>
+                            <input type="hidden" name="id" ng-model="cityinfo.id" class="form-control">
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="form-body">
+                            <div class="form-group form-md-line-input" ng-class="{ 'has-error' : mktOfcCityForm.city_name.$invalid && mktOfcCityForm.city_name.$dirty }">
+                                <label for="form_control_1" class="col-md-3 control-label">City&nbsp;Name<span class="required" aria-required="true">*</span></label>
+                                <div class="col-md-9">
+                                    <input type="text" name="city_name" ng-model="cityinfo.city_name" class="form-control" uib-typeahead="cityDetails.City for cityDetails in allCities | filter:$viewValue | limitTo:10" typeahead-editable="false" required>
+                                    <div class="form-control-focus"> </div>
+                                    <span ng-show="mktOfcCityForm.city_name.$error.required && mktOfcCityForm.city_name.$dirty" class="help-block">
+                                        City name is required
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="form-body">
+                            <div class="form-group">
+                                <label for="form_control_1" class="col-md-3 control-label">Skyline Image (1100X185) <span class="required" aria-required="true">*</span> </label>
+                                <div class="col-md-9">
+                                    <input type="file" upload-able="cityinfo.skyline_img" style="height:auto;" class="form-control">
+                                    <div class="form-control-focus"> </div>
+                                    <br>
+                                    <img ng-src="{{cityinfo.imagePath}}" class="img-responsive" alt="">
+                                    <input type="hidden" name="cityinfo.oldImage" value="{{cityinfo.skyline_img}}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                <div class="form-actions pull-right">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn green" ng-disabled="mktOfcCityForm.$invalid">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <div class="btn-group pull-right page-title">
+                        <a class="btn btn-sm green btn-outline filter-submit margin-bottom" href="ng/delivery-zone/add/{{state}}/{{mkOfficeId}}/{{mkOfficeCityId}}">
+                            <i class="icon-user"></i>Add New Delivery Zone</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet box green">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-cogs"></i>Delivery Zones</div>
+                        <div class="tools">
+                            <a class="collapse" href="javascript:;" data-original-title="" title=""> </a>
+                            <a class="remove" href="javascript:;" data-original-title="" title=""> </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body flip-scroll">
+                        <table class="table table-bordered table-striped table-condensed flip-content">
+                            <thead class="flip-content">
+                                <tr>
+                                    <th> Name </th>
+                                    <th> OnFleet Team ID </th>
+                                    <th class="numeric"> Action </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="value in listOfDeliveryZones">
+                                    <td> {{value.delivery_zone_name}} </td>
+                                    <td class="numeric"> {{value.onfleet_id}} </td>
+                                    <td class="numeric">
+                                        <a href="ng/delivery-zone/edit/{{state}}/{{mofid}}/{{mkOfficeCityId}}/{{value.id}}" class="btn btn-outline btn-circle btn-sm purple" href="javascript:;"><i class="fa fa-edit"></i> View </a>
+                                        <a class="btn btn-outline btn-circle dark btn-sm black" href="javascript:;" ng-click="deleteDeliveryZone(value.id)"><i class="fa fa-trash-o"></i> Delete </a>
+                                    </td>
+                                </tr>
+                                <tr ng-show="errors.status">
+                                    <td colspan="7" class="text-center font-red font-lg">{{errors.msg}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

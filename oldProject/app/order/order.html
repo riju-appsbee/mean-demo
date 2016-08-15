@@ -1,0 +1,105 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="#">Order</a>
+        </li>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <h3 class="page-title"> Order List </h3>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-2">
+            <select class="form-control" name="market_office_state_code" ng-model="params.market_office_state_code" ng-options="row.id as row.value for row in states" ng-change="getMarketOfficeCitiesByState(params.market_office_state_code)" required>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <select class="form-control" name="market_office_city_id" ng-model="params.market_office_city_id" ng-options="row.id as row.city_name for row in marketOfficeCitites" ng-click="changeCity(params.market_office_city_id)" required>
+            </select>
+        </div>
+
+        <div class="col-md-4">
+            <div class="dataTables_filter pull-left">
+                <form ng-submit="searchOrder()">
+                    <input type="search" ng-model="searchText" class="form-control input-sm input-medium input-inline" placeholder="Type and hit enter.">
+                    <button class="btn green btn-sm" type="submit">
+                        <span class="ladda-label">Search</span>
+                    </button>
+                </form>
+            </div>
+        </div> 
+
+        <div class="col-md-3">
+            <span class="demo-loading-btn btn-sm btn blue pull-right" ng-show="loaderValue"> Loading data... </span>
+        </div>                   
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN SAMPLE TABLE PORTLET-->
+        <div class="portlet box">
+            <div class="portlet-body flip-scroll">
+            <span class="pull-right" ng-show="!loaderValue">Total : {{listOfOrder.length}}</span>
+                <table class="table table-bordered table-striped table-condensed flip-content">
+                    <thead class="flip-content">
+                        <tr>
+                            <th> Order Number </th>
+                            <th> Customer Name </th>
+                            <th> Email </th>
+                            <th> Phone </th>
+                            <th> Total Amount </th>
+                            <th> Payment Status </th>
+                            <th> Order Status </th>
+                            <th> Source </th>
+                            <th> Date </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="val in listOfOrder">
+                            <td> {{ val.order_number }} </td>
+                            <td> {{ val.name }} </td>
+                            <td> {{ val.email }} </td>
+                            <td> {{ val.phone }} </td>
+                            <td> ${{ val.total_amount }} </td>
+                            <td>
+                                <span ng-if="val.payment_status == 'Charged'" class="btn green-meadow btn-xs">Charged</span>
+                                <span ng-if="val.payment_status == 'Voided'" class="btn btn-warning btn-xs">Voided</span>
+                                <span ng-if="val.payment_status == 'Refunded'" class="btn btn-danger btn-xs">Refunded</span>
+                                <span ng-if="val.payment_status == 'Credited'" class="btn btn-info btn-xs">Credited</span>
+                            </td>
+                            <td>
+                                <span ng-if="val.order_status == 'Processing'" class="btn btn-warning btn-xs">Processing</span>
+                                <span ng-if="val.order_status == 'Delivered'" class="btn green-meadow btn-xs">Delivered</span>
+                                <span ng-if="val.order_status == 'Canceled'" class="btn btn-danger btn-xs">Canceled</span>
+                                <span ng-if="val.order_status == 'Canceling'" class="btn label-default btn-xs">Canceling</span>
+                                <span ng-if="val.order_status == 'Assigned'" class="btn purple btn-xs">Assigned</span>
+                            </td>
+                            <td> {{ val.order_platform }} </td>
+                            <td> {{ val.created_at | date:'medium' }} </td>                            
+                        </tr>
+                        <tr ng-show="!listOfOrder.length">
+                            <td colspan="9" class="text-center font-red font-lg">No record available.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-md-5 col-sm-5 text-left">
+                        <div class="dataTables_info">Showing {{currentPage}} to {{numPerPage}} of {{totalItems}} records</div>
+                    </div>
+                    <div class="col-md-7 col-sm-7 text-right">
+                        <uib-pagination total-items="totalItems" ng-model="currentPage" items-per-page="numPerPage" ng-change="pageChanged()"></uib-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END SAMPLE TABLE PORTLET-->
+    </div>
+</div>

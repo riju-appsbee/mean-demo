@@ -1,0 +1,75 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="#">Customer Delivery Address List</a>
+        </li>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <h3 class="page-title"> CUSTOMER DELIVERY ADDRESS LIST </h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-8">
+            <div class="dataTables_filter pull-left">
+                <form ng-submit="searchTable()">
+                    <label>Search:
+                        <input type="search" ng-model="searchValue" class="form-control input-sm input-medium input-inline" placeholder="Type & hit enter">
+                        <button class="btn green btn-sm" type="submit">
+                            <span class="ladda-label">Search</span>
+                        </button>
+                    </label>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN SAMPLE TABLE PORTLET-->
+        <div class="portlet box green">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-cogs"></i>All data are listed here </div>
+            </div>
+            <div class="portlet-body flip-scroll" style="display: block; overflow-x: scroll;">
+                <span class="pull-right">Total : {{tblData.length}}</span>
+                <table class="table table-bordered table-striped table-condensed flip-content">
+                    <thead class="flip-content">
+                        <tr>
+                            <th> Id </th>
+                            <th> State Code </th>
+                            <th> Mrkt Ofc City Delvry Zone Id </th>
+                            <th> Address </th>
+                            <th> Note </th>
+                            <th> Latitude </th>
+                            <th> Longitude </th>
+                            <th> Created At </th>
+                            <th> Customer Id </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="rs in tblData">
+                            <td>{{rs.id.N}}</td>
+                            <td class="numeric">{{rs.scod.S}}</td>
+                            <td class="numeric">{{rs.mocd.S}}</td>
+                            <td class="numeric">{{rs.addr.S}}</td>
+                            <td class="numeric">{{rs.nte.S}}</td>
+                            <td class="numeric">{{rs.lat.S}}</td>
+                            <td class="numeric">{{rs.lng.S}}</td>
+                            <td class="numeric">{{rs.cat.N}}</td>
+                            <td class="numeric">{{rs.cid.N}}</td>
+                        </tr>
+                        <tr ng-show="!tblData.length">
+                            <td colspan="9" style="text-align:center; color:red;">No record available.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- END SAMPLE TABLE PORTLET-->
+    </div>
+</div>

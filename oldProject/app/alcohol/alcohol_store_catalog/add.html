@@ -1,0 +1,89 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="ng/alcohol-store/list">Alcohol Store</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="ng/alcohol-store-catalog/list/{{storeid}}">Alcohol Store Catalog</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="">Add Alcohol Store Catalog</a>
+        </li>
+    </ul>
+</div>
+<h3 class="page-title font-green"><i class=" fa fa-shopping-cart font-green"></i>  Add {{storeInfo.name}} Catalog</h3>
+<!-- BEGIN FORM-->
+<form class="form-horizontal" name="alcoholCatForm" method="post" ng-submit="addAlcoholCat(alcoholCatForm.$valid)" novalidate>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase">Basic Information </span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="form-body">
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : alcoholCatForm.catalog_name.$invalid && !alcoholCatForm.catalog_name.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">Catalog Name <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <input type="text" name="catalog_name" ng-model="params.catalog_name" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="alcoholCatForm.catalog_name.$invalid && !alcoholCatForm.catalog_name.$pristine" class="help-block">Please enter a catalog name.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            <label class="col-md-4 control-label" for="form_control_1">Store Categories</label>
+                            <div class="col-md-8">
+                                <tags-input ng-model="params.store_categories" add-on-paste="true" spellcheck="false" placeholder="Add a store category and hit enter" min-length="1">
+                                </tags-input>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-radios">
+                            <label for="form_control_1" class="col-md-4 control-label">Active</label>
+                            <div class="col-md-8">
+                                <div class="md-radio-inline" ng-init="params.active = true">
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.active" id="active_yes" ng-value="true">
+                                        <label for="active_yes">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> Yes
+                                        </label>
+                                    </div>
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.active" id="active_no" ng-value="false">
+                                        <label for="active_no">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-3">
+                    <div class="form-actions pull-right">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn green" ng-disabled="alcoholCatForm.$invalid">Submit</button>
+                                <button type="reset" class="btn default">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</form>

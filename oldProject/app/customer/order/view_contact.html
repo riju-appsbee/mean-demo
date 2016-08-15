@@ -1,0 +1,196 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="ng/market-store/list">Market Store</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="#">Market Store Contact List</a>
+        </li>
+    </ul>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <h3 class="page-title"> Market Store Name : {{params.name}} </h3>
+        </div>
+        <div class="col-md-6">
+            <div class="page-title pull-right">
+            <a class="btn btn-sm green btn-outline filter-submit margin-bottom" ng-click="addNewContactPopup()">
+                <i class="fa fa-plus"></i> Add New Contact</a>
+            </div>
+       </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN SAMPLE TABLE PORTLET-->
+        <div class="portlet box green">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-cogs"></i>Contact List : Total ( {{totalMarketStoreContact}} )</div>
+                <div class="tools">
+                    <a class="collapse" href="javascript:;" data-original-title="" title=""> </a>
+                    <a class="config" data-toggle="modal" href="#portlet-config" data-original-title="" title=""> </a>
+                    <a class="reload" href="javascript:;" data-original-title="" title=""> </a>
+                    <a class="remove" href="javascript:;" data-original-title="" title=""> </a>
+                </div>
+            </div>
+            <div class="portlet-body flip-scroll">
+                <table class="table table-bordered table-striped table-condensed flip-content">
+                    <thead class="flip-content">
+                        <tr>
+                            <th> Sno. </th>
+                            <th> Title </th>
+                            <th> Name </th>
+                            <th> Cell No </th>
+                            <th> Email </th>
+                            <th width="20%"> Action </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="(key, val) in listOfMarketStoreContact">
+                            <td> {{$index + 1}}. </td>
+                            <td>{{ val.title }}</td>
+                            <td>{{ val.name }}</td>
+                            <td>{{ val.cellphone_no }}</td>
+                            <td>{{ val.email }}</td>
+                            <td>
+                                <a class="btn btn-outline btn-circle btn-sm purple" ng-click="updateContactPopup(key,'')"><i class="fa fa-edit"></i> View </a>
+
+                                <a class="btn btn-outline btn-circle dark btn-sm red" data-ng-click="deleteMarketOfficeContact(params.id,key)" href="javascript:;"><i class="fa fa-trash-o"></i> Delete </a>
+                            </td>
+                        </tr>
+                        <tr ng-show="!totalMarketStoreContact">
+                            <td colspan="7" style="text-align:center; color:red;"> {{ 'No record availbale.' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- END SAMPLE TABLE PORTLET-->
+    </div>
+</div>
+
+<!-- ADD POPUP FORM BEGIN -->
+<script type="text/ng-template" id="add_new_contact">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Fill Contact Details</h4>
+            </div>
+            <form class="form-horizontal" name="marketStoreContactForm" method="post" ng-submit="addMarketStoreContact(marketStoreContactForm.$valid)" novalidate>
+                <div class="modal-body"> 
+                    <div class="form-body">
+                        <div class="form-group form-md-line-input"  ng-class="{ 'has-error' : marketStoreContactForm.title.$invalid && !marketStoreContactForm.title.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Title <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="title"  ng-model="contact_info.title" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="marketStoreContactForm.title.$invalid && !marketStoreContactForm.title.$pristine" class="help-block">Please enter restaurant name.</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-md-line-input"  ng-class="{ 'has-error' : marketStoreContactForm.name.$invalid && !marketStoreContactForm.name.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Name <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="name"  ng-model="contact_info.name" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="marketStoreContactForm.name.$invalid && !marketStoreContactForm.name.$pristine" class="help-block">Please enter restaurant name.</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : marketStoreContactForm.email.$invalid && !marketStoreContactForm.email.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Email <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="email" name="email" ng-model="contact_info.email" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="marketStoreContactForm.email.$invalid && !marketStoreContactForm.email.$pristine" class="help-block">Please enter restaurant email address.</span>
+                            </div>
+                        </div> 
+
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : marketStoreContactForm.cellphone_no.$invalid && !marketStoreContactForm.cellphone_no.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Phone <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" input-mask name ="cellphone_no" ng-model="contact_info.cellphone_no" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="marketStoreContactForm.cellphone_no.$error.required && marketStoreContactForm.cellphone_no.$dirty" class="help-block">Please enter valid phone number.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn green" ng-disabled="marketStoreContactForm.$invalid">Add</button>
+                    <button type="button" class="btn dark btn-outline" ng-click="cancel()">Close</button>
+                </div>
+            </form> 
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <toastr></toartr>
+</script>
+<!-- ADD POPUP FORM END -->
+
+<!-- EDIT POPUP FORM START -->
+<script type="text/ng-template" id="update_contact">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit Contact Details</h4>
+            </div>
+            <form class="form-horizontal" name="marketStoreEditContactForm" method="post" ng-submit="editMarketStoreContact(marketStoreEditContactForm.$valid)" novalidate>
+                <div class="modal-body"> 
+                    <div class="form-body">                       
+                        <div class="form-group form-md-line-input"  ng-class="{ 'has-error' : marketStoreEditContactForm.title.$invalid && !marketStoreEditContactForm.title.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Title <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="title"  ng-model="contact_edit_info.title" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="marketStoreEditContactForm.title.$invalid && !marketStoreEditContactForm.title.$pristine" class="help-block">Please enter restaurant name.</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-md-line-input"  ng-class="{ 'has-error' : marketStoreEditContactForm.name.$invalid && !marketStoreEditContactForm.name.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Name <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="name"  ng-model="contact_edit_info.name" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="marketStoreEditContactForm.name.$invalid && !marketStoreEditContactForm.name.$pristine" class="help-block">Please enter restaurant name.</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : marketStoreEditContactForm.email.$invalid && !marketStoreEditContactForm.email.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Email <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="email" name="email" ng-model="contact_edit_info.email" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="marketStoreEditContactForm.email.$invalid && !marketStoreEditContactForm.email.$pristine" class="help-block">Please enter restaurant email address.</span>
+                            </div>
+                        </div> 
+
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : marketStoreEditContactForm.cellphone_no.$invalid && !marketStoreEditContactForm.cellphone_no.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Phone <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" input-mask name ="cellphone_no" ng-model="contact_edit_info.cellphone_no" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="marketStoreEditContactForm.cellphone_no.$error.required && marketStoreEditContactForm.cellphone_no.$dirty" class="help-block">Please enter valid phone number.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn green" ng-disabled="marketStoreEditContactForm.$invalid">Update</button>
+                    <button type="button" class="btn dark btn-outline" ng-click="cancel()">Close</button>
+                </div>
+            </form> 
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <toastr></toartr>
+</script>
+<!-- EDIT POPUP FORM END -->

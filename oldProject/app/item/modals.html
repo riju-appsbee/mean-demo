@@ -1,0 +1,170 @@
+<div class="modal fade" id="choiceModal" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="form-horizontal" name="choiceForm" method="post" novalidate>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="clearChoiceForm(choiceForm)"></button>
+                    <h4 class="modal-title">Choice Form</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-body">
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : choiceForm.title.$invalid && !choiceForm.title.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Title<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" placeholder="Enter a title for the choice" name="title" ng-model="params.title" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="choiceForm.title.$error.required && choiceForm.title.$dirty" class="help-block">Please enter a valid title.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : choiceForm.select.$invalid && !choiceForm.select.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Select<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" placeholder="Enter a number" name="select" ng-model="params.select" ng-pattern="/^[0-9]{1,7}$/" class="form-control" value="1" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="choiceForm.select.$error.required && choiceForm.select.$dirty" class="help-block">Please enter valid number.</span>
+                                <span ng-show="!choiceForm.select.$error.required && choiceForm.select.$error.pattern && choiceForm.select.$dirty" class="help-block">Must contain only number.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-radios">
+                            <label for="form_control_1" class="col-md-3 control-label">Required<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <div class="md-radio-inline" ng-init="params.required=true">
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.required" id="required_yes" ng-value="true">
+                                        <label for="required_yes">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> Yes
+                                        </label>
+                                    </div>
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.required" id="required_no" ng-value="false">
+                                        <label for="required_no">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-radios">
+                            <label for="form_control_1" class="col-md-3 control-label">Active<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <div class="md-radio-inline" ng-init="params.choice_active=true">
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.choice_active" id="choice_active_yes" ng-value="true">
+                                        <label for="choice_active_yes">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> Yes
+                                        </label>
+                                    </div>
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.choice_active" id="choice_active_no" ng-value="false">
+                                        <label for="choice_active_no">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal" ng-click="clearChoiceForm(choiceForm)">Close</button>
+                    <button type="submit" class="btn green" data-dismiss="modal" ng-click="addChoice(choiceForm)">Save Choice</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="optionModal" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="optionForm" class="form-horizontal" name="optionForm" method="post" novalidate>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="clearOptionForm(optionForm)"></button>
+                    <h4 class="modal-title">Option Form</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-body">
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : optionForm.option_name.$invalid && !optionForm.option_name.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Option Name<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" placeholder="Enter a name for the option" name="option_name" ng-model="params.option_name" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="optionForm.option_name.$error.required && optionForm.option_name.$dirty" class="help-block">Please enter a valid name.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : optionForm.wholesale_price_option.$invalid && !optionForm.wholesale_price_option.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Wholesale&nbsp;Price<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" placeholder="Enter a number" name="wholesale_price_option" ng-model="params.wholesale_price_option" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" class="form-control" ng-value="1" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="optionForm.wholesale_price_option.$error.required && optionForm.wholesale_price_option.$dirty" class="help-block">Please enter valid wholesale price.</span>
+                                <span ng-show="!optionForm.wholesale_price_option.$error.required && optionForm.wholesale_price_option.$error.pattern && optionForm.wholesale_price_option.$dirty" class="help-block">Must contain only number.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : optionForm.retail_price_option.$invalid && !optionForm.retail_price_option.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Retail&nbsp;Price<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" placeholder="Enter a number" name="retail_price_option" ng-model="params.retail_price_option" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" class="form-control" ng-value="1" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="optionForm.retail_price_option.$error.required && optionForm.retail_price_option.$dirty" class="help-block">Please enter valid retail price.</span>
+                                <span ng-show="!optionForm.retail_price_option.$error.required && optionForm.retail_price_option.$error.pattern && optionForm.retail_price_option.$dirty" class="help-block">Must contain only number.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : optionForm.soldout_exp_time_option.$invalid && !optionForm.soldout_exp_time_option.$pristine }">
+                            <label class="control-label col-md-3">Sold Out Expiry<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <div class="input-group date date-picker" date-picker data-date-format="mm-dd-yyyy">
+                                    <input type="text" ng-model="params.soldout_exp_time_option" class="form-control" readonly name="soldout_exp_time_option" required>
+                                    <span class="input-group-btn">
+                                        <button class="btn default" type="button">
+                                            <i class="fa fa-calendar"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                                <span ng-show="optionForm.soldout_exp_time_option.$error.required && optionForm.soldout_exp_time_option.$dirty" class="help-block">Please select a date.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-radios">
+                            <label for="form_control_1" class="col-md-3 control-label">Active<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <div class="md-radio-inline" ng-init="params.option_active=true">
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.option_active" id="option_active_yes" ng-value="true">
+                                        <label for="option_active_yes">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> Yes
+                                        </label>
+                                    </div>
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.option_active" id="option_active_no" ng-value="false">
+                                        <label for="option_active_no">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal" ng-click="clearOptionForm(optionForm)">Close</button>
+                    <button type="submit" class="btn green" data-dismiss="modal" ng-click="addOption(optionForm)">Save Option</button>
+                </div>
+        </div>
+        </form>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

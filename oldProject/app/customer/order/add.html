@@ -1,0 +1,108 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="ng/order/list">Order List</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="ng/order/checkout/-KIh6TUrKLb9qMSPB5fK">Go to checkout page</a>
+        </li>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <h3 class="page-title"> Create Order </h3> </div>
+        <div class="col-md-6 customar_order">
+        </div>
+    </div>
+</div>
+<!-- BEGIN FORM-->
+<div>
+    <div class="row">
+<div class="col-md-12">
+  <div class="col-md-8">
+      
+<div class="col-md-12">
+            <div class="center_section">Address<sup>*</sup>
+
+                <span class="input_search">
+                <input name="address" ng-model="customerAddress" type="text" placeholder="Where are you?" class="gplace" id="address" data-source="home" ng-focus="showDeliveryAddresses()" ng-keypress="hideDeliveryAddresses()" ng-blur="hideDeliveryAddresses()">
+
+                <div ng-show="ifAddressBoxFocused" class="drop_sec">
+                <div ng-repeat="addressDetails in customerInfo.delivery_addresses" class="list_n"><a href="#" ng-mousedown="populateAddressInTheBox(addressDetails)">{{addressDetails.address}}</a></div>
+                </div>
+
+                <div class="button_section" ng-show="showOnProperAddressValidation">
+                <button type="submit" class="btn green" ng-click="saveCustomerAddress(customerAddress)">Save</button>
+                <button type="submit" class="btn btn-default" ng-click="clearCustomerAddress()">Cancel</button>
+                </div>
+
+                </span>
+
+            </div>
+            <div class="search_main">
+                <input name="" ng-keyup="searchRestaurant()" ng-model="searchText" type="text" placeholder="Search restaurant by name" />
+                <!--<button type="submit" class="btn green" ng-click="getAllRestaurants()">Search</button>-->
+            </div>
+
+</div>
+<div class="col-md-12">
+            <div class="form-group form-md-line-input" ng-show="restaurantLoaderValue">
+                <span class="label label-success"> Loading data... </span>
+            </div>
+
+            <div class="res_box row" ng-repeat="(key, val) in listOfRestaurant" ng-if="okeys(listOfRestaurant) > 0">
+                <a ng-click="showRestaurantMenu(key)">
+                    <div class="col-md-2"><img src="{{cloud_url+val.image}}" alt="" /></div>
+                    <div class="col-md-6"><strong>{{val.name}}</strong>
+                        <br />{{val.cuisine}}</div>
+                    <div class="col-md-2"><span>{{val.order_time-10}}-{{val.order_time+5}} mins</span></div>
+                    <div class="col-md-2">
+                        <a ng-if="val.is_closed === true" class="btn red btn-outline sbold btn-sm pull-right ng-scope">CLOSED</a>
+                    </div>
+                </a>
+            </div>
+
+            <div class="res_box" ng-if="okeys(listOfRestaurant) === 0">
+                <span class="text-center font-red font-sm">No record found.</span>
+            </div>
+
+</div>
+
+
+  </div>
+  <div class="col-md-4">
+      
+<div class="col-md-12">
+            <div class="portlet box cust_info">
+                
+                <div class="portlet-body">
+                    <div class="row static-info">
+                        <div class="col-md-3 name"> Name: </div>
+                        <div class="col-md-9 value"> {{customerInfo.name ? customerInfo.name : ''}} </div>
+                    </div>
+                    <div class="row static-info">
+                        <div class="col-md-3 name"> Email: </div>
+                        <div class="col-md-9 value"> {{customerInfo.email ? customerInfo.email : ''}} </div>
+                    </div>
+                    <div class="row static-info">
+                        <div class="col-md-3 name"> Phone: </div>
+                        <div class="col-md-9 value"> {{customerInfo.phone ? customerInfo.phone : ''}} </div>
+                    </div>
+                    <div class="row static-info">
+                        <div class="col-md-3 name"> Address: </div>
+                        <div class="col-md-9 value"> {{customerInfo.tmp_delivery_address.address ? customerInfo.tmp_delivery_address.address : customerInfo.address}} </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+  </div>
+</div>
+        
+        
+    </div>
+</div>

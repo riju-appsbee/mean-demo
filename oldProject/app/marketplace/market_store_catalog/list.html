@@ -1,0 +1,83 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="ng/market-store/list">Market Store</a>
+            <i class="fa fa-circle"></i>
+        </li>        
+        <li>
+            <a href="ng/market-store-catalog/list/{{storeid}}">Market Store Catalog</a>
+        </li>
+    </ul>
+    <div class="page-toolbar">
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <h3 class="page-title"> {{storeInfo.name}} Catalog List : Total ( {{totalItems}} ) </h3>
+        </div>
+        <div class="col-md-6">
+            <div class="btn-group pull-right page-title">
+                <a class="btn btn-sm green btn-outline filter-submit margin-bottom" href="ng/market-store-catalog/add/{{storeid}}">
+                    <i class="fa fa-plus"></i> Add New Market Store Catalog</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN SAMPLE TABLE PORTLET-->
+        <div class="portlet box green">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-cogs"></i>All Market Store Catalog are listed here </div>
+                <div class="tools">
+                    <a class="collapse" href="" data-original-title="" title=""> </a>                    
+                    <a class="remove" href="" data-original-title="" title=""> </a>
+                </div>
+            </div>
+            <div class="portlet-body flip-scroll">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="col-md-8 col-sm-8">
+                            <span class="label label-success pull-left" ng-show="loaderValue"> Loading data... </span>
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <div class="dataTables_filter pull-right">
+                                <form ng-submit="search()">
+                                    <label>Search:
+                                        <input type="search" ng-model="searchText" class="form-control input-sm input-medium input-inline" placeholder="Type and hit enter.">
+                                    </label>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-bordered table-striped table-condensed flip-content">
+                    <thead class="flip-content">
+                        <tr>
+<!--                            <th> ID </th>-->
+                            <th> Catalog Name </th>
+                            <th> Store Category </th>
+                            <th class="numeric"> Action </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="mrktCat in listData track by $index">
+<!--                            <td>{{$index + 1}}</td>-->
+                            <td class="numeric">{{mrktCat.catalog_name}}</td> 
+                            <td class="numeric"><span ng-repeat="storeCat in mrktCat.store_categories track by $index">{{storeCat | addcomma:$last}}</span></td>
+                            <td class="numeric">
+                                <a class="btn btn-outline btn-circle btn-sm purple" href="ng/market-store-catalog/edit/{{storeid}}/{{mrktCat.id}}"><i class="fa fa-edit"></i> View </a>
+                                <a ng-click="deleteMrktCat(mrktCat.id)" class="btn btn-outline btn-circle dark btn-sm black" href=""><i class="fa fa-trash-o"></i> Delete </a>                                
+                            </td>
+                        </tr>                        
+                    </tbody>
+                </table>
+                
+            </div>
+        </div>
+        <!-- END SAMPLE TABLE PORTLET-->
+    </div>
+</div>

@@ -1,0 +1,197 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="ng/employee/list">Employee</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="#">Edit Employee</a>
+        </li>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <h3 class="page-title"> Edit Employee </h3> </div>
+        <div class="col-md-6">
+            <div class="btn-group pull-right page-title">
+                <a class="btn btn-sm green btn-outline filter-submit margin-bottom" href="ng/employee/add">
+                    <i class="icon-user"></i> Add New Employee </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--
+<div class="m-heading-1 border-green m-bordered">
+    <h3>jQuery Validation Plugin</h3>
+    <p> This jQuery plugin makes simple clientside form validation easy, whilst still offering plenty of customization options. For more info please check out
+    </p>
+</div>
+-->
+<!-- BEGIN FORM-->
+<form class="form-horizontal" name="employeeForm" method="post" ng-submit="editEmployeeForm()">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase">User Information </span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="form-body">
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : employeeForm.email.$invalid  && !employeeForm.email.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Name <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="name" ng-model="params.name" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="employeeForm.name.$error.required && !employeeForm.name.$pristine" class="help-block">
+                                    Name is required
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : employeeForm.email.$invalid  && !employeeForm.email.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Email <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="email" name="email" ng-model="params.email" class="form-control ng-valid-email" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="employeeForm.email.$error.required && !employeeForm.email.$pristine" class="help-block">
+                                    Email is required
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : employeeForm.email.$invalid  && !employeeForm.email.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Phone <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="phone" input-mask ng-model="params.phone" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="employeeForm.phone.$error.required && !employeeForm.phone.$pristine" class="help-block">
+                                    Phone is required
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : employeeForm.email.$invalid  && !employeeForm.email.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Password <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="password" name="password" ng-model="params.password" class="form-control">
+                                <div class="form-control-focus"> </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : employeeForm.email.$invalid  && !employeeForm.email.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Address <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="address" ng-model="params.address" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="employeeForm.address.$error.required && !employeeForm.address.$pristine" class="help-block">
+                                    Address is required
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : employeeForm.email.$invalid  && !employeeForm.email.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Role <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <select name="employee_role_id" ng-model="params.employee_role_id" ng-options="val.id as val.name for val in roles" ng-selected="roleValue" class="form-control">
+                                    <option value="">-----Select-----</option>
+                                </select>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="employeeForm.employee_role_id.$error.required && !employeeForm.employee_role_id.$pristine" class="help-block">
+                                    Role is required
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : employeeForm.email.$invalid  && !employeeForm.email.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Zip Code <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="zipcode" ng-model="params.zipcode" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="employeeForm.zipcode.$error.required && !employeeForm.zipcode.$pristine" class="help-block">
+                                    Zip code is required
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : employeeForm.email.$invalid  && !employeeForm.email.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">State Code <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="state_code" ng-model="params.state_code" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="employeeForm.state_code.$error.required && !employeeForm.state_code.$pristine" class="help-block">
+                                    State Code is required
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : employeeForm.email.$invalid  && !employeeForm.email.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">City Name <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="city_name" ng-model="params.city_name" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="employeeForm.city_name.$error.required && !employeeForm.city_name.$pristine" class="help-block">
+                                    City Name is required
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-init="params = {active: 'true'}">
+                            <label for="form_control_1" class="col-md-3 control-label">Active</label>
+                            <div class="col-md-9">
+                                <input type="radio" name="active" ng-model="params.active" value="true"> Yes &nbsp;
+                                <input type="radio" name="active" ng-model="params.active" value="false"> No
+                                <div class="form-control-focus"> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase">Employee Market Place Information </span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="form-body">
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : employeeForm.email.$invalid  && !employeeForm.email.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">Market State <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <select name="estate_code" ng-model="params.employee_market_office.state_code" ng-options="state.id as state.value for state in states" ng-change="getMarketOffice(params.employee_market_office.state_code)" class="form-control" required>
+                                    <option value="">---Select---</option>
+                                </select>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="employeeForm.state_code.$error.required && !employeeForm.state_code.$pristine" class="help-block">
+                                    Market State is required
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : employeeForm.email.$invalid  && !employeeForm.email.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">Market Office <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <select name="market_office_id" ng-model="params.employee_market_office.market_office_id" class="form-control" ng-options="marketOffice.id as marketOffice.office_name for marketOffice in marketOffices" required>
+                                    <option value="">---Select---</option>
+                                </select>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="employeeForm.market_office_id.$error.required && !employeeForm.market_office_id.$pristine" class="help-block">
+                                    Market Office is required
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-actions pull-right">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn green" ng-disabled="employeeForm.$invalid">Submit</button>
+                        <button type="reset" class="btn default">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

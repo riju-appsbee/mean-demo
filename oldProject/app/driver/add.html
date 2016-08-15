@@ -1,0 +1,411 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="ng/driver/list">Driver</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="">Add Driver</a>
+        </li>
+    </ul>
+</div>
+<h3 class="page-title font-green"><i class=" icon-user font-green"></i>  Add Driver </h3>
+<!-- BEGIN FORM-->
+<form class="form-horizontal" name="driverForm" method="post" ng-submit="addDriver(driverForm.$valid)" novalidate>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase">Basic Information </span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="form-body">
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : driverForm.first_name.$invalid && !driverForm.first_name.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">First Name <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <input type="text" name="first_name" ng-model="params.first_name" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="driverForm.first_name.$invalid && !driverForm.first_name.$pristine" class="help-block">Please enter first name.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : driverForm.last_name.$invalid && !driverForm.last_name.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">Last Name <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <input type="text" name="last_name" ng-model="params.last_name" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="driverForm.last_name.$invalid && !driverForm.last_name.$pristine" class="help-block">Please enter last name.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : driverForm.onfleet_first_name.$invalid && !driverForm.onfleet_first_name.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">Onfleet First Name <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <input type="text" name="onfleet_first_name" ng-model="params.onfleet_first_name" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="driverForm.onfleet_first_name.$invalid && !driverForm.onfleet_first_name.$pristine" class="help-block">Please enter onfleet first name.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : driverForm.onfleet_last_name.$invalid && !driverForm.onfleet_last_name.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">Onfleet Last Name <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <input type="text" name="onfleet_last_name" ng-model="params.onfleet_last_name" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="driverForm.onfleet_last_name.$invalid && !driverForm.onfleet_last_name.$pristine" class="help-block">Please enter onfleet last name.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-radios">
+                            <label for="form_control_1" class="col-md-4 control-label">Onfleet&nbsp;Worker&nbsp;Status</label>
+                            <div class="col-md-8">
+                                <div class="md-radio-inline" ng-init="params.onfleet_worker_status='false'">
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.onfleet_worker_status" id="onfleet_worker_status_yes" ng-value="'true'">
+                                        <label for="onfleet_worker_status_yes">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> Yes
+                                        </label>
+                                    </div>
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.onfleet_worker_status" id="onfleet_worker_status_no" ng-value="'false'">
+                                        <label for="onfleet_worker_status_no">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : driverForm.email.$invalid && !driverForm.email.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">Email Address<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <input type="email" name="email" ng-model="params.email" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="driverForm.email.$invalid && !driverForm.email.$pristine" class="help-block">Please enter email address.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : driverForm.password.$invalid && !driverForm.password.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">Password <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <input type="password" name="password" ng-model="params.password" class="form-control" ng-minlength="8" ng-maxlength="20" ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="driverForm.password.$error.required && driverForm.password.$dirty" class="help-block">Please enter password.</span>
+                                <span ng-show="!driverForm.password.$error.required && (driverForm.password.$error.minlength || driverForm.password.$error.maxlength) && driverForm.password.$dirty" class="help-block"> Passwords must be between 8 and 20 characters.</span>
+                                <span ng-show="!driverForm.password.$error.required && !driverForm.password.$error.minlength && !driverForm.password.$error.maxlength && driverForm.password.$error.pattern && driverForm.password.$dirty" class="help-block">Must contain one lower &amp; uppercase letter, and one non-alpha character (a number or a symbol.)</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : driverForm.phone.$invalid && !driverForm.phone.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">Phone <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-4">
+                                <input type="tel" ng-value="'+1'" name="country_code" international-phone-number ng-model="params.country_code" ng-blur="updateCountryCode($event)" class="form-control">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" input-mask name="phone" ng-model="params.phone" class="phone form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="driverForm.phone.$error.required && driverForm.phone.$dirty" class="help-block">Please enter valid phone number.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : driverForm.address.$invalid && !driverForm.address.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">Address <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <input type="text" name="address" ng-model="params.address" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="driverForm.address.$invalid && !driverForm.address.$pristine" class="help-block">Please enter your address.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            <label for="form_control_1" class="col-md-4 control-label">Zip Code <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" ng-model="params.zipcode" value="">
+                                <div class="form-control-focus"> </div>
+                                <span class="help-block">Please enter zip code.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{'has-error' : driverForm.state_code.$invalid && !driverForm.state_code.$pristine }">
+                            <label class="col-md-4 control-label" for="form_control_1">State<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <select class="form-control" name="state_code" ng-model="params.state_code" ng-options="row.id as row.value for row in states" required>
+                                </select>
+                                <div class="form-control-focus"></div>
+                                <span ng-show="driverForm.state_code.$invalid && !driverForm.state_code.$pristine" class="help-block">Please select a state.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            <label for="form_control_1" class="col-md-4 control-label">City</label>
+                            <div class="col-md-8">
+                                <input type="text" ng-model="params.city_name" class="form-control">
+                                <div class="form-control-focus"> </div>
+                                <span class="help-block">Please enter the name of a city.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-radios">
+                            <label for="form_control_1" class="col-md-4 control-label">Contractor</label>
+                            <div class="col-md-8">
+                                <div class="md-radio-inline" ng-init="params.contractor='true'">
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.contractor" id="contractor_yes" ng-value="'true'">
+                                        <label for="contractor_yes">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> Yes
+                                        </label>
+                                    </div>
+                                    <div class="md-radio">
+                                        <input type="radio" checked="" class="md-radiobtn" ng-model="params.contractor" id="contractor_no" ng-value="'false'">
+                                        <label for="contractor_no">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : driverForm.driver_license.$invalid && !driverForm.driver_license.$pristine }">
+                            <label for="form_control_1" class="col-md-5 control-label">Driver License<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-7">
+                                <input type="text" name="driver_license" ng-model="params.driver_license" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="driverForm.driver_license.$invalid && !driverForm.driver_license.$pristine" class="help-block">Please enter license number.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : driverForm.social_security_number.$invalid && !driverForm.social_security_number.$pristine }">
+                            <label for="form_control_1" class="col-md-5 control-label">Social Security Number<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-7">
+                                <input type="text" name="social_security_number" ng-model="params.social_security_number" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="driverForm.social_security_number.$invalid && !driverForm.social_security_number.$pristine" class="help-block">Please enter social security number.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            <label for="form_control_1" class="col-md-3 control-label">Driver Note</label>
+                            <div class="col-md-9">
+                                <input type="text" ng-model="params.driver_note" class="form-control">
+                                <div class="form-control-focus"> </div>
+                                <span class="help-block">Please enter any note for the driver.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            <label for="form_control_1" class="col-md-5 control-label">Insurance Company Name</label>
+                            <div class="col-md-7">
+                                <input type="text" ng-model="params.insurance_company_name" class="form-control">
+                                <div class="form-control-focus"></div>
+                                <span class="help-block">Please enter the name of the insurance company.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            <label for="form_control_1" class="col-md-7 control-label">Insurance Company Policy Number</label>
+                            <div class="col-md-5">
+                                <input type="text" ng-model="params.insurance_company_policy_number" class="form-control">
+                                <div class="form-control-focus"></div>
+                                <span class="help-block">Please enter the policy number.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            <label class="control-label col-md-7">Insurance Policy Expiary Date</label>
+                            <div class="col-md-5">
+                                <div class="input-group date" data-provide="datepicker" data-date-orientation="top right" data-date-format="yyyy-mm-dd">
+                                    <input type="text" ng-model="params.insurance_policy_exp_date" class="form-control" readonly name="insurance_policy_exp_date">
+                                    <span class="input-group-btn">
+                                        <button class="btn default" type="button">
+                                            <i class="fa fa-calendar"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                                <span class="help-block"> select a date </span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-radios">
+                            <label for="form_control_1" class="col-md-7 control-label">Deactivate</label>
+                            <div class="col-md-5">
+                                <div class="md-radio-inline" ng-init="params.deactivated='false'">
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.deactivated" id="deactivated_yes" ng-value="'true'">
+                                        <label for="deactivated_yes">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> Yes
+                                        </label>
+                                    </div>
+                                    <div class="md-radio">
+                                        <input type="radio" checked="" class="md-radiobtn" ng-model="params.deactivated" id="deactivated_no" ng-value="'false'">
+                                        <label for="deactivated_no">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <!-- BEGIN VALIDATION STATES-->
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase">DMV Information</span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="form-body">
+                        <div class="form-group form-md-line-input">
+                            <label class="control-label col-md-6">Driver Image</label>
+                            <div class="col-md-4">
+                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"> </div>
+                                    <div>
+                                        <span class="btn red btn-outline btn-file">
+                                        <span class="fileinput-new"> Select image </span>
+                                        <span class="fileinput-exists"> Change </span>
+                                        <input type="file" name="image" upload-able="params.image" />
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            <label for="form_control_1" class="col-md-6 control-label">DMV License Last Check Date</label>
+                            <div class="col-md-4">
+                                <div class="input-group date" data-provide="datepicker" data-date-orientation="top right" data-date-format="yyyy-mm-dd">
+                                    <input type="text" ng-model="params.dmv_license_last_check_date" class="form-control" readonly name="dmv_license_last_check_date">
+                                    <span class="input-group-btn">
+                                        <button class="btn default" type="button">
+                                            <i class="fa fa-calendar"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                                <span class="help-block"> select a date </span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            <label for="form_control_1" class="col-md-6 control-label">DMV License Next Check Date</label>
+                            <div class="col-md-4">
+                                <div class="input-group date" data-provide="datepicker" data-date-orientation="top right" data-date-format="yyyy-mm-dd">
+                                    <input type="text" ng-model="params.dmv_license_next_check_date" class="form-control" readonly name="dmv_license_next_check_date">
+                                    <span class="input-group-btn">
+                                        <button class="btn default" type="button">
+                                            <i class="fa fa-calendar"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                                <span class="help-block"> select a date </span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-radios">
+                            <label for="form_control_1" class="col-md-6 control-label">Foodjet Car</label>
+                            <div class="col-md-4">
+                                <div class="md-radio-inline" ng-init="params.foodjet_car='false'">
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.foodjet_car" id="foodjet_car_yes" ng-value="'true'">
+                                        <label for="foodjet_car_yes">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> Yes
+                                        </label>
+                                    </div>
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.foodjet_car" id="foodjet_car_no" ng-value="'false'">
+                                        <label for="foodjet_car_no">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <!-- BEGIN VALIDATION STATES-->
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase">Driver Pay Rate</span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="form-body">
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : driverForm.base_pay_rate.$invalid && !driverForm.base_pay_rate.$pristine }">
+                            <label for="form_control_1" class="col-md-6 control-label">Base Pay Rate<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-4">
+                                <input type="text" name="base_pay_rate" ng-model="params.base_pay_rate" class="form-control" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="driverForm.base_pay_rate.$error.required && driverForm.base_pay_rate.$dirty" class="help-block">Please enter base pay rate.</span>
+                                <span ng-show="!driverForm.base_pay_rate.$error.required && driverForm.base_pay_rate.$error.pattern && driverForm.base_pay_rate.$dirty" class="help-block">Must contain only number.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : driverForm.pay_per_meal.$invalid && !driverForm.pay_per_meal.$pristine }">
+                            <label for="form_control_1" class="col-md-6 control-label">Pay Per Delivery<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-4">
+                                <input type="text" name="pay_per_meal" ng-model="params.pay_per_meal" class="form-control" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="driverForm.pay_per_meal.$error.required && driverForm.pay_per_meal.$dirty" class="help-block">Please enter pay per delivery.</span>
+                                <span ng-show="!driverForm.pay_per_meal.$error.required && driverForm.pay_per_meal.$error.pattern && driverForm.pay_per_meal.$dirty" class="help-block">Must contain only number.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <!-- BEGIN VALIDATION STATES-->
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase">Driver Market Place Information</span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="form-body">
+
+                        <div class="form-group form-md-line-input" ng-class="{'has-error' : driverForm.market_office_state_code.$invalid && !driverForm.market_office_state_code.$pristine }">
+                            <label class="col-md-6 control-label" for="form_control_1">State<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-4">
+                                <select class="form-control" name="market_office_state_code" ng-model="params.market_office_state_code" ng-options="row.id as row.value for row in states" ng-change="getMarketOffice(params.market_office_state_code)" required>
+                                </select>
+                                <div class="form-control-focus"></div>
+                                <span ng-show="driverForm.market_office_state_code.$invalid && !driverForm.market_office_state_code.$pristine" class="help-block">Please select a state.</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-md-line-input" ng-class="{'has-error' : driverForm.market_office_id.$invalid && !driverForm.market_office_id.$pristine }">
+                            <label class="col-md-6 control-label" for="form_control_1">Market Office<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-4">
+                                <select class="form-control" name="market_office_id" ng-model="params.market_office_id" ng-options="row.id as row.office_name for row in marketOffice" required>
+                                </select>
+                                <div class="form-control-focus"></div>
+                                <span ng-show="driverForm.market_office_id.$invalid && !driverForm.market_office_id.$pristine" class="help-block">Please select a market office.</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-actions pull-right">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" spinner-button class="btn green mt-ladda-btn ladda-button" data-style="expand-left" data-spinner-color="#333" ng-disabled="driverForm.$invalid"><span class="ladda-label">Submit</span></button>
+                        <button type="reset" class="btn default" ng-click="resetDriverForm()">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

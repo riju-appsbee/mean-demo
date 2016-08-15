@@ -1,0 +1,121 @@
+<!-- BEGIN PAGE HEADER-->
+<style>
+    .mt-comments .mt-comment { position: relative;}
+    .closed_n { position: absolute; right: 0; top: 0; font-size: 12px; }
+	.today_drivers_section .col-md-6 .caption {font-size: 14px; line-height: 18px; padding: 6px 0  6px 20px;}
+	.today_drivers_section .col-md-6 .portlet {border: 1px solid #eee;}
+	.today_drivers_section .col-md-6 .portlet>.portlet-title { min-height: 36px; line-height:36px; margin: 0;}
+	.today_drivers_section .col-md-6 .mt-comments .mt-comment {margin: 0; padding: 5px; font-size: 12px;}
+	.today_drivers_section .col-md-6 .mt-comments .mt-comment .mt-comment-body .mt-comment-info .mt-comment-author { margin: 0 0 5px;}
+	.today_drivers_section .col-md-6 .mt-comments .mt-comment .mt-comment-img>img { width: 38px;}
+	.today_drivers_section .col-md-6 .closed_n { position: absolute; right: 3px; top: 0; font-weight: bold; font-family: cursive;}
+</style>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="">Today Drivers Code</a>
+        </li>
+    </ul>
+</div>
+
+<div class="row">
+        <div class="col-md-6">
+            <h3 class="page-title"> Today Drivers</h3>
+        </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="portlet light bordered">
+            <select class="bs-select form-control" ng-model="selectedState" ng-options="row.id as row.value for row in states" ng-change="getMarketOffice()">
+
+            </select>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="portlet light bordered">
+          <select class="bs-select form-control" ng-model="mofid" ng-options="row.id.toString() as row.office_name for row in marketOffice" ng-change="changeMarketOffice()">
+          </select>
+
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="portlet light bordered">
+          <select class="bs-select form-control" ng-model="moCity" ng-options="row.id.toString() as row.city_name for row in cities" ng-change="getDeliveryZoneByDate()">
+          </select>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-12">
+        <!-- BEGIN PORTLET-->
+        <div class="portlet light bordered">
+            <div class="portlet-body">
+                <div id="datepaginator_sample_4" date-paginator selected-date="selectedDate" on-date-change="onDateChange()"> </div>
+            </div>
+        </div>
+        <!-- END PORTLET-->
+    </div>
+</div>
+
+<div class="row today_drivers_section">
+    <div class="col-md-6">
+
+        <div class="portlet">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-cogs"></i>Drivers</div>
+               
+            </div>
+            <div class="portlet-body flip-scroll" style="display: block;">
+                <div class="mt-comments">
+                    <div class="mt-comment" ng-repeat="val in drivers" driver-id="{{val.id}}" id=drag{{val.id}} draggable='true' drag-drop="source">
+                        <div class="mt-comment-img">
+                            <img src="{{val.image || 'assets/pages/media/users/avatar1.jpg'}}"> </div>
+                        <div class="mt-comment-body">
+                            <div class="mt-comment-info">
+                                <span class="mt-comment-author"> {{ val.first_name }} {{val.last_name}} </span>
+                            </div>
+                            <div class="mt-comment-text"> {{val.address}} {{val.city_name}}, {{val.state_code}} {{val.zipcode}} </div>
+                            <a class="closed_n" style="display:none" id="remove{{val.id}}" href="#">X</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-6">
+
+        <div ng-show="deliveryZone">
+            <div class="portlet" ng-repeat="value in deliveryZone">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-cogs"></i>{{value.delivery_zone_name}}</div>
+                </div>
+                <div class="portlet-body flip-scroll" style="display: block;">
+
+                    <div class="mt-comments">
+                        <div class="mt-comment" ng-repeat="val in value.drivers" ng-hide="val === null">
+                            <div class="mt-comment-img">
+                                <img src="{{val.image || 'assets/pages/media/users/avatar1.jpg'}}"> </div>
+                            <div class="mt-comment-body">
+                                <div class="mt-comment-info">
+                                    <span class="mt-comment-author"> {{ val.first_name }} {{val.last_name}} </span>
+                                </div>
+                                <div class="mt-comment-text"> {{val.address}} {{val.city_name}}, {{val.state_code}} {{val.zipcode}} </div>
+                                <a class="closed_n" id="remove{{val.id}}" href="#" zone-id="{{value.id}}" driver-id="{{val.id}}" remove-driver="removeDriverFromZone(zoneID,driverID,callback)">X</a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="mt-comments dragdrop" id="target{{value.id}}" zone-id="{{value.id}}" style="height:70px" drag-drop="dest" add-driver-to-zone="addDriverToZone(zoneID,driverID)" remove-driver-from-zone="removeDriverFromZone(zoneID,driverID,callback)">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

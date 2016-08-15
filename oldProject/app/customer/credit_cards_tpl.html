@@ -1,0 +1,49 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-social-dribbble font-blue"></i>
+            <span class="caption-subject font-blue bold uppercase">Customer {{tabResult.tabName}} List : Total ( {{tabResult.length}} )</span>
+        </div>        
+    </div>
+    <div class="portlet-body">
+        <div class="table-scrollable">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th> # </th>
+                        <th> Card Number </th>
+                        <th> Card Type </th>
+                        <th> Heartland Mu Token </th>
+                        <th> Heartland Avs Data </th>
+                        <th> Expiry Month </th>
+                        <th> Expiry Year </th>
+                        <th> Card Use Type </th>
+                        <th> Is Default </th>
+                        <th> Created Date </th>
+                        <th> Action </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="val in tabResult">
+                        <td> {{ val.id }}. </td>
+                        <td> {{ val.card_number }} </td>
+                        <td> {{ val.card_type }} </td>
+                        <td> {{ val.heartland_mu_token }} </td>
+                        <td> {{ val.heartland_avs_data }} </td>
+                        <td> {{ val.expiry_month }} </td>
+                        <td> {{ val.expiry_year }} </td>
+                        <td> {{ val.card_use_type }} </td>
+                        <td> {{ val.is_default }} </td>
+                         <td> {{ val.created_at | date:'medium' }} </td>
+                        <td>
+                            <a class="label label-sm label-success" data-ng-click="delCreditCard(val.id,$index)" href="javascript:;"><i class="fa fa-trash-o"></i> Delete </a>
+                        </td>
+                    </tr>
+                    <tr ng-show="!tabResult.length">
+                        <td colspan="11" class="text-center font-red font-lg"> {{ 'No record available.' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

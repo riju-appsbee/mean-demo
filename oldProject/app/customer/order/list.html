@@ -1,0 +1,86 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="ng/market-store/list">Market Store</a>
+        </li>
+    </ul>
+    
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <h3 class="page-title"> Market Store List : Total ({{totalUsers}}) </h3> </div>
+        <div class="col-md-6">
+            <div class="btn-group pull-right page-title">
+                <a class="btn btn-sm green btn-outline filter-submit margin-bottom" href="ng/market-store/add">
+                    <i class="icon-user"></i> Add New Market Store </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN SAMPLE TABLE PORTLET-->
+        <div class="portlet box green">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-cogs"></i></div>
+                <div class="tools">
+                    <a class="collapse" href="javascript:;" data-original-title="" title=""> </a>
+                    <a class="config" data-toggle="modal" href="#portlet-config" data-original-title="" title=""> </a>
+                    <a class="reload" href="javascript:;" data-original-title="" title=""> </a>
+                    <a class="remove" href="javascript:;" data-original-title="" title=""> </a>
+                </div>
+            </div>
+            <div class="portlet-body flip-scroll" style="display: block;">
+                <div class="row">
+                    <div class="col-md-4 col-sm-4"> &nbsp; </div>
+                    <div class="col-md-8 col-sm-8">
+                        <div class="dataTables_filter text-right">
+                            <form ng-submit="searchRestaurant()">
+                                
+                                <div class="pull-left bg-green bg-font-green margin-bottom-10" ng-show="loderValue" style="padding: 10px; "> Loading... </div>
+                                <label>Search:
+                                    <input type="search" ng-model="searchText" class="form-control input-sm input-medium input-inline" placeholder="" >
+                                </label>
+                                <a class="btn green btn-outline btn-circle btn-sm active" href="javascript:;" ng-click="marketStoreList()"><i class="fa fa-search"></i> Search </a>
+                                
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <table class="table table-bordered table-striped table-condensed flip-content">
+                    <thead class="flip-content">
+                        <tr>
+                            <th> Name </th>
+                            <th> Address </th>
+                            <th> Email </th>
+                            <th> Conatct No </th>
+                            <th class="numeric"> Action </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="(k, v) in info">
+                            <td> {{v.name}} </td>
+                            <td>  {{v.address}}  </td>
+                            <td>  {{v.email}}  </td>
+                            <td>  {{v.contact_no}}  </td>
+                            <td class="numeric"> 
+                                <a href="ng/market-store/edit/{{k}}" class="btn btn-outline btn-circle btn-sm purple" href="javascript:;"><i class="fa fa-edit"></i> View </a>
+                                <a class="btn btn-outline btn-circle dark btn-sm black" ng-click="deleteMarketStore(k)"  href=""><i class="fa fa-trash-o"></i> Delete </a>
+                                
+                            </td>
+                        </tr>
+
+                                          
+                    </tbody>
+                </table>
+                
+            </div>
+        </div>
+        <!-- END SAMPLE TABLE PORTLET-->
+    </div>
+</div>

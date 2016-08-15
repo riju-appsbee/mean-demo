@@ -1,0 +1,142 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="ng/market-office/list/">Market Office</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="#">Add Market Office</a>
+        </li>
+    </ul>
+</div>
+<h3 class="page-title font-green"><i class=" icon-user font-green"></i>  Add Market Office </h3>
+<!-- BEGIN FORM-->
+<div>
+    <form class="form-horizontal" name="marketOfficeForm" method="post" ng-submit="addMarketOffice(marketOfficeForm.$valid)">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="portlet light portlet-fit portlet-form bordered">
+                    <div class="portlet-body">
+                        <div class="form-body">
+                            <div class="form-group form-md-line-input" ng-class="{'has-error' : marketOfficeForm.state_code.$invalid && !marketOfficeForm.state_code.$pristine }">
+                                <label class="col-md-4 control-label" for="form_control_1">State<span class="required" aria-required="true">*</span></label>
+                                <div class="col-md-8">
+                                    <select class="form-control" name="state_code" ng-model="selectedState" ng-options="row.id as row.value for row in states" ng-change="getMarketOffice(selectedState)" required>
+                                    </select>
+                                    <div class="form-control-focus"></div>
+                                    <span ng-show="marketOfficeForm.state_code.$invalid && !marketOfficeForm.state_code.$pristine" class="help-block">Please select a state.</span>
+                                </div>
+                            </div>
+                            <div class="form-group form-md-line-input" ng-class="{ 'has-error' : marketOfficeForm.office_name.$invalid && marketOfficeForm.office_name.$dirty }">
+                                <label for="form_control_1" class="col-md-4 control-label">Office Name <span class="required" aria-required="true">*</span></label>
+                                <div class="col-md-8">
+                                    <!-- <input type="text" name="office_name" ng-model="params.office_name" class="form-control" required> -->
+                                    <input type="text" name="office_name" ng-model="params.office_name" class="form-control" uib-typeahead="city.office_name for city in allCities | filter:$viewValue | limitTo:10" typeahead-editable="true" required>
+                                    
+                                    <div class="form-control-focus"> </div>
+                                    <span ng-show="marketOfficeForm.office_name.$error.required && marketOfficeForm.office_name.$dirty" class="help-block">
+                                        Office Name is required
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-body">
+                                <div class="form-group form-md-line-input" ng-class="{'has-error' : marketOfficeForm.timezone.$invalid && !marketOfficeForm.timezone.$pristine }">
+                                    <label class="col-md-4 control-label" for="form_control_1">Timezone<span class="required" aria-required="true">*</span></label>
+                                    <div class="col-md-8">
+                                        <select class="form-control m-bot15" name="timezone" id="timezone" ng-model="params.timezone" required>
+                                            <option value="">Select Timezone</option>
+                                            <option value="America/Adak">America/Adak</option>
+                                            <option value="America/Anchorage">America/Anchorage</option>
+                                            <option value="America/Boise">America/Boise</option>
+                                            <option value="America/Chicago">America/Chicago</option>
+                                            <option value="America/Denver">America/Denver</option>
+                                            <option value="America/Detroit">America/Detroit</option>
+                                            <option value="America/Indiana/Indianapolis">America/Indiana/Indianapolis</option>
+                                            <option value="America/Indiana/Knox">America/Indiana/Knox</option>
+                                            <option value="America/Indiana/Marengo">America/Indiana/Marengo</option>
+                                            <option value="America/Indiana/Petersburg">America/Indiana/Petersburg</option>
+                                            <option value="America/Indiana/Tell_City">America/Indiana/Tell_City</option>
+                                            <option value="America/Indiana/Vevay">America/Indiana/Vevay</option>
+                                            <option value="America/Indiana/Vincennes">America/Indiana/Vincennes</option>
+                                            <option value="America/Indiana/Winamac">America/Indiana/Winamac</option>
+                                            <option value="America/Juneau">America/Juneau</option>
+                                            <option value="America/Kentucky/Louisville">America/Kentucky/Louisville</option>
+                                            <option value="America/Kentucky/Monticello">America/Kentucky/Monticello</option>
+                                            <option value="America/Los_Angeles">America/Los_Angeles</option>
+                                            <option value="America/Menominee">America/Menominee</option>
+                                            <option value="America/Metlakatla">America/Metlakatla</option>
+                                            <option value="America/New_York">America/New_York</option>
+                                            <option value="America/Nome">America/Nome</option>
+                                            <option value="America/North_Dakota/Beulah">America/North_Dakota/Beulah</option>
+                                            <option value="America/North_Dakota/Center">America/North_Dakota/Center</option>
+                                            <option value="America/North_Dakota/New_Salem">America/North_Dakota/New_Salem</option>
+                                            <option value="America/Phoenix">America/Phoenix</option>
+                                            <option value="America/Sitka">America/Sitka</option>
+                                            <option value="America/Yakutat">America/Yakutat</option>
+                                            <option value="Pacific/Honolulu">Pacific/Honolulu</option>
+                                        </select>
+                                        <div class="form-control-focus"></div>
+                                        <span ng-show="marketOfficeForm.timezone.$invalid && !marketOfficeForm.timezone.$pristine" class="help-block">Please select a timezone.</span>
+                                    </div>
+                                </div>
+                                <div class="form-group form-md-line-input">
+                                    <label for="form_control_1" class="col-md-4 control-label">Location </label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="location" ng-model="params.location" class="form-control">
+                                        <div class="form-control-focus"> </div>
+                                    </div>
+                                </div>
+                                <div class="form-group form-md-line-input" ng-class="{ 'has-error' : marketOfficeForm.tax_percentage.$invalid && !marketOfficeForm.tax_percentage.$dirty }">
+                                    <label for="form_control_1" class="col-md-4 control-label">Tax Percentage<span class="required" aria-required="true">*</span></label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="tax_percentage" ng-model="params.tax_percentage" class="form-control" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" required>
+                                        <div class="form-control-focus"> </div>
+                                        <span ng-show="marketOfficeForm.tax_percentage.$error.required && marketOfficeForm.tax_percentage.$dirty.required">
+                                        Tax Percentage is required
+                                    </span>
+                                    </div>
+                                </div>
+                                <div class="form-group form-md-radios">
+                                    <label for="form_control_1" class="col-md-4 control-label">Mail Sent</label>
+                                    <div class="col-md-8">
+                                        <div class="md-radio-inline" ng-init="params.mail_sent=false">
+                                            <div class="md-radio">
+                                                <input type="radio" class="md-radiobtn" ng-model="params.mail_sent" id="mail_sent_yes" ng-value="true">
+                                                <label for="mail_sent_yes">
+                                                    <span></span>
+                                                    <span class="check"></span>
+                                                    <span class="box"></span> Yes
+                                                </label>
+                                            </div>
+                                            <div class="md-radio">
+                                                <input type="radio" class="md-radiobtn" ng-model="params.mail_sent" id="mail_sent_no" ng-value="false">
+                                                <label for="mail_sent_no">
+                                                    <span></span>
+                                                    <span class="check"></span>
+                                                    <span class="box"></span> No
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-actions pull-right">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn green" ng-disabled="marketOfficeForm.$invalid">Submit</button>
+                            <button type="button" class="btn default" ng-click="reset()">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

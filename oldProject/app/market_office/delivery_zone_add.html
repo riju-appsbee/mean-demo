@@ -1,0 +1,153 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="ng/market-office/list/{{selectedState}}">Market Office</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="ng/market-office/edit/{{selectedState}}/{{mofId}}">Edit Market Office</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="ng/market-office-city/edit/{{selectedState}}/{{mofId}}/{{cityId}}"> Edit Market Office City </a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="#">Add Delivery Zone</a>
+        </li>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <h3 class="page-title"> Add Delivery Zone </h3> </div>
+        <div class="col-md-6">
+            <div class="btn-group pull-right page-title">
+                <a class="btn btn-sm green btn-outline filter-submit margin-bottom" href="ng/delivery-zone/add/{{selectedState}}/{{mofId}}/{{cityId}}">
+                    <i class="icon-user"></i> Add New Delivery Zone </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- BEGIN FORM-->
+<div>
+    <form class="form-horizontal" name="deliveryZoneForm" method="post" ng-submit="addDeliveryZone(params)">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet light portlet-fit portlet-form bordered">
+                    <div class="portlet-body">
+                        <div class="form-body">
+                            <div class="form-group form-md-line-input" ng-class="{ 'has-error' : deliveryZoneForm.delivery_zone_name.$invalid && deliveryZoneForm.delivery_zone_name.$dirty }">
+                                <label for="form_control_1" class="col-md-2 control-label">Zone Name <span class="required" aria-required="true">*</span></label>
+                                <div class="col-md-10">
+                                    <input type="text" name="delivery_zone_name" ng-model="params.delivery_zone_name" class="form-control" required>
+                                    <div class="form-control-focus"> </div>
+                                    <span ng-show="deliveryZoneForm.delivery_zone_name.$error.required && deliveryZoneForm.delivery_zone_name.$dirty" class="help-block">
+                                        Zone Name is required
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group form-md-line-input">
+                                <div class="col-md-12">
+                                    <ng-map zoom="13" center="[{{mcenter.lat}}, {{mcenter.lng}}]" map-type-id="ROADMAP" street-view-control-options="{position: 'LEFT_CENTER'}" style="height:750px;">
+                                        <drawing-manager on-overlaycomplete="onMapOverlayCompleted()" on-polygoncomplete="onMapPolygonCompleted()" drawing-control-options="{position: 'TOP_CENTER',drawingModes:['polygon']}" drawingControl="true" drawingMode="null" markerOptions="{icon:'www.example.com/icon'}" polygonOptions="{fillColor:'red'}" rectangleOptions="{fillColor:'red'}" circleOptions="{fillColor: '#FFFF00',fillOpacity: 1,strokeWeight: 5,clickable: false,zIndex: 1,editable: true}">
+                                        </drawing-manager>
+                                    </ng-map>
+                                    <!--,'rectangle','circle'-->
+                                </div>
+                            </div>
+                            <div class="form-group form-md-line-input" ng-class="{ 'has-error' : deliveryZoneForm.onfleet_id.$invalid && deliveryZoneForm.onfleet_id.$dirty }">
+                                <label for="form_control_1" class="col-md-2 control-label">Team ID <span class="required" aria-required="true">*</span></label>
+                                <div class="col-md-10">
+                                    <input type="text" name="onfleet_id" ng-model="params.onfleet_id" class="form-control" required>
+                                    <div class="form-control-focus"> </div>
+                                    <span ng-show="deliveryZoneForm.onfleet_id.$error.required && deliveryZoneForm.onfleet_id.$dirty">
+                                        Team id is required
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group form-md-line-input" ng-class="{ 'has-error' : deliveryZoneForm.max_dist_srt.$invalid && !deliveryZoneForm.max_dist_srt.$pristine }">
+                                <label for="form_control_1" class="col-md-2 control-label">Maximum Distance<span class="required" aria-required="true">*</span></label>
+                                <div class="col-md-10">
+                                    <input type="text" placeholder="Enter distance in miles" name="max_dist_srt" ng-model="params.max_dist_srt" ng-pattern="/^[0-9]{1,7}$/" class="form-control" required>
+                                    <div class="form-control-focus"> </div>
+                                    <span ng-show="deliveryZoneForm.max_dist_srt.$error.required && deliveryZoneForm.max_dist_srt.$dirty" class="help-block">Please enter distance in miles.</span>
+                                    <span ng-show="!deliveryZoneForm.max_dist_srt.$error.required && deliveryZoneForm.max_dist_srt.$error.pattern && deliveryZoneForm.max_dist_srt.$dirty" class="help-block">Must contain only numbers.</span>
+                                </div>
+                            </div>
+                            <div class="form-group form-md-line-input" ng-class="{ 'has-error' : deliveryZoneForm.custom_message.$invalid && deliveryZoneForm.custom_message.$dirty }">
+                                <label for="form_control_1" class="col-md-2 control-label"> Custom Message</label>
+                                <div class="col-md-10">
+                                    <input type="text" name="custom_message" ng-model="params.custom_message" class="form-control">
+                                    <div class="form-control-focus"> </div>
+                                    <span ng-show="deliveryZoneForm.custom_message.$error.required && deliveryZoneForm.custom_message.$dirty">
+                                        Custom  message is required
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group form-md-radios">
+                                <label for="form_control_1" class="col-md-2 control-label">Active/Inactive</label>
+                                <div class="col-md-10">
+                                    <div class="md-radio-inline" ng-init="params.is_active='false'">
+                                        <div class="md-radio">
+                                            <input type="radio" class="md-radiobtn" ng-model="params.is_active" id="is_active_yes" ng-value="'true'">
+                                            <label for="is_active_yes">
+                                                <span></span>
+                                                <span class="check"></span>
+                                                <span class="box"></span> Yes
+                                            </label>
+                                        </div>
+                                        <div class="md-radio">
+                                            <input type="radio" class="md-radiobtn" ng-model="params.is_active" id="is_active_no" ng-value="'false'">
+                                            <label for="is_active_no">
+                                                <span></span>
+                                                <span class="check"></span>
+                                                <span class="box"></span> No
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group form-md-radios">
+                                <label for="form_control_1" class="col-md-2 control-label">Pause Zone</label>
+                                <div class="col-md-10">
+                                    <div class="md-radio-inline" ng-init="params.pause_delivery_zone='false'">
+                                        <div class="md-radio">
+                                            <input type="radio" class="md-radiobtn" ng-model="params.pause_delivery_zone" id="pause_delivery_zone_yes" ng-value="'true'">
+                                            <label for="pause_delivery_zone_yes">
+                                                <span></span>
+                                                <span class="check"></span>
+                                                <span class="box"></span> Yes
+                                            </label>
+                                        </div>
+                                        <div class="md-radio">
+                                            <input type="radio" class="md-radiobtn" ng-model="params.pause_delivery_zone" id="pause_delivery_zone_no" ng-value="'false'">
+                                            <label for="pause_delivery_zone_no">
+                                                <span></span>
+                                                <span class="check"></span>
+                                                <span class="box"></span> No
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-actions pull-right">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn green" ng-disabled="deliveryZoneForm.$invalid">Submit</button>
+                            <button type="reset" class="btn default">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

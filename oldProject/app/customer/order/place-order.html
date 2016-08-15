@@ -1,0 +1,277 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="ng/order/add/{{finalObj.customer_id}}">Order List</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="#">Add New Order</a>
+        </li>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-md-12 checkout_section">
+        <div class="col-md-8 checkout_inn_box">
+            <div class="col-md-12">
+                <div class="col-md-3"><strong>Address</strong>
+                    <br /><a href="javascript:;" ng-click="changeAddress(finalObj.delivery_address.address , finalObj.customer_id)">Change</a></div>
+                <div class="col-md-9">{{finalObj.delivery_address.address}}
+                    <br />
+                    <div class="map_section">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d335972.7265649382!2d-121.6564982289932!3d38.52419416947926!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x809ac672b28397f9%3A0x921f6aaa74197fdb!2sSacramento%2C+CA%2C+USA!5e0!3m2!1sen!2sin!4v1465483314537" width="380" height="100" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-3"><strong>Add Delivery Instractions</strong></div>
+                <div class="col-md-9">
+                    <div class="form-group">
+                        <textarea class="form-control" name="note" ng-model="params.note" rows="5" placeholder="Delivery Instructions: Ex. call me when you’re Outside!"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-3"><strong>Phone</strong>
+                    <br /><a href="javascript:;" ng-click="open(finalObj.delivery_address.phone , finalObj.customer_id)">Change</a></div>
+                <div class="col-md-9">
+                    <input type="text" name="phone" input-mask ng-model="finalObj.delivery_address.phone" class="form-control hide_text" readonly="" required>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-3"><strong>Time</strong></div>
+                <div class="col-md-9">46 - 56 Minutes</div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-3"><strong>Payment</strong>
+                    <br /><a href="javascript:;" ng-click="addCard(finalObj.customer_id)">Add Credit Card</a>
+                </div>
+                <div class="col-md-6">
+                    <!--<select ng-model="card_used" ng-options="card.id as card.card_number for card in creditCardInfo" required name="card_use_type" class="form-control">                
+                    </select>
+                    card.id as card.card_number for card in creditCardInfo
+                    card.card_number | concat_xx for card in creditCardInfo track by card.id-->
+
+                    <select ng-model="card_info" name="card_info" class="form-control" ng-options="card.card_number for card in creditCardInfo track by card.id" ng-change="getSelectedCard(card_info.id)">
+                        <option value="">---Select Card---</option>
+                    </select>
+
+                </div>
+                <!--<div class="col-md-3">
+                    <button type="submit" class="btn green btn-block"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add a payment Card</button>
+                </div>-->
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-3"><strong>Promo Code</strong></div>
+                <div class="col-md-9">
+                    <div class="form-group">
+                        <input type="text" ng-model="promo_code" class="form-control" placeholder="Enter Promo Code">
+                        <button type="button" class="btn btn-danger" ng-click="checkPromoDiscount(promo_code)" ng-disabled="!promo_code.length">Apply</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-3"><strong>Credit</strong>
+                <br /><a href="#">(${{customer_credit_amount | number:2}})</a></div>
+                <div class="col-md-9">
+                    <div class="form-group">
+                        <input type="text" ng-model="credit_amount" class="form-control" placeholder="$0.00">
+                        <button type="button" class="btn btn-danger" ng-click="checkCreditDiscount(credit_amount)" ng-disabled="!credit_amount.length">Apply</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-3"><strong>Summary</strong>
+                    <br /><!--<a href="#">Return to Menu</a>--></div>
+                <div class="col-md-9 place_ord">
+                    <div class="col-md-12 mar_bot_5 bor_bot" ng-repeat="items in finalObj.food">
+                        <div class="col-md-1"><strong> {{items.qty}}</strong></div>
+                        <div class="col-md-8"><strong>{{items.name}}</strong></div>
+                        <div class="col-md-3"><strong>x ${{items.retail_price | number:2}}</strong></div>
+                        <div class="col-md-12" ng-repeat="(choiceKey,choiceRow) in items.choices">
+                            <div class="col-md-1">&nbsp;</div>
+                            <div class="col-md-8 choice_font_weight">{{choiceRow.title}}</div>
+                            <div class="col-md-3">&nbsp;</div>
+                            <div class="col-md-12 pad_n" ng-repeat="(optionKey, optionValue) in choiceRow.options">
+                                <div class="col-md-1">&nbsp;</div>
+                                <div class="col-md-8">&nbsp;&nbsp;&nbsp;- {{optionValue.name}}</div>
+                                <div class="col-md-3 ali_r">${{optionValue.retail_price | number:2}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 order_box">
+                        <div class="col-md-1"><strong>Total</strong></div>
+                        <div class="col-md-8"></div>
+                        <div class="col-md-3"><strong>$ {{finalObj.amount.food_amount | number:2}}</strong></div>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="col-md-12">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <button type="button" class="btn btn-danger org_col" ng-disabled="!finalObj.food.length" ng-click="createNewOrder()">Place Order</button>
+                </div>
+                <div class="col-md-3"></div>
+            </div>-->
+        </div>
+        <div class="col-md-4 mar_t30 order_sec">
+            <h2><strong>Order From</strong></h2>
+            <p class="pad_5">4505 Italian Cuisine & BBQ - ASAP</p>
+            <button type="submit" class="btn green btn-block" ng-disabled="!finalObj.food.length" ng-click="createNewOrder()">Place Order</button>
+            <div class="col-md-12 order_box place_order">
+                <div class="col-md-8">Subtotal Amount</div>
+                <div class="col-md-4">${{finalObj.amount.food_amount | number:2}} </div>
+                <div class="col-md-8">Promo discount</div>
+                <div class="col-md-4">${{promo_amount | number:2}} </div>
+                <div class="col-md-8">Credit discount</div>
+                <div class="col-md-4">${{credit_amount_applied | number:2}} </div>
+                <div class="col-md-8">Subtotal + Tax ({{tax_percentage | number:2}})</div>
+                <div class="col-md-4">${{totalPlusTax | number:2}} </div>
+                <div class="col-md-8">Delivery Fee</div>
+                <div class="col-md-4">FREE $0.00</div>
+                <div class="col-md-8">Driver Tip</div>
+                <div class="col-md-4">${{tipsValue | number:2}} </div>
+            </div>
+            <div class="col-md-12 order_box place_order">
+                <ul class="discount_section">
+                    <li ng-click="tipsCalculation(10);" ng-class="{active : activeValue == '10'}">10%</li>
+                    <li ng-click="tipsCalculation(15);" ng-class="{active : activeValue == '15'}">15%</li>
+                    <li ng-click="tipsCalculation(20);" ng-class="{active : activeValue == '20'}">20%</li>
+                    <li ng-click="tipsCalculation(25);" ng-class="{active : activeValue == '25'}">25%</li>
+                    <li ng-click="otherTipsOptionShow();" ng-class="{active : activeValue === 'other'}">Other</li>
+                </ul>
+                <div class="col-md-12 pad_5" ng-show="otherTips">
+                    <div class="col-md-9">
+                        <input type="text" ng-model="other_tips" class="form-control" placeholder="Enter Tips Amount">
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" class="btn btn-danger" ng-click="otherTipsCalculate(other_tips)" ng-disabled="!other_tips.length">Apply</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 order_box place_order">
+                <div class="col-md-8"><strong>Total</strong></div>
+                <div class="col-md-4"><strong>${{grandTotal | number:2}} </strong></div>
+            </div>
+            <div class="clearfix"></div>
+            <button type="submit" class="btn green btn-block" ng-disabled="!finalObj.food.length" ng-click="createNewOrder()">Place Order</button>
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="changePhoneNumber.html">
+    <div class="modal-dialog">
+        <div class="modal-content" ng-show="phoneSection">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="cancel()">&times;</button>
+                <h4 class="modal-title">Change Phone Number</h4>
+            </div>
+            <div class="modal-body">
+                <input type="text" name="phone" ng-model="item.phone" class="form-control" required>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" ng-click="cancel()">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="showVerificationSection(item.id)">Save changes</button>
+            </div>
+        </div>
+
+        <div class="modal-content" ng-show="verificationSection">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="cancel()">&times;</button>
+                <h4 class="modal-title">Your Verification Code</h4>
+            </div>
+            <div class="modal-body">
+                <input type="text" name="verification_code" ng-model="verification_code" class="form-control" required>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" ng-click="cancel()">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="ok(item.phone , item.id , verification_code)" ng-disabled="!verification_code.length">Verify</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</script>
+
+<script type="text/ng-template" id="changeAddress.html">
+    <div class="modal-dialog">
+        <div class="modal-content" ng-show="phoneSection">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="cancel()">&times;</button>
+                <h4 class="modal-title">Change Address</h4>
+            </div>
+            <div class="modal-body">
+                <!--<input type="text" name="address" ng-model="item.address" class="form-control" required>-->
+                <div class="center_section">Address<sup>*</sup>
+
+                    <span class="input_search">
+                    <input name="address" ng-model="customerAddress" type="text" placeholder="Where are you?" class="gplace" id="address" data-source="home" ng-focus="showDeliveryAddresses()" ng-keypress="hideDeliveryAddresses()" ng-blur="hideDeliveryAddresses()">
+
+                    <div ng-show="ifAddressBoxFocused" class="drop_sec">
+                    <div ng-repeat="addressDetails in customerInfo.delivery_addresses" class="list_n"><a href="#" ng-mousedown="populateAddressInTheBox(addressDetails)">{{addressDetails.address}}</a></div>
+                    </div>
+
+                    <div class="button_section" ng-show="showOnProperAddressValidation">
+                    <button type="submit" class="btn green" ng-click="saveCustomerAddress(customerAddress)">Save</button>
+                    <button type="submit" class="btn btn-default" ng-click="clearCustomerAddress()">Cancel</button>
+                    </div>
+
+                    </span>
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" ng-click="cancel()">Close</button>
+                <button type="button" class="btn btn-primary" ng-disabled="checkProperAddress" ng-click="ok(customerAddress)">Save changes</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</script>
+
+<script type="text/ng-template" id="addCard.html">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="payment_form" method="post" ng-submit="addCardDetails()">
+                <div class="modal-header">
+                    <button type="button" class="close" ng-click="cancel()">&times;</button>
+                    <h4 class="modal-title">Add Heartland Card</h4>
+                </div>
+                <div class="modal-body">
+                    <!-- Your payment fields go here -->
+
+                    <label for="card_number">Card number: <sup>*</sup></label>
+                    <input ng-model="params.card_number" class="form-control" type="text" id="card_number" value="" />
+
+                    <label for="card_number">Card cvv: <sup>*</sup></label>
+                    <input ng-model="params.card_cvv" class="form-control" type="text" id="card_cvv" value="" />
+
+                    <label for="exp_month">Exp month: <sup>*</sup></label>
+                    <input ng-model="params.expiry_month"  class="form-control" type="text" id="expiry_month" value="" />
+
+                    <label for="exp_year">Exp year: <sup>*</sup></label>
+                    <input ng-model="params.expiry_year"  class="form-control" type="text" id="expiry_year" value="" />
+
+                    <label for="exp_year">Card Use Type: <sup>*</sup></label>
+                    <select ng-model="params.card_use_type" class="form-control">
+                    <option value="Personal">Personal</option>
+                    <option value="Business">Business</option>
+                    </select>
+
+                    <label for="exp_year">Zipcode: <sup>*</sup></label>
+                    <input ng-model="params.zip" class="form-control" type="text" id="zip" value="" />
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" ng-click="cancel()">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</script>

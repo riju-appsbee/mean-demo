@@ -1,0 +1,312 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="ng/gift/list">Gift Code</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="#">Add Gift Code</a>
+        </li>
+    </ul>
+    <div class="page-toolbar">
+        <div class="btn-group pull-right">
+            <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" dropdown-menu-hover data-delay="1000" data-close-others="true"> Actions
+                <i class="fa fa-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu pull-right" role="menu">
+                <li>
+                    <a href="ng/gift/add">
+                        <i class="icon-user"></i> Add New Gift Code </a>
+                </li>               
+            </ul>
+        </div>
+    </div>
+</div>
+<h3 class="page-title font-green"><i class=" icon-user font-green"></i>  Add Gift Code </h3>
+
+<div class="m-heading-1 border-green m-bordered">
+    <p>Provide gift code details.</p>
+</div>
+
+    <div class="row">    
+        <div class="col-md-6">
+            <!-- BEGIN FORM-->
+            <form class="form-horizontal" name="giftForm" method="post" ng-submit="add(giftForm.$valid)" novalidate>
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase">Gift code details </span>
+                    </div>
+                </div>
+
+                <div class="portlet-body">
+                    <div class="form-body">
+                        <div class="form-group form-md-line-input" ng-class="{'has-error' : giftForm.state_code.$invalid && !giftForm.state_code.$pristine }">
+                            <label class="col-md-4 control-label" for="form_control_1">State<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <select name="state_code" class="form-control dropdown-toggle" required
+                            		ng-model="params.state_code" 
+					ng-options="row.id as row.value for row in states"> 
+                                    <option value="">Select State</option>
+                                </select>
+                                <div class="form-control-focus"></div>
+                                <span ng-show="giftForm.state_code.$invalid && !giftForm.state_code.$pristine && giftForm.state_code.$error.required" class="help-block">Please select a state.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group form-md-line-input"  ng-class="{ 'has-error' : giftForm.code.$invalid && !giftForm.code.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">Code <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <input type="text" name="code"  ng-model="params.code" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="giftForm.code.$invalid && !giftForm.code.$pristine" class="help-block">Please enter gift code.</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-md-line-input"  ng-class="{ 'has-error' : giftForm.title.$invalid && !giftForm.title.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">Title <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <input type="text" name="title"  ng-model="params.title" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="giftForm.title.$invalid && !giftForm.title.$pristine" class="help-block">Please enter title.</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-md-line-input"  ng-class="{ 'has-error' : giftForm.amount.$invalid && !giftForm.amount.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">Amount ($)<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <input type="text" name="amount"  ng-model="params.amount" ng-pattern="/^\d+(\.[0-9]{1,2})*\s?$/" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="giftForm.amount.$invalid && !giftForm.amount.$pristine" class="help-block">Please provide amount upto 2 decimal places.</span>
+                            </div>
+                        </div>                        
+
+
+                        <div class="form-group form-md-line-input" ng-class="{'has-error' : giftForm.start_date.$invalid && !giftForm.start_date.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">Start Date<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-4">
+                                <div class="input-group date date-picker" date-picker data-date-format="yyyy-mm-dd">
+                                    <input type="text" ng-model="params.start_date" class="form-control" readonly name="start_date" required>
+                                    <span class="input-group-btn">
+                                        <button class="btn default" type="button">
+                                            <i class="fa fa-calendar"></i>
+                                        </button>
+                                    </span>
+                                </div>	                            
+                                <span ng-show="giftForm.start_date.$invalid && !giftForm.start_date.$pristine" class="help-block"> select a start date </span>  
+                            </div>
+                        </div>
+
+                        <div class="form-group form-md-line-input" ng-class="{'has-error' : giftForm.end_date.$invalid && !giftForm.end_date.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">End Date<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-4">
+                                <div class="input-group date date-picker" date-picker data-date-format="yyyy-mm-dd">
+                                    <input type="text" ng-model="params.end_date" class="form-control" readonly name="end_date" compare-date="params.start_date">
+                                    <span class="input-group-btn">
+                                        <button class="btn default" type="button">
+                                            <i class="fa fa-calendar"></i>
+                                        </button>
+                                    </span>
+                                </div>	                            
+                                <span ng-show="giftForm.end_date.$invalid && !giftForm.end_date.$pristine" class="help-block"> select a end date </span>  
+                            </div>
+                        </div>
+
+
+                        <div class="form-group form-md-radios">
+                            <label for="form_control_1" class="col-md-4 control-label">Active</label>
+                            <div class="col-md-8">
+                                <div class="md-radio-inline">
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.active" id="active_yes" ng-value="true">
+                                        <label for="active_yes">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> Yes 
+                                        </label>
+                                    </div>
+
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.active" id="active_no" ng-value="false">
+                                        <label for="active_no">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> No 
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-md-radios">
+                            <label for="form_control_1" class="col-md-4 control-label">New Customer Only</label>
+                            <div class="col-md-8">
+                                <div class="md-radio-inline">
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.new_customer_only" id="new_customer_only_yes" ng-value="true">
+                                        <label for="new_customer_only_yes">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> Yes 
+                                        </label>
+                                    </div>
+
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.new_customer_only" id="new_customer_only_no" ng-value="false">
+                                        <label for="new_customer_only_no">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> No 
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>    
+                </div>
+            </div>
+            <div class="form-actions" class="pull-right">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn green" ng-disabled="giftForm.$invalid">Submit</button>
+                        <button type="reset" class="btn default" ng-click="resetGiftForm()">Reset</button>
+                    </div>
+                </div>
+            </div>
+            </form> 
+        </div>
+               
+<!--        section for auto generation of gift code-->
+        <div class="col-md-6">
+            <!-- BEGIN FORM-->
+            <form class="form-horizontal" name="giftAutoForm" method="post" ng-submit="autoGenerate(giftAutoForm.$valid)" novalidate>
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase">AUTO GENERATE GIFT CODE </span>
+                    </div>
+                </div>
+
+                <div class="portlet-body">
+                    <div class="form-body">
+                        <div class="form-group form-md-line-input" ng-class="{'has-error' : giftAutoForm.state_code.$invalid && !giftAutoForm.state_code.$pristine }">
+                            <label class="col-md-3 control-label" for="form_control_1">State<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">                                
+                                <select name="state_code" class="form-control dropdown-toggle" required
+                            		ng-model="params_auto.state_code" 
+					ng-options="row.id as row.value for row in states"> 
+                                    <option value="">Select State</option>
+                                </select>
+                                <div class="form-control-focus"></div>
+                                <span ng-show="giftAutoForm.state_code.$invalid && !giftAutoForm.state_code.$pristine && giftAutoForm.state_code.$error.required" class="help-block">Please select a state.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group form-md-line-input"  ng-class="{ 'has-error' : giftAutoForm.no_of_codes.$invalid && !giftAutoForm.no_of_codes.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">No. of codes <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="no_of_codes"  ng-model="params_auto.no_of_codes" class="form-control" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="giftAutoForm.no_of_codes.$error.required && !giftAutoForm.no_of_codes.$pristine" class="help-block">Please enter number codes to generate.</span>
+                                <span ng-show="!giftAutoForm.no_of_codes.$error.required && giftAutoForm.no_of_codes.$error.pattern && giftAutoForm.no_of_codes.$dirty" class="help-block">Must contain only number.</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-md-line-input"  ng-class="{ 'has-error' : giftAutoForm.title.$invalid && !giftAutoForm.title.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Title <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="title"  ng-model="params_auto.title" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="giftAutoForm.title.$invalid && !giftAutoForm.title.$pristine" class="help-block">Please enter title.</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-md-line-input"  ng-class="{ 'has-error' : giftAutoForm.amount.$invalid && !giftAutoForm.amount.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Amount ($)<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="amount"  ng-model="params_auto.amount" ng-pattern="/^\d+(\.[0-9]{1,2})*\s?$/" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="giftAutoForm.amount.$invalid && !giftAutoForm.amount.$pristine" class="help-block">Please provide amount upto 2 decimal places.</span>
+                            </div>
+                        </div>                        
+
+
+                        <div class="form-group form-md-line-input" ng-class="{'has-error' : giftAutoForm.start_date.$invalid && !giftAutoForm.start_date.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Start Date<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-4">
+                                <div class="input-group date date-picker" date-picker data-date-format="yyyy-mm-dd">
+                                    <input type="text" ng-model="params_auto.start_date" class="form-control" readonly name="start_date" required>
+                                    <span class="input-group-btn">
+                                        <button class="btn default" type="button">
+                                            <i class="fa fa-calendar"></i>
+                                        </button>
+                                    </span>
+                                </div>	                            
+                                <span ng-show="giftAutoForm.start_date.$invalid && !giftAutoForm.start_date.$pristine" class="help-block"> select a start date </span>  
+                            </div>
+                        </div>
+
+                        <div class="form-group form-md-line-input" ng-class="{'has-error' : giftAutoForm.end_date.$invalid && !giftAutoForm.end_date.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">End Date<span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-4">
+                                <div class="input-group date date-picker" date-picker data-date-format="yyyy-mm-dd">
+                                    <input type="text" ng-model="params_auto.end_date" class="form-control" readonly name="end_date" compare-date="params_auto.start_date">
+                                    <span class="input-group-btn">
+                                        <button class="btn default" type="button">
+                                            <i class="fa fa-calendar"></i>
+                                        </button>
+                                    </span>
+                                </div>	                            
+                                <span ng-show="giftAutoForm.end_date.$invalid && !giftAutoForm.end_date.$pristine" class="help-block"> select a end date </span>  
+                            </div>
+                        </div>
+
+
+                        <div class="form-group form-md-radios">
+                            <label for="form_control_1" class="col-md-3 control-label">Active</label>
+                            <div class="col-md-9">
+                                <div class="md-radio-inline">
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params_auto.active" id="active_auto_yes" ng-value="true">
+                                        <label for="active_yes">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> Yes 
+                                        </label>
+                                    </div>
+
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params_auto.active" id="active_auto_no" ng-value="false">
+                                        <label for="active_no">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> No 
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+
+                    </div>    
+                </div>
+            </div>
+            <div class="form-actions pull-right">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn green" ng-disabled="giftAutoForm.$invalid">Submit</button>
+                        <button type="reset" class="btn default" ng-click="resetGiftAutoForm()">Reset</button>
+                    </div>
+                </div>
+            </div>
+            </form> 
+        </div>
+
+    </div>
+
+    
+   

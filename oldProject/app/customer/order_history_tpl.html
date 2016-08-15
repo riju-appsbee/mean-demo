@@ -1,0 +1,37 @@
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-social-dribbble font-blue"></i>
+            <span class="caption-subject font-blue bold uppercase">Customer {{tabResult.tabName}} List : Total ( {{tabResult.length}} )</span>
+        </div>        
+    </div>
+    <div class="portlet-body">
+        <div class="table-scrollable">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Order Number</th>
+                        <th>Market Office</th>
+                        <th>Total amount</th>
+                        <th>Order Date</th>
+                        <th> Action </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr ng-repeat="val in tabResult">
+                        <td> {{ val.id }}.</td>
+                        <td> {{ val.order_number }} </td>
+                        <td> {{ val.market_office_name }} </td>
+                        <td> $ {{ val.total_amount }} </td>
+                        <td> {{ val.created_at | date:'medium' }} </td>
+                        <td>
+                            <span class="label label-sm label-success view-order-details"> Order Details </span>
+                        </td>
+                    </tr>                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

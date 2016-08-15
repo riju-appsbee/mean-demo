@@ -1,0 +1,110 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="#">Reward Setting</a>
+            <i class="fa fa-circle"></i>
+        </li>
+    </ul>
+    
+</div>
+<h3 class="page-title font-green"><i class=" icon-user font-green"></i>  Edit Reward Setting </h3>
+
+<!-- BEGIN FORM-->
+
+    <div class="row">    
+    	<form class="form-horizontal" name="rewardForm" method="post" ng-submit="update(rewardForm.$valid,'NP')" novalidate>
+    	<div class="col-md-6">
+           <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase">Number of Points </span>
+                    </div>
+                </div>
+
+                <div class="portlet-body">
+                    <div class="form-body">
+                        <div class="form-group form-md-line-input"  ng-class="{ 'has-error' : rewardForm.dollar_amount.$invalid && !rewardForm.dollar_amount.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Dollar Amount <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="dollar_amount"  ng-model="npParams.dollar_amount" class="form-control" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="rewardForm.dollar_amount.$invalid && !rewardForm.dollar_amount.$pristine" class="help-block">Please provide dollar amount.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group form-md-line-input"  ng-class="{ 'has-error' : rewardForm.gain_point.$invalid && !rewardForm.gain_point.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Gain Point <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="gain_point"  ng-model="npParams.gain_point" class="form-control" ng-pattern="/^[0-9]$/"  required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="rewardForm.gain_point.$invalid && !rewardForm.gain_point.$pristine" class="help-block">Please provide gain point.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions" style="float:right">
+				<div class="row">
+				    <div class="col-md-12">
+				        <button type="submit" class="btn green" ng-disabled="rewardForm.$invalid">Submit</button>
+				        <button type="button" class="btn default" ng-click="reset('NP')">Reset</button>
+				    </div>
+				</div>
+			</div>
+                        
+                    </div>    
+                </div>
+            </div>
+        </div>
+        </form>  
+    
+    	<form class="form-horizontal" name="cashForm" method="post" ng-submit="update(cashForm.$valid,'ROC')" novalidate>
+        <div class="col-md-6">
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase">REWARD CASH OUT </span>
+                    </div>
+                </div>
+
+                <div class="portlet-body">
+                    <div class="form-body">
+                        <div class="form-group form-md-line-input"  ng-class="{ 'has-error' : cashForm.point_limit.$invalid && !cashForm.point_limit.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Point Limit <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="point_limit"  ng-model="rocParams.point_limit" class="form-control" ng-pattern="/^[0-9]$/" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="cashForm.point_limit.$invalid && !cashForm.point_limit.$pristine" class="help-block">Please provide point limit.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group form-md-line-input"  ng-class="{ 'has-error' : cashForm.credit_limit.$invalid && !cashForm.credit_limit.$pristine }">
+                            <label for="form_control_1" class="col-md-3 control-label">Credit Limit <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" name="credit_limit"  ng-model="rocParams.credit_limit" class="form-control" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="cashForm.credit_limit.$invalid && !cashForm.credit_limit.$pristine" class="help-block">Please provide credit limit.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions" style="float:right">
+				<div class="row">
+				    <div class="col-md-12">
+				        <button type="submit" class="btn green" ng-disabled="cashForm.$invalid">Submit</button>
+				        <button type="button" class="btn default" ng-click="reset('ROC')">Reset</button>
+				    </div>
+				</div>
+			</div>
+                        
+                    </div>    
+                </div>
+            </div>
+        </div>
+        </form>  
+
+
+        
+    </div>
+
+    

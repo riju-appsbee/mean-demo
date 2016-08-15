@@ -1,0 +1,25 @@
+/*.shift_section h3 {padding: 0; margin:0;}
+.shift_section .form-group { padding:0 30px; margin: 0 0 10px 0;}
+.shift_section .form-group h4 {margin: 10px 0!important; }
+.shift_section .form-section {margin: 10px 0 !important; padding: 10px!important;}*/
+
+.fj-animate.ng-enter {
+    -webkit-animation: fadeInDown 1s;
+    -moz-animation: fadeInDown 1s;
+    -ms-animation: fadeInDown 1s;
+    animation: fadeInDown 1s;
+    opacity: 0;
+}
+.fj-animate.ng-enter.ng-enter-active {
+    opacity: 1;
+}
+.fj-animate.ng-leave {
+    -webkit-animation: fadeOutUp 1s;
+    -moz-animation: fadeOutUp 1s;
+    -ms-animation: fadeOutUp 1s;
+    animation: fadeOutUp 1s;
+    opacity: 1;
+}
+.fj-animate.ng-enter.ng-leave-active {
+    opacity: 0;
+}

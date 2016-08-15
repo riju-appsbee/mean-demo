@@ -1,0 +1,323 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="ng/customer/list">Customer</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="#">Edit Customer</a>
+        </li>
+    </ul>
+</div>
+<!--<h3 class="page-title font-green"><i class=" icon-user font-green"></i>  Edit Customer </h3>-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <h3 class="page-title"> Edit Customer </h3> </div>
+        <div class="col-md-6">
+            <div class="btn-group pull-right page-title">
+                <a class="btn btn-sm green btn-outline filter-submit margin-bottom" href="ng/customer/order/add/{{params.id}}">
+                    Create Order </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="m-heading-1 border-green m-bordered">
+    <p>Provide your proper details.</p>
+</div>
+<!-- BEGIN FORM-->
+<form class="form-horizontal" name="customerForm" method="post" ng-submit="updateCustomer(customerForm.$valid)" novalidate>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase">Personal Information </span>
+                        <input type="hidden" name="id" ng-model="params.id" class="form-control">
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="form-body">
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : customerForm.first_name.$invalid && !customerForm.first_name.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">First Name <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <input type="text" name="first_name" ng-model="params.first_name" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="customerForm.first_name.$invalid && !customerForm.first_name.$pristine" class="help-block">Please enter first name.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : customerForm.last_name.$invalid && !customerForm.last_name.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">Last Name <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <input type="text" name="last_name" ng-model="params.last_name" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="customerForm.last_name.$invalid && !customerForm.last_name.$pristine" class="help-block">Please enter last name.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : customerForm.email.$invalid && !customerForm.email.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">Email <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-8">
+                                <input type="email" name="email" ng-model="params.email" class="form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="customerForm.email.$invalid && !customerForm.email.$pristine" class="help-block">Please enter email address.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : customerForm.password.$invalid && !customerForm.password.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">Password </label>
+                            <div class="col-md-8">
+                                <input type="password" name="password" ng-model="params.password" class="form-control" ng-minlength="4" ng-maxlength="20" ng-pattern="/^[a-zA-Z0-9]+$/">
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="!customerForm.password.$error.required && (customerForm.password.$error.minlength || customerForm.password.$error.maxlength) && customerForm.password.$dirty" class="help-block"> Passwords must be between 4 and 20 characters.</span>
+                                <span ng-show="!customerForm.password.$error.required && !customerForm.password.$error.minlength && !customerForm.password.$error.maxlength && customerForm.password.$error.pattern && customerForm.password.$dirty" class="help-block">Must contain only alpha numeric character.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{'has-error' : customerForm.cpassword.$invalid && !customerForm.cpassword.$pristine}">
+                            <label for="form_control_1" class="col-md-4 control-label">Confirm Password </label>
+                            <div class="col-md-8">
+                                <input type="password" compare-to="customerForm.password" name="cpassword" ng-model="params.cpassword" class="form-control">
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="!customerForm.cpassword.$error.required && customerForm.cpassword.$error.compareTo && customerForm.password.$dirty" class="help-block">Passwords do not match.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input" ng-class="{ 'has-error' : customerForm.phone.$invalid && !customerForm.phone.$pristine }">
+                            <label for="form_control_1" class="col-md-4 control-label">Phone <span class="required" aria-required="true">*</span></label>
+                            <div class="col-md-4">
+                                <input type="tel" ng-value="'+1'" name="country_code" international-phone-number ng-model="params.country_code" ng-blur="updateCountryCode($event)" class="form-control">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" input-mask name="phone" ng-model="params.phone" class="phone form-control" required>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="customerForm.phone.$error.required && customerForm.phone.$dirty" class="help-block">Please enter valid phone number.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            <label for="form_control_1" class="col-md-4 control-label"></label>
+                            <div class="col-md-8">
+                                <a class="btn btn-xs red" href="javascript:;" ng-click="verifiedPhone()" ng-if="params.verified_phone === false">Verify Now!</a>
+                                <a class="btn btn-xs green" href="javascript:;" ng-click="verifiedPhone()" ng-if="params.verified_phone === true">Phone Verified</a>
+                                <a class="btn btn-xs default" ng-click="overwritePhoneVerification(params.verified_phone)" href="javascript:;">Override Now!</a>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            <label for="form_control_1" class="col-md-4 control-label">Address </label>
+                            <div class="col-md-8">
+                                <input type="text" name="address" ng-model="params.address" class="form-control">
+                                <div class="form-control-focus"> </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            <label for="form_control_1" class="col-md-4 control-label">City </label>
+                            <div class="col-md-8">
+                                <input type="text" name="city" ng-model="params.city" class="form-control" uib-typeahead="cityDetails.City for cityDetails in allCities | filter:$viewValue | limitTo:10" typeahead-editable="false">
+                                <div class="form-control-focus"> </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            <label for="form_control_1" class="col-md-4 control-label">State </label>
+                            <div class="col-md-8">
+                                <input type="text" name="state" ng-model="params.state" class="form-control" uib-typeahead="stateDetails.State for stateDetails in allStates | filter:$viewValue | limitTo:10" typeahead-editable="false">
+                                <div class="form-control-focus"> </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            <label for="form_control_1" class="col-md-4 control-label"> Zip Code </label>
+                            <div class="col-md-8">
+                                <input type="text" name="zip_code" ng-model="params.zip_code" class="form-control">
+                                <div class="form-control-focus"> </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            <label for="form_control_1" class="col-md-4 control-label">Credit</label>
+                            <div class="col-md-8">
+                                <input type="number" ng-model="params.credit" step="1" class="form-control">
+                                <div class="form-control-focus"> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <!-- BEGIN VALIDATION STATES-->
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class=" icon-layers font-green"></i>
+                        <span class="caption-subject font-green sbold uppercase">Other Information</span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="form-body">
+                        <div class="form-group form-md-line-input">
+                            <label for="form_control_1" class="col-md-4 control-label">Onfleet Notes</label>
+                            <div class="col-md-8">
+                                <input type="text" ng-model="params.onfleet_note" class="form-control">
+                                <div class="form-control-focus"> </div>
+                                <span class="help-block">Please enter onfleet notes.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            <label for="form_control_1" class="col-md-4 control-label">Internal Notes</label>
+                            <div class="col-md-8">
+                                <input type="text" ng-model="params.internal_note" class="form-control">
+                                <div class="form-control-focus"> </div>
+                                <span class="help-block">Please enter internal notes.</span>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-radios">
+                            <label for="form_control_1" class="col-md-4 control-label">Receive Daily Email</label>
+                            <div class="col-md-8">
+                                <div class="md-radio-inline" ng-init="params.daily_email=false">
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.daily_email" id="daily_email_yes" ng-value="true">
+                                        <label for="daily_email_yes">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> Yes
+                                        </label>
+                                    </div>
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.daily_email" id="daily_email_no" ng-value="false">
+                                        <label for="daily_email_no">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-radios">
+                            <label for="form_control_1" class="col-md-4 control-label">Receive Phone Call</label>
+                            <div class="col-md-8">
+                                <div class="md-radio-inline" ng-init="params.receive_phone_call=true">
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.receive_phone_call" id="receive_phone_call_yes" ng-value="true">
+                                        <label for="receive_phone_call_yes">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> Yes
+                                        </label>
+                                    </div>
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.receive_phone_call" id="receive_phone_call_no" ng-value="false">
+                                        <label for="receive_phone_call_no">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-radios">
+                            <label for="form_control_1" class="col-md-4 control-label">SMS Notifications</label>
+                            <div class="col-md-8">
+                                <div class="md-radio-inline" ng-init="params.skip_sms_notifications=true">
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.skip_sms_notifications" id="sms_notification_yes" ng-value="true">
+                                        <label for="sms_notification_yes">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> Yes
+                                        </label>
+                                    </div>
+                                    <div class="md-radio">
+                                        <input type="radio" checked="" class="md-radiobtn" ng-model="params.skip_sms_notifications" id="sms_notification_no" ng-value="false">
+                                        <label for="sms_notification_no">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-radios">
+                            <label for="form_control_1" class="col-md-4 control-label">Active</label>
+                            <div class="col-md-8">
+                                <div class="md-radio-inline" ng-init="params.active=true">
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.active" id="active_yes" ng-value="true">
+                                        <label for="active_yes">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> Yes
+                                        </label>
+                                    </div>
+                                    <div class="md-radio">
+                                        <input type="radio" class="md-radiobtn" ng-model="params.active" id="active_no" ng-value="false">
+                                        <label for="active_no">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span> No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-actions pull-right">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" spinner-button class="btn green mt-ladda-btn ladda-button" data-style="expand-left" data-spinner-color="#333" ng-disabled="customerForm.$invalid"><span class="ladda-label">UPDATE</span></button>
+                        <a class="btn default" href="ng/customer/list">BACK</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">&nbsp;</div>
+    </div>
+</form>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-anchor font-green-sharp"></i>
+                    <span class="caption-subject font-green-sharp bold uppercase">Additional information</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="portlet box">
+                    <div class="portlet-body">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-3 col-xs-3">
+                                <ul class="nav nav-tabs tabs-left">
+                                    <li ng-repeat="tab in additionalTabs" ng-class="{active:isActiveTab(tab.tabname)}" ng-click="onClickTab(tab)">
+                                        <a data-toggle="tab" aria-expanded="true"> {{tab.title}} </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-9 col-sm-9 col-xs-9">
+                                <div class="tab-content" id="tabelement">
+                                    <div class="portlet light bordered">
+                                        <div class="portlet-title">
+                                            <div class="caption">
+                                                <i class="icon-social-dribbble font-blue"></i>
+                                                <span class="caption-subject font-blue bold uppercase">Customer Delivery Address List</span>
+                                            </div>
+                                        </div>
+                                        <div class="portlet-body">
+                                            <p> Please click on tab to load details </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
