@@ -1,0 +1,268 @@
+deepak-desktop FoodJets_Api # node -v
+v5.7.0
+deepak-desktop FoodJets_Api # npm -v
+3.6.0
+deepak-desktop FoodJets_Api # cd /srv/
+deepak-desktop srv # mkdir node
+deepak-desktop srv # cd node/
+deepak-desktop node # npm init
+This utility will walk you through creating a package.json file.
+It only covers the most common items, and tries to guess sensible defaults.
+
+See `npm help json` for definitive documentation on these fields
+and exactly what they do.
+
+Use `npm install <pkg> --save` afterwards to install a package and
+save it as a dependency in the package.json file.
+
+Press ^C at any time to quit.
+name: (node) Mean
+Sorry, name can no longer contain capital letters.
+name: (node) mean
+version: (1.0.0) 
+description: mean startup project
+entry point: (index.js) server.js
+test command: npm server
+git repository: 
+keywords: mean, chop
+author: test
+license: (ISC) 
+About to write to /srv/node/package.json:
+
+{
+  "name": "mean",
+  "version": "1.0.0",
+  "description": "mean startup project",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm server"
+  },
+  "keywords": [
+    "mean",
+    "chop"
+  ],
+  "author": "test",
+  "license": "ISC"
+}
+
+
+Is this ok? (yes) yes
+deepak-desktop node # ls -l
+total 4
+-rw-r--r-- 1 root root 236 Mar 28 17:27 package.json
+deepak-desktop node # cat package.json
+{
+  "name": "mean",
+  "version": "1.0.0",
+  "description": "mean startup project",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm server"
+  },
+  "keywords": [
+    "mean",
+    "chop"
+  ],
+  "author": "test",
+  "license": "ISC"
+}
+deepak-desktop node # npm install express --save
+mean@1.0.0 /srv/node
+`-- express@4.13.4 
+  +-- accepts@1.2.13 
+  | +-- mime-types@2.1.10 
+  | | `-- mime-db@1.22.0 
+  | `-- negotiator@0.5.3 
+  +-- array-flatten@1.1.1 
+  +-- content-disposition@0.5.1 
+  +-- content-type@1.0.1 
+  +-- cookie@0.1.5 
+  +-- cookie-signature@1.0.6 
+  +-- debug@2.2.0 
+  | `-- ms@0.7.1 
+  +-- depd@1.1.0 
+  +-- escape-html@1.0.3 
+  +-- etag@1.7.0 
+  +-- finalhandler@0.4.1 
+  | `-- unpipe@1.0.0 
+  +-- fresh@0.3.0 
+  +-- merge-descriptors@1.0.1 
+  +-- methods@1.1.2 
+  +-- on-finished@2.3.0 
+  | `-- ee-first@1.1.1 
+  +-- parseurl@1.3.1 
+  +-- path-to-regexp@0.1.7 
+  +-- proxy-addr@1.0.10 
+  | +-- forwarded@0.1.0 
+  | `-- ipaddr.js@1.0.5 
+  +-- qs@4.0.0 
+  +-- range-parser@1.0.3 
+  +-- send@0.13.1 
+  | +-- destroy@1.0.4 
+  | +-- http-errors@1.3.1 
+  | | `-- inherits@2.0.1 
+  | +-- mime@1.3.4 
+  | `-- statuses@1.2.1 
+  +-- serve-static@1.10.2 
+  +-- type-is@1.6.12 
+  | `-- media-typer@0.3.0 
+  +-- utils-merge@1.0.0 
+  `-- vary@1.0.1 
+
+npm WARN mean@1.0.0 No repository field.
+deepak-desktop node # cat package.json
+{
+  "name": "mean",
+  "version": "1.0.0",
+  "description": "mean startup project",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm server"
+  },
+  "keywords": [
+    "mean",
+    "chop"
+  ],
+  "author": "test",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}
+deepak-desktop node # ls -l
+total 8
+drwxr-xr-x 43 root root 4096 Mar 28 17:29 node_modules
+-rw-r--r--  1 root root  286 Mar 28 17:29 package.json
+deepak-desktop node # npm install
+mean@1.0.0 /srv/node
+`-- express@4.13.4 
+  +-- accepts@1.2.13 
+  | +-- mime-types@2.1.10 
+  | | `-- mime-db@1.22.0 
+  | `-- negotiator@0.5.3 
+  +-- array-flatten@1.1.1 
+  +-- content-disposition@0.5.1 
+  +-- content-type@1.0.1 
+  +-- cookie@0.1.5 
+  +-- cookie-signature@1.0.6 
+  +-- debug@2.2.0 
+  | `-- ms@0.7.1 
+  +-- depd@1.1.0 
+  +-- escape-html@1.0.3 
+  +-- etag@1.7.0 
+  +-- finalhandler@0.4.1 
+  | `-- unpipe@1.0.0 
+  +-- fresh@0.3.0 
+  +-- merge-descriptors@1.0.1 
+  +-- methods@1.1.2 
+  +-- on-finished@2.3.0 
+  | `-- ee-first@1.1.1 
+  +-- parseurl@1.3.1 
+  +-- path-to-regexp@0.1.7 
+  +-- proxy-addr@1.0.10 
+  | +-- forwarded@0.1.0 
+  | `-- ipaddr.js@1.0.5 
+  +-- qs@4.0.0 
+  +-- range-parser@1.0.3 
+  +-- send@0.13.1 
+  | +-- destroy@1.0.4 
+  | +-- http-errors@1.3.1 
+  | | `-- inherits@2.0.1 
+  | +-- mime@1.3.4 
+  | `-- statuses@1.2.1 
+  +-- serve-static@1.10.2 
+  +-- type-is@1.6.12 
+  | `-- media-typer@0.3.0 
+  +-- utils-merge@1.0.0 
+  `-- vary@1.0.1 
+
+npm WARN mean@1.0.0 No repository field.
+deepak-desktop node # vim server.js
+deepak-desktop node # vim server.js
+deepak-desktop node # node server.js 
+Example app listening on port 3000!
+^C
+deepak-desktop node # npm test
+
+> mean@1.0.0 test /srv/node
+> npm server
+
+
+Usage: npm <command>
+
+where <command> is one of:
+    access, add-user, adduser, apihelp, author, bin, bugs, c,
+    cache, completion, config, ddp, dedupe, deprecate, dist-tag,
+    dist-tags, docs, edit, explore, faq, find, find-dupes, get,
+    help, help-search, home, i, info, init, install,
+    install-test, issues, it, la, link, list, ll, ln, login,
+    logout, ls, outdated, owner, pack, ping, prefix, prune,
+    publish, r, rb, rebuild, remove, repo, restart, rm, root,
+    run-script, s, se, search, set, show, shrinkwrap, star,
+    stars, start, stop, t, tag, team, test, tst, un, uninstall,
+    unlink, unpublish, unstar, up, update, upgrade, v, verison,
+    version, view, whoami
+
+npm <cmd> -h     quick help on <cmd>
+npm -l           display full usage info
+npm faq          commonly asked questions
+npm help <term>  search for help on <term>
+npm help npm     involved overview
+
+Specify configs in the ini-formatted file:
+    /root/.npmrc
+or on the command line via: npm <command> --key value
+Config info can be viewed via: npm help config
+
+npm@3.6.0 /usr/lib/node_modules/npm
+npm ERR! Test failed.  See above for more details.
+deepak-desktop node # npm server.js 
+
+Usage: npm <command>
+
+where <command> is one of:
+    access, add-user, adduser, apihelp, author, bin, bugs, c,
+    cache, completion, config, ddp, dedupe, deprecate, dist-tag,
+    dist-tags, docs, edit, explore, faq, find, find-dupes, get,
+    help, help-search, home, i, info, init, install,
+    install-test, issues, it, la, link, list, ll, ln, login,
+    logout, ls, outdated, owner, pack, ping, prefix, prune,
+    publish, r, rb, rebuild, remove, repo, restart, rm, root,
+    run-script, s, se, search, set, show, shrinkwrap, star,
+    stars, start, stop, t, tag, team, test, tst, un, uninstall,
+    unlink, unpublish, unstar, up, update, upgrade, v, verison,
+    version, view, whoami
+
+npm <cmd> -h     quick help on <cmd>
+npm -l           display full usage info
+npm faq          commonly asked questions
+npm help <term>  search for help on <term>
+npm help npm     involved overview
+
+Specify configs in the ini-formatted file:
+    /root/.npmrc
+or on the command line via: npm <command> --key value
+Config info can be viewed via: npm help config
+
+npm@3.6.0 /usr/lib/node_modules/npm
+deepak-desktop node # node server.js 
+Example app listening on port 3000!
+^C
+deepak-desktop node # vim package.json 
+deepak-desktop node # npm test
+
+> mean@1.0.0 test /srv/node
+> node server
+
+Example app listening on port 3000!
+^C
+deepak-desktop node # vim package.json 
+deepak-desktop node # node server
+Example app listening on port 3000!
+^C
+deepak-desktop node # npm test
+
+> mean@1.0.0 test /srv/node
+> node server
+
+Example app listening on port 3000!
